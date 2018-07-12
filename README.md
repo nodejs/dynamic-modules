@@ -29,7 +29,7 @@ The DynamicModuleRecord calls out to a host hook, `HostEvaluateDynamicModule` on
 
 In addition, module execution is allowed to define named export bindings during execution using a provided `SetDynamicExportBinding` concrete method.
 
-Because the Dynamic Module Record cannot have any dependencies itself, early accesses to bindings before execution are not possible. If any bindings are accessed uninitialized after execution, a `ReferenceError` is thrown.
+Because the Dynamic Module Record cannot have any dependencies itself, early accesses to bindings before execution are not possible. If any bindings remain uninitialized after execution, a `ReferenceError` is thrown, effectively moving this validation phase from instantiate to post-execution.
 
 ## Illustrative Example
 
