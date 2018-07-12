@@ -1,0 +1,159 @@
+<!doctype html>
+<head><meta charset="utf-8">
+<title>Dynamic Modules</title><script type="application/json" id="menu-search-biblio">[{"type":"clause","id":"introduction","aoid":null,"title":"Introduction","titleHTML":"Introduction","number":"","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"Introduction"},{"type":"term","term":"Dynamic Module Record","refId":"sec-dynamic-module-records","referencingIds":["_ref_2","_ref_3","_ref_4","_ref_5","_ref_6","_ref_7","_ref_8","_ref_9","_ref_11","_ref_12","_ref_14","_ref_15","_ref_16"],"id":"dynamicmodule-record","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","key":"Dynamic Module Record"},{"type":"table","id":"table-X","number":1,"caption":"Table 1: Additional Fields of Dynamic Module Records","referencingIds":["_ref_0"],"namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","key":"Table 1: Additional Fields of Dynamic Module Records"},{"type":"op","aoid":"CreateDynamicModule","refId":"sec-createdynamicmodule","location":"","referencingIds":[],"key":"CreateDynamicModule"},{"type":"clause","id":"sec-createdynamicmodule","aoid":"CreateDynamicModule","title":"CreateDynamicModule ( realm, hostDefined )","titleHTML":"CreateDynamicModule ( <var>realm</var>, <var>hostDefined</var> )","number":"1.1","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":["_ref_1"],"key":"CreateDynamicModule ( realm, hostDefined )"},{"type":"clause","id":"sec-getexportednames","aoid":null,"title":"GetExportedNames ( exportStarSet ) Concrete Method","titleHTML":"GetExportedNames ( <var>exportStarSet</var> ) Concrete Method","number":"1.2","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"GetExportedNames ( exportStarSet ) Concrete Method"},{"type":"clause","id":"sec-resolveexport","aoid":null,"title":"ResolveExport ( exportName, resolveSet ) Concrete Method","titleHTML":"ResolveExport ( <var>exportName</var>, <var>resolveSet</var> ) Concrete Method","number":"1.3","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"ResolveExport ( exportName, resolveSet ) Concrete Method"},{"type":"clause","id":"sec-moduledeclarationinstantiation","aoid":null,"title":"Instantiate ( ) Concrete Method","titleHTML":"Instantiate ( ) Concrete Method","number":"1.4","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"Instantiate ( ) Concrete Method"},{"type":"clause","id":"sec-moduleevaluation","aoid":null,"title":"Evaluate ( ) Concrete Method","titleHTML":"Evaluate ( ) Concrete Method","number":"1.5","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"Evaluate ( ) Concrete Method"},{"type":"clause","id":"sec-setdynamicexportbinding","aoid":null,"title":"SetDynamicExportBinding ( name, value ) Concrete Method","titleHTML":"SetDynamicExportBinding ( <var>name</var>, <var>value</var> ) Concrete Method","number":"1.6","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"SetDynamicExportBinding ( name, value ) Concrete Method"},{"type":"clause","id":"sec-dynamic-module-records","aoid":null,"title":"Dynamic Module Records","titleHTML":"Dynamic Module Records","number":"1","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"Dynamic Module Records"},{"type":"op","aoid":"HostEvaluateDynamicModule","refId":"sec-hostevaluatedynamicmodule","location":"","referencingIds":[],"key":"HostEvaluateDynamicModule"},{"type":"clause","id":"sec-hostevaluatedynamicmodule","aoid":"HostEvaluateDynamicModule","title":"Runtime Semantics: HostEvaluateDynamicModule ( dynamicModule )","titleHTML":"Runtime Semantics: HostEvaluateDynamicModule ( <var>dynamicModule</var> )","number":"2","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":["_ref_13"],"key":"Runtime Semantics: HostEvaluateDynamicModule ( dynamicModule )"}]</script></head><body><div id="menu-toggle">☰</div><div id="menu-spacer"></div><div id="menu"><div id="menu-search"><input type="text" id="menu-search-box" placeholder="Search..."><div id="menu-search-results" class="inactive"></div></div><div id="menu-pins"><div class="menu-pane-header">Pins</div><ul id="menu-pins-list"></ul></div><div class="menu-pane-header">Table of Contents</div><div id="menu-toc"><ol class="toc"><li><span class="item-toggle-none"></span><a href="#introduction" title="Introduction">Introduction</a></li><li><span class="item-toggle">◢</span><a href="#sec-dynamic-module-records" title="Dynamic Module Records"><span class="secnum">1</span> Dynamic Module Records</a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#sec-createdynamicmodule" title="CreateDynamicModule ( realm, hostDefined )"><span class="secnum">1.1</span> CreateDynamicModule ( <var>realm</var>, <var>hostDefined</var> )</a></li><li><span class="item-toggle-none"></span><a href="#sec-getexportednames" title="GetExportedNames ( exportStarSet ) Concrete Method"><span class="secnum">1.2</span> GetExportedNames ( <var>exportStarSet</var> ) Concrete Method</a></li><li><span class="item-toggle-none"></span><a href="#sec-resolveexport" title="ResolveExport ( exportName, resolveSet ) Concrete Method"><span class="secnum">1.3</span> ResolveExport ( <var>exportName</var>, <var>resolveSet</var> ) Concrete Method</a></li><li><span class="item-toggle-none"></span><a href="#sec-moduledeclarationinstantiation" title="Instantiate ( ) Concrete Method"><span class="secnum">1.4</span> Instantiate ( ) Concrete Method</a></li><li><span class="item-toggle-none"></span><a href="#sec-moduleevaluation" title="Evaluate ( ) Concrete Method"><span class="secnum">1.5</span> Evaluate ( ) Concrete Method</a></li><li><span class="item-toggle-none"></span><a href="#sec-setdynamicexportbinding" title="SetDynamicExportBinding ( name, value ) Concrete Method"><span class="secnum">1.6</span> SetDynamicExportBinding ( <var>name</var>, <var>value</var> ) Concrete Method</a></li></ol></li><li><span class="item-toggle-none"></span><a href="#sec-hostevaluatedynamicmodule" title="Runtime Semantics: HostEvaluateDynamicModule ( dynamicModule )"><span class="secnum">2</span> RS: HostEvaluateDynamicModule ( <var>dynamicModule</var> )</a></li></ol></div></div><div id="spec-container"><h1 class="version first">Stage 0 Draft / July 12, 2018</h1><h1 class="title">Dynamic Modules</h1>
+<script src="ecmarkup.js" defer=""></script>
+<link rel="stylesheet" href="ecmarkup.css">
+
+<emu-intro id="introduction">
+  <h1>Introduction</h1>
+
+  <p>Dynamic Modules allow non-source-text module records to be created and used by host environments.</p>
+  <p>In addition, they provide late definition of export bindings at the execution phase, to support named exports compatibility with legacy module systems.</p>
+</emu-intro>
+
+<emu-clause id="sec-dynamic-module-records">
+  <h1><span class="secnum">1</span>Dynamic Module Records</h1>
+
+  <p>A  <dfn id="dynamicmodule-record">Dynamic Module Record</dfn> is used to represent information about a module that is defined programatically. Its fields contain digested information about the names that are exported by the module and its concrete methods use this digest to link, instantiate, and evaluate the module alongside other Abstract Module Records.</p>
+  
+  <p>Dependency cycles with Source Text Module Records are avoided since these modules can only export, and not import from other Abstract Module Records.</p>
+
+  <p>Dynamic Module Records support late export binding, in that export names are only validated after execution.</p>
+
+  <p>In addition to the fields, defined in  <emu-xref href="#table-36"><a href="https://tc39.github.io/ecma262/#table-36">Table 37</a></emu-xref>, Dynamic Module Records have the additional fields listed in  <emu-xref href="#table-X" id="_ref_0"><a href="#table-X">Table 1</a></emu-xref>. Each of these fields is initially set in <emu-xref aoid="CreateDynamicModule" id="_ref_1"><a href="#sec-createdynamicmodule">CreateDynamicModule</a></emu-xref>.</p>
+
+  <emu-table id="table-X" caption="Additional Fields of Dynamic Module Records"><figure><figcaption>Table 1: Additional Fields of Dynamic Module Records</figcaption>
+    <table>
+      <tbody>
+      <tr>
+        <th>
+          Field Name
+        
+        </th>
+        <th>
+          Value Type
+        
+        </th>
+        <th>
+          Meaning
+        
+        </th>
+      </tr>
+      <tr>
+        <td>
+          [[ExportNames]]
+        
+        </td>
+        <td>
+          A string <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> of exported names.
+        
+        </td>
+        <td>
+          The list of export bindings associated with this dynamic <emu-xref href="#sec-abstract-module-records"><a href="https://tc39.github.io/ecma262/#sec-abstract-module-records">Module Record</a></emu-xref>.
+        
+        </td>
+      </tr>
+      <tr>
+        <td>
+          [[EvaluationError]]
+        
+        </td>
+        <td>
+          An <emu-xref href="#sec-completion-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-completion-record-specification-type">abrupt completion</a></emu-xref> | <emu-val>undefined</emu-val>
+        
+        </td>
+        <td>
+          A completion of type <emu-const>throw</emu-const> representing the exception that occurred during evaluation.  <emu-val>undefined</emu-val> if no exception occurred or if [[Status]] is not <code>"evaluated"</code>.
+        
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </figure></emu-table>
+  
+  <emu-clause id="sec-createdynamicmodule" aoid="CreateDynamicModule">
+    <h1><span class="secnum">1.1</span>CreateDynamicModule ( <var>realm</var>, <var>hostDefined</var> )</h1>
+    <p>This method would be expected to be called by the host when constructing a <emu-xref href="#sec-abstract-module-records"><a href="https://tc39.github.io/ecma262/#sec-abstract-module-records">Module Record</a></emu-xref> in <var>HostResolveImportedModule</var>.</p>
+    <p>The abstract operation CreateDynamicModule with arguments <var>realm</var>, and <var>hostDefined</var> creates a new <emu-xref href="#dynamicmodule-record" id="_ref_2"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> performing the following steps:</p>
+    <emu-alg><ol><li>Let <var>exportNames</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>Return the <emu-xref href="#dynamicmodule-record" id="_ref_3"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> { [[Realm]]: <var>realm</var>, [[Environment]]: <emu-val>undefined</emu-val>, [[Namespace]]: <emu-val>undefined</emu-val>, [[Status]]: <code>"uninstantiated"</code>, [[ExportNames]]: <var>exportNames</var>, [[EvaluationError]]: <emu-val>undefined</emu-val>, [[HostDefined]]: <var>hostDefined</var> }.
+    </li></ol></emu-alg>
+  </emu-clause>
+
+  <p>The following definitions specify the required concrete methods for Dynamic Module Records.</p>
+
+  <emu-clause id="sec-getexportednames">
+    <h1><span class="secnum">1.2</span>GetExportedNames ( <var>exportStarSet</var> ) Concrete Method</h1>
+    <p>The GetExportedNames concrete method of a <emu-xref href="#dynamicmodule-record" id="_ref_4"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> implements the corresponding <emu-xref href="#sec-abstract-module-records"><a href="https://tc39.github.io/ecma262/#sec-abstract-module-records">Module Record</a></emu-xref> abstract method.</p>
+    <p>It performs the following steps:</p>
+    <emu-alg><ol><li>Let <var>module</var> be this <emu-xref href="#dynamicmodule-record" id="_ref_5"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref>.</li><li>Return <var>module</var>.[[exportNames]].
+    </li></ol></emu-alg>
+  </emu-clause>
+
+  <emu-clause id="sec-resolveexport">
+    <h1><span class="secnum">1.3</span>ResolveExport ( <var>exportName</var>, <var>resolveSet</var> ) Concrete Method</h1>
+    <p>The ResolveExport concrete method of a <emu-xref href="#dynamicmodule-record" id="_ref_6"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> implements the corresponding <emu-xref href="#sec-abstract-module-records"><a href="https://tc39.github.io/ecma262/#sec-abstract-module-records">Module Record</a></emu-xref> abstract method.</p>
+
+    <p>ResolveExport ensures that a binding is created for the dynamic <emu-xref href="#sec-abstract-module-records"><a href="https://tc39.github.io/ecma262/#sec-abstract-module-records">Module Record</a></emu-xref>, lazily creating a binding if needed.</p>
+
+    <p>This abstract method performs the following steps:</p>
+
+    <emu-alg><ol><li>Let <var>module</var> be this <emu-xref href="#dynamicmodule-record" id="_ref_7"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref>.</li><li>Let <var>exportNames</var> be <var>module</var>.[[ExportNames]].</li><li>If <var>exportNames</var> does not contain <var>exportName</var> then,<ol><li>Let <var>envRec</var> be the Module <emu-xref href="#sec-environment-records"><a href="https://tc39.github.io/ecma262/#sec-environment-records">Environment Record</a></emu-xref> <var>module</var>.[[Environment]]</li><li>If <var>envRec</var> does not already have a binding for <var>exportName</var> then,<ol><li>Perform ! <var>envRec</var>.CreateMutableBinding(<var>name</var>, <emu-val>false</emu-val>).</li></ol></li><li>Append <var>exportName</var> to the end of <var>exportNames</var>.</li></ol></li><li>Return ResolvedBinding <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref> { [[Module]]: <var>module</var>, [[BindingName]]: <var>exportName</var> }.
+    </li></ol></emu-alg>
+  </emu-clause>
+
+  <emu-clause id="sec-moduledeclarationinstantiation">
+    <h1><span class="secnum">1.4</span>Instantiate ( ) Concrete Method</h1>
+
+    <p>The Instantiate concrete method of a <emu-xref href="#dynamicmodule-record" id="_ref_8"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> implements the corresponding <emu-xref href="#sec-abstract-module-records"><a href="https://tc39.github.io/ecma262/#sec-abstract-module-records">Module Record</a></emu-xref> abstract method.</p>
+    <p>On success, Instantiate transitions this module's [[Status]] from <code>"uninstantiated"</code> to <code>"instantiated"</code>. On failure, an exception is thrown and this module's [[Status]] remains <code>"uninstantiated"</code>.</p>
+
+    <p>This abstract method performs the following steps:</p>
+
+    <emu-alg><ol><li>Let <var>module</var> be this <emu-xref href="#dynamicmodule-record" id="_ref_9"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref>.</li><li>Assert: <var>module</var>.[[Status]] is not <code>"instantiating"</code> or <code>"evaluating"</code>.</li><li>Let <var>realm</var> be module.[[Realm]].</li><li>Assert: <var>realm</var> is a valid <emu-xref href="#realm"><a href="https://tc39.github.io/ecma262/#realm">Realm</a></emu-xref>.</li><li>Let <var>env</var> be <emu-xref aoid="NewModuleEnvironment" id="_ref_10"><a href="https://tc39.github.io/ecma262/#sec-newmoduleenvironment">NewModuleEnvironment</a></emu-xref>(<var>realm</var>.[[GlobalEnv]]).</li><li>Set <var>module</var>.[[Environment]] to <var>env</var>.</li><li>Set <var>module</var>.[[Status]] to <code>"instantiated"</code>.</li><li>Return <emu-val>undefined</emu-val>.
+    </li></ol></emu-alg>
+  </emu-clause>
+
+  <emu-clause id="sec-moduleevaluation">
+    <h1><span class="secnum">1.5</span>Evaluate ( ) Concrete Method</h1>
+
+    <p>The Evaluate concrete method of a <emu-xref href="#dynamicmodule-record" id="_ref_11"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> implements the corresponding <emu-xref href="#sec-abstract-module-records"><a href="https://tc39.github.io/ecma262/#sec-abstract-module-records">Module Record</a></emu-xref> abstract method.</p>
+    <p>Evaluate transitions this module's [[Status]] from <code>"instantiated"</code> to <code>"evaluated"</code>.</p>
+
+    <p>If execution results in an exception, that exception is recorded in the [[EvaluationError]] field and rethrown by future invocations of Evaluate.</p>
+
+    <p>Evaluation of dynamic modules calls out to <var>HostEvaluateDynamicModule</var>, before finalising the export names of the dynamic modules. Any uninitialized export bindings throw a reference error at this stage.</p>
+
+    <p>This abstract method performs the following steps:</p>
+
+    <emu-alg><ol><li>Let <var>m</var> be this <emu-xref href="#dynamicmodule-record" id="_ref_12"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref>.</li><li>Assert: <var>m</var>.[[Status]] is <code>"instantiated"</code> or <code>"evaluated"</code>.</li><li>Set <var>m</var>.[[Status]] to <code>"evaluating"</code>.</li><li>Let <var>result</var> be <emu-xref aoid="HostEvaluateDynamicModule" id="_ref_13"><a href="#sec-hostevaluatedynamicmodule">HostEvaluateDynamicModule</a></emu-xref>(<var>m</var>).</li><li>If <var>result</var> is an <emu-xref href="#sec-completion-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-completion-record-specification-type">abrupt completion</a></emu-xref>, then<ol><li>Assert: <var>m</var>.[[Status]] is <code>"evaluating"</code>.</li><li>Set <var>m</var>.[[Status]] to <code>"evaluated"</code>.</li><li>Set <var>m</var>.[[EvaluationError]] to <var>result</var>.</li><li>Return <var>result</var>.</li></ol></li><li>Let <var>n</var> be the value of <var>m</var>.[[Namespace]].</li><li>If <var>n</var> is not <var>undefined</var> then,<ol><li>Assert <var>n</var> is a Module Namespace Exotic Object.</li></ol></li><li>Let <var>envRec</var> be the value of <var>module</var>.[[Environment]].</li><li>For each string <var>exportName</var> in <var>m</var>.[[ExportNames]], do<ol><li>Assert: <var>envRec</var> has a binding for <var>exportName</var>.</li><li>If the binding for <var>exportName</var> in <var>envRec</var> is uninitialized then,<ol><li>Let <var>error</var> be a <emu-val>ReferenceError</emu-val> exception.</li><li>Set <var>m</var>.[[Status]] to <code>"evaluated"</code>.</li><li>Set <var>m</var>.[[EvaluationError]] to <var>error</var>.</li><li>Return <var>error</var>.</li></ol></li><li>If <var>n</var> is not <var>undefined</var> then,<ol><li>Let <var>namespaceExports</var> be <var>n</var>.[[Exports]].</li><li>If <var>namespaceExports</var> does not contain <var>exportName</var> then,<ol><li>Insert <var>exportName</var> in the list <var>namespaceExports</var> at the position corresponding to the sort order of <code>Array.prototype.sort</code> with <emu-val>undefined</emu-val> as <var>comparefn</var>.</li></ol></li></ol></li></ol></li><li>Set <var>m</var>.[[Status]] to <code>"evaluated"</code>.</li><li>Assert: <var>m</var>.[[EvaluationError]] is <emu-val>undefined</emu-val>.</li><li>Return <emu-val>undefined</emu-val>.
+    </li></ol></emu-alg>
+  </emu-clause>
+
+  <emu-clause id="sec-setdynamicexportbinding">
+    <h1><span class="secnum">1.6</span>SetDynamicExportBinding ( <var>name</var>, <var>value</var> ) Concrete Method</h1>
+    <p>The SetDynamicExportBinding concrete method of a <emu-xref href="#dynamicmodule-record" id="_ref_14"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> implements the corresponding <emu-xref href="#sec-abstract-module-records"><a href="https://tc39.github.io/ecma262/#sec-abstract-module-records">Module Record</a></emu-xref> abstract method for a string <var>name</var> and initialization value <var>value</var>.</p>
+    <p>This method must not be called on a module record that has already completed execution.</p>
+    <emu-alg><ol><li>Let <var>module</var> be this <emu-xref href="#dynamicmodule-record" id="_ref_15"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref>.</li><li>Assert: <var>module</var>.[[Status]] is not <code>"evaluated"</code>.</li><li>Let <var>envRec</var> be the module <emu-xref href="#sec-environment-records"><a href="https://tc39.github.io/ecma262/#sec-environment-records">Environment Record</a></emu-xref> <var>module</var>.[[Environment]].</li><li>If <var>envRec</var> has a binding for <var>name</var> then,<ol><li>If the binding for <var>name</var> in <var>envRec</var> has not been initialized then,<ol><li>Perform <var>envRec</var>.InitializeBinding(<var>name</var>, <var>value</var>).</li></ol></li><li>Otherwise,<ol><li>Perform <var>envRec</var>.SetMutableBinding(<var>name</var>, <var>value</var>, <emu-val>true</emu-val>).</li></ol></li></ol></li><li>Otherwise,<ol><li>Perform <var>envRec</var>.CreateMutableBinding(<var>name</var>, <emu-val>false</emu-val>).</li><li>Perform <var>envRec</var>.InitializeBinding(<var>name</var>, <var>value</var>).
+    </li></ol></li></ol></emu-alg>
+  </emu-clause>
+</emu-clause>
+
+<emu-clause id="sec-hostevaluatedynamicmodule" aoid="HostEvaluateDynamicModule">
+  <h1><span class="secnum">2</span>Runtime Semantics: HostEvaluateDynamicModule ( <var>dynamicModule</var> )</h1>
+  <p>HostEvaluateDynamicModule is an implementation-defined abstract operation that performs programmatic execution of a <emu-xref href="#dynamicmodule-record" id="_ref_16"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref>, <var>dynamicModule</var>.</p>
+  <p>The implementation of HostEvaluateDynamicModule must conform to the following requirements:</p>
+  <ul>
+    <li>
+      HostEvaluateDynamicModule will call the SetDynamicExportBinding concrete method on the <var>dynamicModule</var> to initialize the export bindings.
+    
+    </li>
+    <li>
+      If there is an evaluation error, it must be thrown.
+    
+    </li>
+  </ul>
+  <emu-note><span class="note">Note</span><div class="note-contents">
+    <p>Note: HostEvaluateDynamicModule must not itself rely on checking what lexical bindings have already been initialized for the module. It is important that the bindings defined in evaluation are fully independent of what bindings are imported.</p>
+  </div></emu-note>
+</emu-clause>
+</div></body>
