@@ -46,9 +46,9 @@ where `'fs'` is a CommonJS module being implemented as a Dynamic Module Record.
 
 The following rough outline steps are taken in the spec:
 
-1. `'main.js'` is instantiated.
 2. `'fs'` is instantiated, which for Dynamic Module Records is mostly a noop apart from book-keeping.
-3. The `readFile` binding is initialized, at this point a new lexical binding is created for it in the lexical environment for `'fs'`.
+1. `'main.js'` is instantiated.
+2. The `readFile` binding is initialized, at this point a new lexical binding is created for it in the lexical environment for `'fs'`.
 4. The `fs` Namespace Exotic Object is created, with a single export name, `readFile`.
 5. `'fs'` is evaluated, calling the `HostEvaluateDynamicModule` hook. The host can then execute the CommonJS module using the third-party loader, and set the lexical environment values for named export bindings using the `SetDynamicExportBinding` concrete method.
   It may, for example, also define a `writeFile` binding at this point.
