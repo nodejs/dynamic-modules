@@ -104,7 +104,7 @@ copyright: false
       1. If _exportNames_ does not contain _exportName_ then,
         1. Let _envRec_ be the Module Environment Record _module_.[[Environment]]
         1. If _envRec_ does not already have a binding for _exportName_ then,
-          1. Perform ! _envRec_.CreateMutableBinding(_name_, *false*).
+          1. Perform ! _envRec_.CreateMutableBinding(_exportName_, *false*).
         1. Append _exportName_ to the end of _exportNames_.
       1. Return ResolvedBinding Record { [[Module]]: _module_, [[BindingName]]: _exportName_ }.
     </emu-alg>
