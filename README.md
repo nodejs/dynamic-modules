@@ -89,7 +89,7 @@ the well-defined nature of export names despite supporting late definition here.
 
 ### Why does this need to be a host method?
 
-A Reflect-style interface could certainly be considered for exposing programmatic module creation, and this proposal could certainly form a base for that.
+A Reflect-style interface could be considered for exposing programmatic module creation, and this proposal could form a base for that.
 
 But the goal was to create a minimal proposal solving the immediate needs rather than a whole new JS API that would have its own design concerns.
 
