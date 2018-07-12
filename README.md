@@ -16,9 +16,6 @@ Host environments such as Node.js need to define module records that are not bas
 
 Examples for Node.js include builtin modules (while these are still CommonJS), native addons, JSON files, and CommonJS. Currently NodeJS generates a source text internally to handle these cases, which is an unwieldy approach.
 
-> Note: This interface is a single one-way boundary without further transitive dependencies on other modules in the graph. This is distinct from integration with WASM or Binary AST
-which can have further transitive dependencies with the existing graph, therefore needing their own Abstract Module Record implementations.
-
 In addition implementing named exports support for CommonJS in Node.js is [currently blocked](https://github.com/nodejs/node/pull/16675) due to the limitations of the source text wrapper approach requiring the exported names to be known before execution.
 
 ## Proposed Solution
@@ -30,6 +27,9 @@ The DynamicModuleRecord calls out to a host hook, `HostEvaluateDynamicModule` on
 In addition, module execution is allowed to define named export bindings during execution using a provided `SetDynamicExportBinding` concrete method.
 
 Because the Dynamic Module Record cannot have any dependencies itself, early accesses to bindings before execution are not possible. If any bindings remain uninitialized after execution, a `ReferenceError` is thrown, effectively moving this validation phase from instantiate to post-execution.
+
+> Note: The Dynamic Module Record approach provides support for a single one-way boundary without further transitive dependencies on other modules in the graph. This is distinct from integration with WASM or Binary AST
+which can have further transitive dependencies with the existing graph, therefore needing their own Abstract Module Record implementations.
 
 ## Illustrative Example
 
