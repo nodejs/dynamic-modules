@@ -59,7 +59,7 @@ The following rough outline steps are taken in the spec:
 While the exact implementation is not specified, the host API defining `'fs'` might look something like:
 
 ```js
-function createDynamicModule (id, setDynamicExportBinding) {
+function executeDynamicModule (id, setDynamicExportBinding) {
   const exports = require(id);
   for (const exportName of Object.keys(exports)) {
     setDynamicExportBinding(exportName, exports[exportName]);
