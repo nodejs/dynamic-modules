@@ -54,7 +54,7 @@ The following rough outline steps are taken in the spec:
   It may, for example, also define a `writeFile` binding at this point.
 6. If any bindings for `'fs'` are uninitialized at this point, a `ReferenceError` is thrown. Eg if there was a `import { missing } from 'fs'`.
 6. If the `fs` Namespace Exotic Object is defined (it is created lazily in the existing spec), any new export names are added to it at this point. There is no worry of early access here as it is impossible for user code to read the object before this point.
-7. `'main.js'` is evaluated, and accesses the `readFile` binding as well as the `fs.readFile` namespace binding. If either binding weren't defined at this point, a `ReferenceError` would be thrown on acccess.
+7. `'main.js'` is evaluated, and accesses the `readFile` binding as well as the `fs.readFile` namespace binding. All bindings are guaranteed to be defined at this point.
 
 ## FAQ
 
