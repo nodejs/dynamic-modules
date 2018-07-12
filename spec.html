@@ -176,19 +176,26 @@ copyright: false
   <emu-clause id="sec-setdynamicexportbinding">
     <h1>SetDynamicExportBinding ( _name_, _value_ ) Concrete Method</h1>
     <p>The SetDynamicExportBinding concrete method of a Dynamic Module Record implements the corresponding Module Record abstract method for a string _name_ and initialization value _value_.</p>
-    <p>This method must not be called on a module record that has already completed execution.</p>
+    <p>After execution completion, only binding mutation is supported.</p>
+    <p>This method can return an error on abrupt completion.</p>
     <emu-alg>
       1. Let _module_ be this Dynamic Module Record.
-      1. Assert: _module_.[[Status]] is not `"evaluated"`.
       1. Let _envRec_ be the module Environment Record _module_.[[Environment]].
       1. If _envRec_ has a binding for _name_ then,
         1. If the binding for _name_ in _envRec_ has not been initialized then,
+          1. If _module_.[[Status]] is `"evaluated"` then,
+            1. Let _error_ be a *ReferenceError* exception.
+            1. Return _error_.
           1. Perform _envRec_.InitializeBinding(_name_, _value_).
         1. Otherwise,
           1. Perform _envRec_.SetMutableBinding(_name_, _value_, *true*).
       1. Otherwise,
+        1. If _module_.[[Status]] is `"evaluated"` then,
+          1. Let _error_ be a *ReferenceError* exception.
+          1. Return _error_.
         1. Perform _envRec_.CreateMutableBinding(_name_, *false*).
         1. Perform _envRec_.InitializeBinding(_name_, _value_).
+      1. Return *undefined*.
     </emu-alg>
   </emu-clause>
 </emu-clause>

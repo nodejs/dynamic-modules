@@ -56,6 +56,18 @@ The following rough outline steps are taken in the spec:
 6. If the `fs` Namespace Exotic Object is defined (it is created lazily in the existing spec), any new export names are added to it at this point. There is no worry of early access here as it is impossible for user code to read the object before this point.
 7. `'main.js'` is evaluated, and accesses the `readFile` binding as well as the `fs.readFile` namespace binding. All bindings are guaranteed to be defined at this point.
 
+While the exact implementation is not specified, the host API defining `'fs'` might look something like:
+
+```js
+function createDynamicModule (id, setDynamicExportBinding) {
+  const exports = require(id);
+  for (const exportName of Object.keys(exports)) {
+    setDynamicExportBinding(exportName, exports[exportName]);
+  }
+  // in addition `setDynamicExportBinding` can be stored and used for runtime mutations
+}
+```
+
 ## FAQ
 
 ### Why not support constant bindings?
