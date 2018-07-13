@@ -95,6 +95,21 @@ But the goal was to create a minimal proposal solving the immediate needs rather
 
 Such a feature could certainly build on top of this to go with eg any registry APIs in future.
 
+### Could dynamic module records not be defined outside of ECMA-262?
+
+To support dynamic modules that execute in the tree-order with export names possibly defined at execution time, it is not possible to use a source text
+wrapper approach at all - a new engine API is required to support this.
+
+This specification for Dynamic Module Records takes a number of steps that are not clear they would be supported by the ECMA-262 module semantics:
+
+* We are allowing the `ResolveExport` concrete method to define let-style export binding placeholders when called on dynamic modules to ensure availability during instantiate.
+* We are possibly extending new export names onto Namespace Exotic Objects after they have already been created.
+
+In addition, to ensure the above is well-defined, we provide a post-execution validation of export names, analogous what is done for Source Text Module Records at the instantiate phase.
+
+As a common use case for interfacing non-source-text modules with the ES module system in JS engines, it seems important to carefully
+specify how the dynamic module boundary should behave exactly down to execution order, how execution-time exports can be defined to be spec-compatible, and their validation and error semantics.
+
 ## Specification
 
 * [Ecmarkup source](https://github.com/guybedford/proposal-dynamic-modules/blob/master/spec.html)
