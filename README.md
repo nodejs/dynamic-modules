@@ -68,6 +68,36 @@ function executeDynamicModule (id, setDynamicExportBinding) {
 }
 ```
 
+## Handling Namespace and Star Exports
+
+Some spec changes need to be made to support namespace star exports from Dynamic Modules.
+
+Consider the following example:
+
+lib.js
+```js
+export * from 'dynamic-module';
+```
+
+main1.js
+```js
+import { dynamicMethod } from './lib.js';
+```
+
+main2.js
+```js
+import * as lib from './lib.js';
+```
+
+`'main1.js'` can be supported fine, as the `ResolveExport` concrete method will ensure a placeholder for `dynamicMethod` that is then validated on execution.
+
+On the other hand, the namespace object for `'main2.js'` will not know the list of exported names from `'dynamic-module'` when it is created during instantiation.
+
+In order to support this, we introduce some book-keeping to track any Namespace Exotic Objects created that reference star exports of Dynamic Module Records.
+The post-execution of that dynamic module then amends the appropriate namespaces with new export names.
+
+This is well-defined because the namespace can never be accessed before the Dynamic Module has executed.
+
 ## FAQ
 
 ### Why not support constant bindings?
@@ -104,6 +134,7 @@ This specification for Dynamic Module Records takes a number of steps that are n
 
 * We are allowing the `ResolveExport` concrete method to define let-style export binding placeholders when called on dynamic modules to ensure availability during instantiate.
 * We are possibly extending new export names onto Namespace Exotic Objects after they have already been created.
+* In order to handle book-keeping on which Namespace Exotic Objects need this extension, we add a new parameter to `GetExportNames` tracking the requesting module.
 
 In addition, to ensure the above is well-defined, we provide a post-execution validation of export names, analogous what is done for Source Text Module Records at the instantiate phase.
 

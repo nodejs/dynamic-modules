@@ -17,202 +17,342 @@ copyright: false
   <p>In addition, they provide late definition of export bindings at the execution phase, to support named exports compatibility with legacy module systems.</p>
 </emu-intro>
 
-<emu-clause id="sec-dynamic-module-records">
-  <h1>Dynamic Module Records</h1>
+<emu-clause id="sec-ecmascript-language-scripts-and-modules">
+  <h1>ECMAScript Language: Scripts and Modules</h1>
+  <emu-clause id="sec-modules">
+    <h1>Modules</h1>
 
-  <p>A <dfn id="dynamicmodule-record">Dynamic Module Record</dfn> is used to represent information about a module that is defined programatically. Its fields contain digested information about the names that are exported by the module and its concrete methods use this digest to link, instantiate, and evaluate the module alongside other Abstract Module Records.</p>
-  
-  <p>Dependency cycles with Source Text Module Records are avoided since these modules can only export, and not import from other Abstract Module Records.</p>
+    <emu-clause id="sec-module-semantics">
+      <h1>Module Semantics</h1>
 
-  <p>Dynamic Module Records support late export binding, in that export names are only validated after execution.</p>
+      <emu-clause id="sec-abstract-module-records">
+        <h1>Abstract Module Records</h1>
 
-  <p>In addition to the fields, defined in <emu-xref href="#table-36"></emu-xref>, Dynamic Module Records have the additional fields listed in <emu-xref href="#table-X"></emu-xref>. Each of these fields is initially set in CreateDynamicModule.</p>
+        <emu-table id="table-37" caption="Abstract Methods of Module Records">
+          <table>
+            <tbody>
+            <tr>
+              <th>
+                Method
+              </th>
+              <th>
+                Purpose
+              </th>
+            </tr>
+            <tr>
+              <td>
+                GetExportedNames(_exportStarSet_<ins>, _starExportModule_</ins>)
+              </td>
+              <td>
+                Return a list of all names that are either directly or indirectly exported from this module.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                ResolveExport(_exportName_, _resolveSet_)
+              </td>
+              <td>
+                <p>Return the binding of a name exported by this module. Bindings are represented by a <dfn id="resolvedbinding-record">ResolvedBinding Record</dfn>, of the form { [[Module]]: Module Record, [[BindingName]]: String }. Return *null* if the name cannot be resolved, or `"ambiguous"` if multiple bindings were found.</p>
+                <p>This operation must be idempotent if it completes normally. Each time it is called with a specific _exportName_, _resolveSet_ pair as arguments it must return the same result.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Instantiate()
+              </td>
+              <td>
+                <p>Prepare the module for evaluation by transitively resolving all module dependencies and creating a module Environment Record.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Evaluate()
+              </td>
+              <td>
+                <p>If this module has already been evaluated successfully, return *undefined*; if it has already been evaluated unsuccessfully, throw the exception that was produced. Otherwise, transitively evaluate all module dependencies of this module and then evaluate this module.</p>
+                <p>Instantiate must have completed successfully prior to invoking this method.</p>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </emu-table>  
+      </emu-clause>
 
-  <emu-table id="table-X" caption="Additional Fields of Dynamic Module Records">
-    <table>
-      <tbody>
-      <tr>
-        <th>
-          Field Name
-        </th>
-        <th>
-          Value Type
-        </th>
-        <th>
-          Meaning
-        </th>
-      </tr>
-      <tr>
-        <td>
-          [[ExportNames]]
-        </td>
-        <td>
-          A string List of exported names.
-        </td>
-        <td>
-          The list of export bindings associated with this dynamic Module Record.
-        </td>
-      </tr>
-      <tr>
-        <td>
-          [[EvaluationError]]
-        </td>
-        <td>
-          An abrupt completion | *undefined*
-        </td>
-        <td>
-          A completion of type ~throw~ representing the exception that occurred during evaluation.  *undefined* if no exception occurred or if [[Status]] is not `"evaluated"`.
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </emu-table>
-  
-  <emu-clause id="sec-createdynamicmodule" aoid="CreateDynamicModule">
-    <h1>CreateDynamicModule ( _realm_, _hostDefined_ )</h1>
-    <p>This method would be expected to be called by the host when constructing a Module Record in _HostResolveImportedModule_.</p>
-    <p>The abstract operation CreateDynamicModule with arguments _realm_, and _hostDefined_ creates a new Dynamic Module Record performing the following steps:</p>
-    <emu-alg>
-      1. Let _exportNames_ be a new empty List.
-      1. Return the Dynamic Module Record { [[Realm]]: _realm_, [[Environment]]: *undefined*, [[Namespace]]: *undefined*, [[Status]]: `"uninstantiated"`, [[ExportNames]]: _exportNames_, [[EvaluationError]]: *undefined*, [[HostDefined]]: _hostDefined_ }.
-    </emu-alg>
+      <emu-clause id="sec-source-text-module-records">
+        <h1>Source Text Module Records</h1>
+
+        <emu-clause id="sec-getexportednames">
+          <h1>GetExportedNames ( _exportStarSet_<ins>, _starExportModule_</ins> ) Concrete Method</h1>
+          <p>The GetExportedNames concrete method of a Source Text Module Record implements the corresponding Module Record abstract method.</p>
+          <p>It performs the following steps:</p>
+          <emu-alg>
+            1. Let _module_ be this Source Text Module Record.
+            1. If _exportStarSet_ contains _module_, then
+              1. Assert: We've reached the starting point of an `import *` circularity.
+              1. Return a new empty List.
+            1. Append _module_ to _exportStarSet_.
+            1. Let _exportedNames_ be a new empty List.
+            1. For each ExportEntry Record _e_ in _module_.[[LocalExportEntries]], do
+              1. Assert: _module_ provides the direct binding for this export.
+              1. Append _e_.[[ExportName]] to _exportedNames_.
+            1. For each ExportEntry Record _e_ in _module_.[[IndirectExportEntries]], do
+              1. Assert: _module_ imports a specific binding for this export.
+              1. Append _e_.[[ExportName]] to _exportedNames_.
+            1. For each ExportEntry Record _e_ in _module_.[[StarExportEntries]], do
+              1. Let _requestedModule_ be ? HostResolveImportedModule(_module_, _e_.[[ModuleRequest]]).
+              1. Let _starNames_ be ? _requestedModule_.GetExportedNames(_exportStarSet_<ins>, _starExportModule_</ins>).
+              1. For each element _n_ of _starNames_, do
+                1. If SameValue(_n_, `"default"`) is *false*, then
+                  1. If _n_ is not an element of _exportedNames_, then
+                    1. Append _n_ to _exportedNames_.
+            1. Return _exportedNames_.
+          </emu-alg>
+          <emu-note>
+            <p>GetExportedNames does not filter out or throw an exception for names that have ambiguous star export bindings.</p>
+          </emu-note>
+        </emu-clause>
+      </emu-clause>
+
+      <emu-clause id="sec-dynamic-module-records">
+        <h1>Dynamic Module Records</h1>
+
+        <p>A <dfn id="dynamicmodule-record">Dynamic Module Record</dfn> is used to represent information about a module that is defined programatically. Its fields contain digested information about the names that are exported by the module and its concrete methods use this digest to link, instantiate, and evaluate the module alongside other Abstract Module Records.</p>
+        
+        <p>Dependency cycles with Source Text Module Records are avoided since these modules can only export, and not import from other Abstract Module Records.</p>
+
+        <p>Dynamic Module Records support late export binding, in that export names are only validated after execution.</p>
+
+        <p>In addition to the fields, defined in <emu-xref href="#table-36"></emu-xref>, Dynamic Module Records have the additional fields listed in <emu-xref href="#table-X"></emu-xref>. Each of these fields is initially set in CreateDynamicModule.</p>
+
+        <emu-table id="table-X" caption="Additional Fields of Dynamic Module Records">
+          <table>
+            <tbody>
+            <tr>
+              <th>
+                Field Name
+              </th>
+              <th>
+                Value Type
+              </th>
+              <th>
+                Meaning
+              </th>
+            </tr>
+            <tr>
+              <td>
+                [[ExportNames]]
+              </td>
+              <td>
+                A string List of exported names.
+              </td>
+              <td>
+                The list of export bindings associated with this Dynamic Module Record.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                [[StarExportModules]]
+              </td>
+              <td>
+                A List of Module Record objects that export all names from this Dynamic Module Record.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                [[EvaluationError]]
+              </td>
+              <td>
+                An abrupt completion | *undefined*
+              </td>
+              <td>
+                A completion of type ~throw~ representing the exception that occurred during evaluation.  *undefined* if no exception occurred or if [[Status]] is not `"evaluated"`.
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </emu-table>
+        
+        <emu-clause id="sec-createdynamicmodule" aoid="CreateDynamicModule">
+          <h1>CreateDynamicModule ( _realm_, _hostDefined_ )</h1>
+          <p>This method would be expected to be called by the host when constructing a Module Record in _HostResolveImportedModule_.</p>
+          <p>The abstract operation CreateDynamicModule with arguments _realm_, and _hostDefined_ creates a new Dynamic Module Record performing the following steps:</p>
+          <emu-alg>
+            1. Let _exportNames_ be a new empty List.
+            1. Let _starExportModules_ be a new empty List.
+            1. Let _module_ be the Dynamic Module Record { [[Realm]]: _realm_, [[Environment]]: *undefined*, [[Namespace]]: *undefined*, [[Status]]: `"uninstantiated"`, [[ExportNames]]: _exportNames_, [[StarExportModules]]: _starExportModules_, [[EvaluationError]]: *undefined*, [[HostDefined]]: _hostDefined_ }.
+            1. Add _module_ to _module_.[[StarExportModules]].
+            1. Return _module_.
+          </emu-alg>
+        </emu-clause>
+
+        <p>The following definitions specify the required concrete methods for Dynamic Module Records.</p>
+
+        <emu-clause id="sec-dynamicgetexportednames">
+          <h1>GetExportedNames ( _exportStarSet_, _starExportModule_ ) Concrete Method</h1>
+          <p>The GetExportedNames concrete method of a Dynamic Module Record implements the corresponding Module Record abstract method.</p>
+          <p>Any modules exporting names from this Dynamic Module Record are stored so their exports can be amended later on.</p>>
+          <p>It performs the following steps:</p>
+          <emu-alg>
+            1. Let _module_ be this Dynamic Module Record.
+            1. If _module_.[[StarExportModules]] does not contain _starExportModule_ then,
+              1. Add _starExportModule_ to _module_.[[StarExportModules]].
+            1. Return _module_.[[exportNames]].
+          </emu-alg>
+        </emu-clause>
+
+        <emu-clause id="sec-dynamicresolveexport">
+          <h1>ResolveExport ( _exportName_, _resolveSet_ ) Concrete Method</h1>
+          <p>The ResolveExport concrete method of a Dynamic Module Record implements the corresponding Module Record abstract method.</p>
+
+          <p>ResolveExport ensures that a binding is created for the dynamic Module Record, lazily creating a binding if needed.</p>
+
+          <p>This abstract method performs the following steps:</p>
+
+          <emu-alg>
+            1. Let _module_ be this Dynamic Module Record.
+            1. Let _exportNames_ be _module_.[[ExportNames]].
+            1. If _exportNames_ does not contain _exportName_ then,
+              1. Let _envRec_ be the Module Environment Record _module_.[[Environment]]
+              1. If _envRec_ does not already have a binding for _exportName_ then,
+                1. Perform ! _envRec_.CreateMutableBinding(_exportName_, *false*).
+              1. Append _exportName_ to the end of _exportNames_.
+            1. Return ResolvedBinding Record { [[Module]]: _module_, [[BindingName]]: _exportName_ }.
+          </emu-alg>
+        </emu-clause>
+
+        <emu-clause id="sec-dynamicmoduledeclarationinstantiation">
+          <h1>Instantiate ( ) Concrete Method</h1>
+
+          <p>The Instantiate concrete method of a Dynamic Module Record implements the corresponding Module Record abstract method.</p>
+          <p>On success, Instantiate transitions this module's [[Status]] from `"uninstantiated"` to `"instantiated"`. On failure, an exception is thrown and this module's [[Status]] remains `"uninstantiated"`.</p>
+
+          <p>This abstract method performs the following steps:</p>
+
+          <emu-alg>
+            1. Let _module_ be this Dynamic Module Record.
+            1. Assert: _module_.[[Status]] is not `"instantiating"` or `"evaluating"`.
+            1. Let _realm_ be module.[[Realm]].
+            1. Assert: _realm_ is a valid Realm.
+            1. Let _env_ be NewModuleEnvironment(_realm_.[[GlobalEnv]]).
+            1. Set _module_.[[Environment]] to _env_.
+            1. Set _module_.[[Status]] to `"instantiated"`.
+            1. Return *undefined*.
+          </emu-alg>
+        </emu-clause>
+
+        <emu-clause id="sec-dynamicmoduleevaluation">
+          <h1>Evaluate ( ) Concrete Method</h1>
+
+          <p>The Evaluate concrete method of a Dynamic Module Record implements the corresponding Module Record abstract method.</p>
+          <p>Evaluate transitions this module's [[Status]] from `"instantiated"` to `"evaluated"`.</p>
+
+          <p>If execution results in an exception, that exception is recorded in the [[EvaluationError]] field and rethrown by future invocations of Evaluate.</p>
+
+          <p>Evaluation of dynamic modules calls out to _HostEvaluateDynamicModule_, before finalising the export names of the dynamic modules. Any uninitialized export bindings throw a reference error at this stage.</p>
+
+          <p>This abstract method performs the following steps:</p>
+
+          <emu-alg>
+            1. Let _m_ be this Dynamic Module Record.
+            1. Assert: _m_.[[Status]] is `"instantiated"` or `"evaluated"`.
+            1. Set _m_.[[Status]] to `"evaluating"`.
+            1. Let _result_ be HostEvaluateDynamicModule(_m_).
+            1. If _result_ is an abrupt completion, then
+              1. Assert: _m_.[[Status]] is `"evaluating"`.
+              1. Set _m_.[[Status]] to `"evaluated"`.
+              1. Set _m_.[[EvaluationError]] to _result_.
+              1. Return _result_.
+            1. Let _envRec_ be the value of _module_.[[Environment]].
+            1. For each string _exportName_ in _m_.[[ExportNames]], do
+              1. Assert: _envRec_ has a binding for _exportName_.
+              1. If the binding for _exportName_ in _envRec_ is uninitialized then,
+                1. Let _error_ be a *ReferenceError* exception.
+                1. Set _m_.[[Status]] to `"evaluated"`.
+                1. Set _m_.[[EvaluationError]] to _error_.
+                1. Return _error_.
+            1. For each module _exportModule_ in the list _m_.[[StarExportModules]].
+              1. Let _n_ be the value of _exportModule_.[[Namespace]].
+              1. If _n_ is not _undefined_ then,
+                1. Assert: _n_ is a Module Namespace Exotic Object.
+                1. For each string _exportName_ in _m_.[[ExportNames]], do
+                  1. Let _namespaceExports_ be _n_.[[Exports]].
+                  1. If _namespaceExports_ does not contain _exportName_ then,
+                    1. Insert _exportName_ in the list _namespaceExports_ at the position corresponding to the sort order of `Array.prototype.sort` with *undefined* as _comparefn_.
+            1. Set _m_.[[Status]] to `"evaluated"`.
+            1. Assert: _m_.[[EvaluationError]] is *undefined*.
+            1. Return *undefined*.
+          </emu-alg>
+        </emu-clause>
+
+        <emu-clause id="sec-setdynamicexportbinding">
+          <h1>SetDynamicExportBinding ( _name_, _value_ ) Concrete Method</h1>
+          <p>The SetDynamicExportBinding concrete method of a Dynamic Module Record implements the corresponding Module Record abstract method for a string _name_ and initialization value _value_.</p>
+          <p>After execution completion, only binding mutation is supported.</p>
+          <p>This method can return an error on abrupt completion.</p>
+          <emu-alg>
+            1. Let _module_ be this Dynamic Module Record.
+            1. Let _envRec_ be the module Environment Record _module_.[[Environment]].
+            1. If _envRec_ has a binding for _name_ then,
+              1. If the binding for _name_ in _envRec_ has not been initialized then,
+                1. If _module_.[[Status]] is `"evaluated"` then,
+                  1. Let _error_ be a *ReferenceError* exception.
+                  1. Return _error_.
+                1. Perform _envRec_.InitializeBinding(_name_, _value_).
+              1. Otherwise,
+                1. Perform _envRec_.SetMutableBinding(_name_, _value_, *true*).
+            1. Otherwise,
+              1. If _module_.[[Status]] is `"evaluated"` then,
+                1. Let _error_ be a *ReferenceError* exception.
+                1. Return _error_.
+              1. Perform _envRec_.CreateMutableBinding(_name_, *false*).
+              1. Perform _envRec_.InitializeBinding(_name_, _value_).
+            1. Return *undefined*.
+          </emu-alg>
+        </emu-clause>
+      </emu-clause>
+
+      <emu-clause id="sec-hostevaluatedynamicmodule" aoid="HostEvaluateDynamicModule">
+        <h1>Runtime Semantics: HostEvaluateDynamicModule ( _dynamicModule_ )</h1>
+        <p>HostEvaluateDynamicModule is an implementation-defined abstract operation that performs programmatic execution of a Dynamic Module Record, _dynamicModule_.</p>
+        <p>The implementation of HostEvaluateDynamicModule must conform to the following requirements:</p>
+        <ul>
+          <li>
+            HostEvaluateDynamicModule will call the SetDynamicExportBinding concrete method on the _dynamicModule_ to initialize the export bindings.
+          </li>
+          <li>
+            If there is an evaluation error, it must be thrown.
+          </li>
+        </ul>
+        <emu-note>
+          <p>HostEvaluateDynamicModule must not itself rely on checking what lexical bindings have already been initialized for the module. It is important that the bindings defined in evaluation are fully independent of what bindings are imported.</p>
+        </emu-note>
+      </emu-clause>
+
+      <emu-clause id="sec-getmodulenamespace" aoid="GetModuleNamespace">
+        <h1>Runtime Semantics: GetModuleNamespace ( _module_ )</h1>
+
+        <p>The GetModuleNamespace abstract operation retrieves the Module Namespace Exotic object representing _module_'s exports, lazily creating it the first time it was requested, and storing it in _module_.[[Namespace]] for future retrieval.</p>
+
+        <p>This abstract operation performs the following steps:</p>
+
+        <emu-alg>
+          1. Assert: _module_ is an instance of a concrete subclass of Module Record.
+          1. Assert: _module_.[[Status]] is not `"uninstantiated"`.
+          1. Assert: If _module_.[[Status]] is `"evaluated"`, _module_.[[EvaluationError]] is *undefined*.
+          1. Let _namespace_ be _module_.[[Namespace]].
+          1. If _namespace_ is *undefined*, then
+            1. Let _exportedNames_ be ? _module_.GetExportedNames(&laquo; &raquo;<ins>, _module_</ins>).
+            1. Let _unambiguousNames_ be a new empty List.
+            1. For each _name_ that is an element of _exportedNames_, do
+              1. Let _resolution_ be ? _module_.ResolveExport(_name_, &laquo; &raquo;).
+              1. If _resolution_ is a ResolvedBinding Record, append _name_ to _unambiguousNames_.
+            1. Set _namespace_ to ModuleNamespaceCreate(_module_, _unambiguousNames_).
+          1. Return _namespace_.
+        </emu-alg>
+        <emu-note>
+          <p>The only way GetModuleNamespace can throw is via one of the triggered HostResolveImportedModule calls. Unresolvable names are simply excluded from the namespace at this point. They will lead to a real instantiation error later unless they are all ambiguous star exports that are not explicitly requested anywhere.</p>
+        </emu-note>
+      </emu-clause>
+    </emu-clause>
   </emu-clause>
-
-  <p>The following definitions specify the required concrete methods for Dynamic Module Records.</p>
-
-  <emu-clause id="sec-getexportednames">
-    <h1>GetExportedNames ( _exportStarSet_ ) Concrete Method</h1>
-    <p>The GetExportedNames concrete method of a Dynamic Module Record implements the corresponding Module Record abstract method.</p>
-    <p>It performs the following steps:</p>
-    <emu-alg>
-      1. Let _module_ be this Dynamic Module Record.
-      1. Return _module_.[[exportNames]].
-    </emu-alg>
-  </emu-clause>
-
-  <emu-clause id="sec-resolveexport">
-    <h1>ResolveExport ( _exportName_, _resolveSet_ ) Concrete Method</h1>
-    <p>The ResolveExport concrete method of a Dynamic Module Record implements the corresponding Module Record abstract method.</p>
-
-    <p>ResolveExport ensures that a binding is created for the dynamic Module Record, lazily creating a binding if needed.</p>
-
-    <p>This abstract method performs the following steps:</p>
-
-    <emu-alg>
-      1. Let _module_ be this Dynamic Module Record.
-      1. Let _exportNames_ be _module_.[[ExportNames]].
-      1. If _exportNames_ does not contain _exportName_ then,
-        1. Let _envRec_ be the Module Environment Record _module_.[[Environment]]
-        1. If _envRec_ does not already have a binding for _exportName_ then,
-          1. Perform ! _envRec_.CreateMutableBinding(_exportName_, *false*).
-        1. Append _exportName_ to the end of _exportNames_.
-      1. Return ResolvedBinding Record { [[Module]]: _module_, [[BindingName]]: _exportName_ }.
-    </emu-alg>
-  </emu-clause>
-
-  <emu-clause id="sec-moduledeclarationinstantiation">
-    <h1>Instantiate ( ) Concrete Method</h1>
-
-    <p>The Instantiate concrete method of a Dynamic Module Record implements the corresponding Module Record abstract method.</p>
-    <p>On success, Instantiate transitions this module's [[Status]] from `"uninstantiated"` to `"instantiated"`. On failure, an exception is thrown and this module's [[Status]] remains `"uninstantiated"`.</p>
-
-    <p>This abstract method performs the following steps:</p>
-
-    <emu-alg>
-      1. Let _module_ be this Dynamic Module Record.
-      1. Assert: _module_.[[Status]] is not `"instantiating"` or `"evaluating"`.
-      1. Let _realm_ be module.[[Realm]].
-      1. Assert: _realm_ is a valid Realm.
-      1. Let _env_ be NewModuleEnvironment(_realm_.[[GlobalEnv]]).
-      1. Set _module_.[[Environment]] to _env_.
-      1. Set _module_.[[Status]] to `"instantiated"`.
-      1. Return *undefined*.
-    </emu-alg>
-  </emu-clause>
-
-  <emu-clause id="sec-moduleevaluation">
-    <h1>Evaluate ( ) Concrete Method</h1>
-
-    <p>The Evaluate concrete method of a Dynamic Module Record implements the corresponding Module Record abstract method.</p>
-    <p>Evaluate transitions this module's [[Status]] from `"instantiated"` to `"evaluated"`.</p>
-
-    <p>If execution results in an exception, that exception is recorded in the [[EvaluationError]] field and rethrown by future invocations of Evaluate.</p>
-
-    <p>Evaluation of dynamic modules calls out to _HostEvaluateDynamicModule_, before finalising the export names of the dynamic modules. Any uninitialized export bindings throw a reference error at this stage.</p>
-
-    <p>This abstract method performs the following steps:</p>
-
-    <emu-alg>
-      1. Let _m_ be this Dynamic Module Record.
-      1. Assert: _m_.[[Status]] is `"instantiated"` or `"evaluated"`.
-      1. Set _m_.[[Status]] to `"evaluating"`.
-      1. Let _result_ be HostEvaluateDynamicModule(_m_).
-      1. If _result_ is an abrupt completion, then
-        1. Assert: _m_.[[Status]] is `"evaluating"`.
-        1. Set _m_.[[Status]] to `"evaluated"`.
-        1. Set _m_.[[EvaluationError]] to _result_.
-        1. Return _result_.
-      1. Let _n_ be the value of _m_.[[Namespace]].
-      1. If _n_ is not _undefined_ then,
-        1. Assert _n_ is a Module Namespace Exotic Object.
-      1. Let _envRec_ be the value of _module_.[[Environment]].
-      1. For each string _exportName_ in _m_.[[ExportNames]], do
-        1. Assert: _envRec_ has a binding for _exportName_.
-        1. If the binding for _exportName_ in _envRec_ is uninitialized then,
-          1. Let _error_ be a *ReferenceError* exception.
-          1. Set _m_.[[Status]] to `"evaluated"`.
-          1. Set _m_.[[EvaluationError]] to _error_.
-          1. Return _error_.
-        1. If _n_ is not _undefined_ then,
-          1. Let _namespaceExports_ be _n_.[[Exports]].
-          1. If _namespaceExports_ does not contain _exportName_ then,
-            1. Insert _exportName_ in the list _namespaceExports_ at the position corresponding to the sort order of `Array.prototype.sort` with *undefined* as _comparefn_.
-      1. Set _m_.[[Status]] to `"evaluated"`.
-      1. Assert: _m_.[[EvaluationError]] is *undefined*.
-      1. Return *undefined*.
-    </emu-alg>
-  </emu-clause>
-
-  <emu-clause id="sec-setdynamicexportbinding">
-    <h1>SetDynamicExportBinding ( _name_, _value_ ) Concrete Method</h1>
-    <p>The SetDynamicExportBinding concrete method of a Dynamic Module Record implements the corresponding Module Record abstract method for a string _name_ and initialization value _value_.</p>
-    <p>After execution completion, only binding mutation is supported.</p>
-    <p>This method can return an error on abrupt completion.</p>
-    <emu-alg>
-      1. Let _module_ be this Dynamic Module Record.
-      1. Let _envRec_ be the module Environment Record _module_.[[Environment]].
-      1. If _envRec_ has a binding for _name_ then,
-        1. If the binding for _name_ in _envRec_ has not been initialized then,
-          1. If _module_.[[Status]] is `"evaluated"` then,
-            1. Let _error_ be a *ReferenceError* exception.
-            1. Return _error_.
-          1. Perform _envRec_.InitializeBinding(_name_, _value_).
-        1. Otherwise,
-          1. Perform _envRec_.SetMutableBinding(_name_, _value_, *true*).
-      1. Otherwise,
-        1. If _module_.[[Status]] is `"evaluated"` then,
-          1. Let _error_ be a *ReferenceError* exception.
-          1. Return _error_.
-        1. Perform _envRec_.CreateMutableBinding(_name_, *false*).
-        1. Perform _envRec_.InitializeBinding(_name_, _value_).
-      1. Return *undefined*.
-    </emu-alg>
-  </emu-clause>
-</emu-clause>
-
-<emu-clause id="sec-hostevaluatedynamicmodule" aoid="HostEvaluateDynamicModule">
-  <h1>Runtime Semantics: HostEvaluateDynamicModule ( _dynamicModule_ )</h1>
-  <p>HostEvaluateDynamicModule is an implementation-defined abstract operation that performs programmatic execution of a Dynamic Module Record, _dynamicModule_.</p>
-  <p>The implementation of HostEvaluateDynamicModule must conform to the following requirements:</p>
-  <ul>
-    <li>
-      HostEvaluateDynamicModule will call the SetDynamicExportBinding concrete method on the _dynamicModule_ to initialize the export bindings.
-    </li>
-    <li>
-      If there is an evaluation error, it must be thrown.
-    </li>
-  </ul>
-  <emu-note>
-    <p>HostEvaluateDynamicModule must not itself rely on checking what lexical bindings have already been initialized for the module. It is important that the bindings defined in evaluation are fully independent of what bindings are imported.</p>
-  </emu-note>
 </emu-clause>
