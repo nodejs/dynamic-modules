@@ -177,8 +177,7 @@
         <emu-clause id="sec-dynamicgetexportednames">
           <h1><span class="secnum">1.1.1.3.2</span>GetExportedNames ( <var>exportStarSet</var>, <var>starExportModule</var> ) Concrete Method</h1>
           <p>The GetExportedNames concrete method of a <emu-xref href="#dynamicmodule-record" id="_ref_14"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> implements the corresponding <emu-xref href="#sec-abstract-module-records" id="_ref_15"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> abstract method.</p>
-          <p>Any modules exporting names from this <emu-xref href="#dynamicmodule-record" id="_ref_16"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> are stored so their exports can be amended later on.</p>&gt;
-          
+          <p>Any modules exporting names from this <emu-xref href="#dynamicmodule-record" id="_ref_16"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> are stored so their exports can be amended later on.</p>
           <p>It performs the following steps:</p>
           <emu-alg><ol><li>Let <var>module</var> be this <emu-xref href="#dynamicmodule-record" id="_ref_17"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref>.</li><li>If <var>module</var>.[[StarExportModules]] does not contain <var>starExportModule</var> then,<ol><li>Add <var>starExportModule</var> to <var>module</var>.[[StarExportModules]].</li></ol></li><li>Return <var>module</var>.[[exportNames]].
           </li></ol></emu-alg>
