@@ -277,7 +277,8 @@ copyright: false
                 1. For each string _exportName_ in _m_.[[ExportNames]], do
                   1. Let _namespaceExports_ be _n_.[[Exports]].
                   1. If _namespaceExports_ does not contain _exportName_ then,
-                    1. Insert _exportName_ in the list _namespaceExports_ at the position corresponding to the sort order of `Array.prototype.sort` with *undefined* as _comparefn_.
+                    1. If SameValue(_exportName_, `"default"`) is *false* or _exportModule_ and _m_ are not the same Module Record then,
+                      1. Insert _exportName_ in the list _namespaceExports_ at the position corresponding to the sort order of `Array.prototype.sort` with *undefined* as _comparefn_.
             1. Set _m_.[[Status]] to `"evaluated"`.
             1. Assert: _m_.[[EvaluationError]] is *undefined*.
             1. Return *undefined*.
