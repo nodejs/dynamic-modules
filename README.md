@@ -133,13 +133,11 @@ wrapper approach at all - a new engine API is required to support this.
 This specification for Dynamic Module Records takes a number of steps that are not clear they would be supported by the ECMA-262 module semantics:
 
 * We are allowing the `ResolveExport` concrete method to define let-style export binding placeholders when called on dynamic modules to ensure availability during instantiate.
+* We are moving the validation of export names for Dynamic Modules from the instantiate phase to the post-execution phase.
 * We are possibly extending new export names onto Namespace Exotic Objects after they have already been created.
 * In order to handle book-keeping on which Namespace Exotic Objects need this extension, we add a new parameter to `GetExportNames` tracking the requesting module.
 
-In addition, to ensure the above is well-defined, we provide a post-execution validation of export names, analogous what is done for Source Text Module Records at the instantiate phase.
-
-As a common use case for interfacing non-source-text modules with the ES module system in JS engines, it seems important to carefully
-specify how the dynamic module boundary should behave exactly down to execution order, how execution-time exports can be defined to be spec-compatible, and their validation and error semantics.
+In addition, this work may provide the foundations for exposing a Reflect-base dynamic module API in future, as previously considered.
 
 ## Specification
 
