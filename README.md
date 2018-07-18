@@ -28,8 +28,7 @@ In addition, module execution is allowed to define named export bindings during 
 
 Because the Dynamic Module Record cannot have any dependencies itself, early accesses to bindings before execution are not possible. If any bindings remain uninitialized after execution, a `ReferenceError` is thrown, effectively moving this validation phase from instantiate to post-execution.
 
-> Note: The Dynamic Module Record approach provides support for a single one-way boundary without further transitive dependencies on other modules in the graph. This is distinct from integration with WASM or Binary AST
-which can have further transitive dependencies with the existing graph, therefore needing their own Abstract Module Record implementations.
+> Note: **Dynamic Module Records have no dependencies.** This provides support for a single one-way boundary without further transitive dependencies on other modules in the graph, avoiding circular reference behaviours. This is distinct from integration with WASM or Binary AST which can have further transitive dependencies with the existing graph, therefore needing their own Abstract Module Record implementations.
 
 ## Illustrative Example
 
