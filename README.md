@@ -95,7 +95,8 @@ On the other hand, the namespace object for `'main2.js'` will not know the list 
 In order to support this, we introduce some book-keeping to track any Namespace Exotic Objects created that reference star exports of Dynamic Module Records.
 The post-execution of that dynamic module then amends the appropriate namespaces with new export names.
 
-This is well-defined because the namespace can never be accessed before the Dynamic Module has executed.
+> Note: It is actually possible to observe the partial names in special cases of cycles. This may be acceptable, otherwise
+  a possible fix is being discussed in [#3](https://github.com/guybedford/proposal-dynamic-modules/pull/3).
 
 ## FAQ
 
