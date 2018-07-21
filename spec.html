@@ -122,7 +122,7 @@ copyright: false
             <p>This abstract operation performs the following steps:</p>
 
             <emu-alg>
-              1. <del></del>If _module_ is not a Source Text Module Record, then</del>
+              1. <del>If _module_ is not a Source Text Module Record, then</del>
                 1. <del>Perform ? _module_.Evaluate().</del>
                 1. <del>Return _index_.</del>
               1. If _module_.[[Status]] is `"evaluated"`, then
@@ -136,7 +136,7 @@ copyright: false
                 1. Set _module_.[[DFSIndex]] to _index_.
                 1. Set _module_.[[DFSAncestorIndex]] to _index_.
                 1. Set _index_ to _index_ + 1.
-              1. <del></del>Append _module_ to _stack_.
+              1. <del>Append _module_ to _stack_</del>.
                 1. For each String _required_ that is an element of _module_.[[RequestedModules]], do
                   1. Let _requiredModule_ be ! HostResolveImportedModule(_module_, _required_).
                   1. NOTE: Instantiate must be completed successfully prior to invoking this method, so every requested module is guaranteed to resolve successfully.
