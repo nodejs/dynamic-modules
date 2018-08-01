@@ -254,7 +254,9 @@ copyright: false
 
           <emu-alg>
             1. Let _m_ be this Dynamic Module Record.
-            1. Assert: _m_.[[Status]] is `"instantiated"` or `"evaluated"`.
+            1. If _m_.[[Status]]_ is `"evaluated"` then,
+               1. Return _m_.[[EvaluationError]].
+            1. Assert: _m_.[[Status]] is `"instantiated"`.
             1. Set _m_.[[Status]] to `"evaluating"`.
             1. Let _result_ be HostEvaluateDynamicModule(_m_).
             1. If _result_ is an abrupt completion, then
