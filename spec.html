@@ -309,6 +309,7 @@ copyright: false
               1. If _module_.[[Status]] is `"evaluated"` then,
                 1. Let _error_ be a *ReferenceError* exception.
                 1. Return _error_.
+              1. Append _name_ to the end of _module_.[[exportNames]].
               1. Perform _envRec_.CreateMutableBinding(_name_, *false*).
               1. Perform _envRec_.InitializeBinding(_name_, _value_).
             1. Return *undefined*.
