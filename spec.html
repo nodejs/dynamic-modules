@@ -365,7 +365,7 @@ copyright: false
           1. Return _namespace_.
         </emu-alg>
         <emu-note>
-          <p>The only way GetModuleNamespace can throw is <ins>either</ins> via one of the triggered HostResolveImportedModule calls <ins>or by attempting to resolve export names from an uninstantiated Dynamic Module Record</ins>. Unresolvable names <ins>to Source Text Modules</ins> are simply excluded from the namespace at this point. They will lead to a real instantiation error later unless they are all ambiguous star exports that are not explicitly requested anywhere.</p>
+          <p>The only way GetModuleNamespace can throw is <ins>either</ins> via one of the triggered HostResolveImportedModule calls <ins>or by attempting to resolve export names from an uninstantiated Dynamic Module Record during a circular reference execution</ins>. Unresolvable names <ins>to Source Text Modules</ins> are simply excluded from the namespace at this point. They will lead to a real instantiation error later unless they are all ambiguous star exports that are not explicitly requested anywhere.</p>
         </emu-note>
       </emu-clause>
     </emu-clause>
