@@ -101,6 +101,8 @@ copyright: false
             1. For each ExportEntry Record _e_ in _module_.[[StarExportEntries]], do
               1. Let _requestedModule_ be ? HostResolveImportedModule(_module_, _e_.[[ModuleRequest]]).
               1. Let _starNames_ be ? _requestedModule_.GetExportedNames(_exportStarSet_<ins>, _starExportModule_</ins>).
+              1. <ins>If _starNames_ is *null* then,</ins>
+                1. <ins>Return *null*.</ins>
               1. For each element _n_ of _starNames_, do
                 1. If SameValue(_n_, `"default"`) is *false*, then
                   1. If _n_ is not an element of _exportedNames_, then
@@ -194,6 +196,8 @@ copyright: false
           <p>It performs the following steps:</p>
           <emu-alg>
             1. Let _module_ be this Dynamic Module Record.
+            1. If _module_.[[Status]] is `"uninstantiated"` then,
+              1. Return *null*.
             1. If _module_.[[StarExportModules]] does not contain _starExportModule_ then,
               1. Add _starExportModule_ to _module_.[[StarExportModules]].
             1. Return _module_.[[exportNames]].
@@ -210,6 +214,8 @@ copyright: false
 
           <emu-alg>
             1. Let _module_ be this Dynamic Module Record.
+            1. If _module_.[[Status]] is `"uninstantiated"` then,
+              1. Perform ? _module_.Instantiate().
             1. Let _exportNames_ be _module_.[[ExportNames]].
             1. If _exportNames_ does not contain _exportName_ then,
               1. Let _envRec_ be the Module Environment Record _module_.[[Environment]]
@@ -349,6 +355,8 @@ copyright: false
           1. Let _namespace_ be _module_.[[Namespace]].
           1. If _namespace_ is *undefined*, then
             1. Let _exportedNames_ be ? _module_.GetExportedNames(&laquo; &raquo;<ins>, _module_</ins>).
+            1. <ins>If _exportedNames_ is *null*, then</ins>
+              1. <ins>Throw a *ReferenceError* exception</ins>
             1. Let _unambiguousNames_ be a new empty List.
             1. For each _name_ that is an element of _exportedNames_, do
               1. Let _resolution_ be ? _module_.ResolveExport(_name_, &laquo; &raquo;).
@@ -357,7 +365,7 @@ copyright: false
           1. Return _namespace_.
         </emu-alg>
         <emu-note>
-          <p>The only way GetModuleNamespace can throw is via one of the triggered HostResolveImportedModule calls. Unresolvable names are simply excluded from the namespace at this point. They will lead to a real instantiation error later unless they are all ambiguous star exports that are not explicitly requested anywhere.</p>
+          <p>The only way GetModuleNamespace can throw is <ins>either</ins> via one of the triggered HostResolveImportedModule calls <ins>or by attempting to resolve export names from an uninstantiated Dynamic Module Record during a circular reference execution</ins>. Unresolvable names <ins>to Source Text Modules</ins> are simply excluded from the namespace at this point. They will lead to a real instantiation error later unless they are all ambiguous star exports that are not explicitly requested anywhere.</p>
         </emu-note>
       </emu-clause>
     </emu-clause>
