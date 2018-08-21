@@ -95,7 +95,11 @@ On the other hand, the namespace object for `'main2.js'` will not know the list 
 In order to support this, we introduce some book-keeping to track any Namespace Exotic Objects created that reference star exports of Dynamic Module Records.
 The post-execution of that dynamic module then amends the appropriate namespaces with new export names.
 
-> Note: It is actually possible to observe the partial names in special cases of cycles. An approach to resolve this is being discussed in [#$](https://github.com/guybedford/proposal-dynamic-modules/pull/4).
+### Uninstantiated circular edge case
+
+It is actually possible to observe unexecuted dynamic modules in special cases of cycles, as described in [#4](https://github.com/guybedford/proposal-dynamic-modules/pull/4), where circular references result in dynamic module leaves not being executed before their parents.
+
+To resolve this, reference errors are added for this specific edge case which are caught on instantiation, which is a single check in GetExportedNames. This way we can guarantee that dynamic modules have always completed execution before their importers.
 
 ## FAQ
 
@@ -133,7 +137,8 @@ This specification for Dynamic Module Records takes a number of steps that are n
 
 * We are allowing the `ResolveExport` concrete method to define let-style export binding placeholders when called on dynamic modules to ensure availability during instantiate.
 * We are moving the validation of export names for Dynamic Modules from the instantiate phase to the post-execution phase.
-* We are possibly extending new export names onto Namespace Exotic Objects after they have already been created.
+* We are possibly extending new export names onto Namespace Exotic Objects after they have already been created (from a spec perspective).
+* To ensure dynamic modules have executed before their importers, we need to throw a reference error within the ES instantiation algorithm in certain specific circular reference edge cases.
 * In order to handle book-keeping on which Namespace Exotic Objects need this extension, we add a new parameter to `GetExportNames` tracking the requesting module.
 
 In addition, this work may provide the foundations for exposing a Reflect-base dynamic module API in future, as previously considered.
