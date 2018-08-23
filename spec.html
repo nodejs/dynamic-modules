@@ -13,8 +13,9 @@ copyright: false
 <emu-intro id="introduction">
   <h1>Introduction</h1>
 
-  <p>Dynamic Modules allow non-source-text module records to be created and used by host environments.</p>
-  <p>In addition, they provide late definition of export bindings at the execution phase, to support named exports compatibility with legacy module systems.</p>
+  <p>Dynamic Modules allow integrations of Source Text Modules records with custom host-defined module records.</p>
+  <p>They are created via CreateDynamicModule returned by HostResolveImportedModule, and are triggered for execution through the HostExecuteDynamicModule host function. They can use the SetDynamicExport concrete method to define and update exported values.</p>
+  <p>In addition, a deferredExports flag can allow these modules to provide late definition of export bindings at the execution phase, under special constraints, to support named exports compatibility with legacy module systems.</p>
 </emu-intro>
 
 <emu-clause id="sec-ecmascript-language-scripts-and-modules">
@@ -27,7 +28,129 @@ copyright: false
 
       <emu-clause id="sec-abstract-module-records">
         <h1>Abstract Module Records</h1>
-
+        <p>A <dfn>Module Record</dfn> encapsulates structural information about the imports and exports of a single module. This information is used to link the imports and exports of sets of connected modules. A Module Record includes four fields that are only used when evaluating a module.</p>
+        <p>For specification purposes Module Record values are values of the Record specification type and can be thought of as existing in a simple object-oriented hierarchy where Module Record is an abstract class with concrete subclasses. This specification only defines <del>a single</del><ins>two</ins> Module Record concrete subclass<ins>es</ins> named Source Text Module Record<ins> and Dynamic Module Record</ins>. Other specifications and implementations may define additional Module Record subclasses corresponding to alternative module definition facilities that they defined.</p>
+        <p>Module Record defines the fields listed in <emu-xref href="#table-36"></emu-xref>. All Module Definition subclasses include at least those fields. Module Record also defines the abstract method list in <emu-xref href="#table-37"></emu-xref>. All Module definition subclasses must provide concrete implementations of these abstract methods.</p>
+        <p><ins>Module Record also defines the abstract operations Instantiate and Evaluate which provide top-level module instantiation and evaluation respectively.</ins></p>
+        <emu-table id="table-36" caption="Module Record Fields">
+          <table>
+            <thead>
+            <tr>
+              <th>
+                Field Name
+              </th>
+              <th>
+                Value Type
+              </th>
+              <th>
+                Meaning
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>
+                [[Realm]]
+              </td>
+              <td>
+                Realm Record | *undefined*
+              </td>
+              <td>
+                The Realm within which this module was created. *undefined* if not yet assigned.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                [[Environment]]
+              </td>
+              <td>
+                Lexical Environment | *undefined*
+              </td>
+              <td>
+                The Lexical Environment containing the top level bindings for this module. This field is set when the module is instantiated.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                [[Namespace]]
+              </td>
+              <td>
+                Object | *undefined*
+              </td>
+              <td>
+                The Module Namespace Object (<emu-xref href="#sec-module-namespace-objects"></emu-xref>) if one has been created for this module. Otherwise *undefined*.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                [[HostDefined]]
+              </td>
+              <td>
+                Any, default value is *undefined*.
+              </td>
+              <td>
+                Field reserved for use by host environments that need to associate additional information with a module.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <ins>[[RequestedModules]]</ins>
+              </td>
+              <td>
+                <ins>List of String</ins>
+              </td>
+              <td>
+                <ins>A List of all the |ModuleSpecifier| strings used by the module represented by this record to request the importation of a module. The List is source code occurrence ordered.</ins>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <ins>[[Status]]</ins>
+              </td>
+              <td>
+                <ins>String</ins>
+              </td>
+              <td>
+                <ins>Initially `"uninstantiated"`. Transitions to `"instantiating"`, `"instantiated"`, `"evaluating"`, `"evaluated"` (in that order) as the module progresses throughout its lifecycle.</ins>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <ins>[[EvaluationError]]</ins>
+              </td>
+              <td>
+                <ins>An abrupt completion | *undefined*</ins>
+              </td>
+              <td>
+                <ins>A completion of type ~throw~ representing the exception that occurred during evaluation.  *undefined* if no exception occurred or if [[Status]] is not `"evaluated"`.</ins>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <ins>[[DFSIndex]]</ins>
+              </td>
+              <td>
+                <ins>Integer | *undefined*</ins>
+              </td>
+              <td>
+                <ins>Auxiliary field used during Instantiate and Evaluate only.</ins>
+                <ins>If [[Status]] is `"instantiating"` or `"evaluating"`, this non-negative number records the point at which the module was first visited during the ongoing depth-first traversal of the dependency graph.</ins>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <ins>[[DFSAncestorIndex]]</ins>
+              </td>
+              <td>
+                <ins>Integer | *undefined*</ins>
+              </td>
+              <td>
+                <ins>Auxiliary field used during Instantiate and Evaluate only. If [[Status]] is `"instantiating"` or `"evaluating"`, this is either the module's own [[DFSIndex]] or that of an "earlier" module in the same strongly connected component.</ins>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </emu-table>
         <emu-table id="table-37" caption="Abstract Methods of Module Records">
           <table>
             <tbody>
@@ -61,7 +184,7 @@ copyright: false
                 Instantiate()
               </td>
               <td>
-                <p>Prepare the module for evaluation by transitively resolving all module dependencies and creating a module Environment Record.</p>
+                <p>Prepare the module for evaluation by <del>transitively resolving all module dependencies and</del> creating a module Environment Record.</p>
               </td>
             </tr>
             <tr>
@@ -69,17 +192,277 @@ copyright: false
                 Evaluate()
               </td>
               <td>
-                <p>If this module has already been evaluated successfully, return *undefined*; if it has already been evaluated unsuccessfully, throw the exception that was produced. Otherwise, transitively evaluate all module dependencies of this module and then evaluate this module.</p>
+                <p><del>If this module has already been evaluated successfully, return *undefined*; if it has already been evaluated unsuccessfully, throw the exception that was produced. Otherwise, transitively evaluate all module dependencies of this module and then evaluate this module.</del></p>
+                <p><ins>Evaluate the module, returning a completion record.</ins></p>
                 <p>Instantiate must have completed successfully prior to invoking this method.</p>
               </td>
             </tr>
             </tbody>
           </table>
-        </emu-table>  
+        </emu-table>
+        <p><ins>The following definitions specify the abstract operations for Abstract Module Records</ins></p>
+
+        <h1><ins>InstantiateAll ( )</ins></h1>
+
+        <p>The InstantiateAll abstract operation of an Abstract Module Record instantiates a module as well as transitively instantiating all of its dependencies.</p>
+        <p>On success, Instantiate transitions this module's [[Status]] from `"uninstantiated"` to `"instantiated"`. On failure, an exception is thrown and this module's [[Status]] remains `"uninstantiated"`.</p>
+
+        <p>This abstract method performs the following steps (most of the work is done by the auxiliary function InnerModuleInstantiation):</p>
+
+        <emu-alg>
+          1. Let _module_ be this Module Record.
+          1. Assert: _module_.[[Status]] is not `"instantiating"` or `"evaluating"`.
+          1. Let _stack_ be a new empty List.
+          1. Let _result_ be InnerModuleInstantiation(_module_, _stack_, 0).
+          1. If _result_ is an abrupt completion, then
+            1. For each module _m_ in _stack_, do
+              1. Assert: _m_.[[Status]] is `"instantiating"`.
+              1. Set _m_.[[Status]] to `"uninstantiated"`.
+              1. Set _m_.[[Environment]] to *undefined*.
+              1. Set _m_.[[DFSIndex]] to *undefined*.
+              1. Set _m_.[[DFSAncestorIndex]] to *undefined*.
+            1. Assert: _module_.[[Status]] is `"uninstantiated"`.
+            1. Return _result_.
+          1. Assert: _module_.[[Status]] is `"instantiated"` or `"evaluated"`.
+          1. Assert: _stack_ is empty.
+          1. Return *undefined*.
+        </emu-alg>
+
+        <h1><ins>InnerModuleInstantiation ( _module_, _stack_, _index_ )</ins></h1>
+
+        <p>The InnerModuleInstantiation abstract operation is used by InstantiateAll to perform the actual instantiation process for the Module Record _module_, as well as recursively on all other modules in the dependency graph. The _stack_ and _index_ parameters, as well as a module's [[DFSIndex]] and [[DFSAncestorIndex]] fields, keep track of the depth-first search (DFS) traversal. In particular, [[DFSAncestorIndex]] is used to discover strongly connected components (SCCs), such that all modules in an SCC transition to `"instantiated"` together.</p>
+
+        <p>This function calls out to the Instantiate concrete method of the Module Record, implementing the Module Record abstract method.</p>
+
+        <p>This abstract operation performs the following steps:</p>
+
+        <emu-alg>
+          1. If _module_.[[Status]] is `"instantiating"`, `"instantiated"`, or `"evaluated"`, then
+            1. Return _index_.
+          1. Assert: _module_.[[Status]] is `"uninstantiated"`.
+          1. Set _module_.[[Status]] to `"instantiating"`.
+          1. Set _module_.[[DFSIndex]] to _index_.
+          1. Set _module_.[[DFSAncestorIndex]] to _index_.
+          1. Set _index_ to _index_ + 1.
+          1. Append _module_ to _stack_.
+          1. For each String _required_ that is an element of _module_.[[RequestedModules]], do
+            1. Let _requiredModule_ be ? HostResolveImportedModule(_module_, _required_).
+            1. Set _index_ to ? InnerModuleInstantiation(_requiredModule_, _stack_, _index_).
+            1. Assert: _requiredModule_.[[Status]] is either `"instantiating"`, `"instantiated"`, or `"evaluated"`.
+            1. Assert: _requiredModule_.[[Status]] is `"instantiating"` if and only if _requiredModule_ is in _stack_.
+            1. If _requiredModule_.[[Status]] is `"instantiating"`, then
+              1. Assert: _requiredModule_ is a Module Record.
+              1. Set _module_.[[DFSAncestorIndex]] to min(_module_.[[DFSAncestorIndex]], _requiredModule_.[[DFSAncestorIndex]]).
+          1. Perform ? _module_.Instantiate().
+          1. Assert: _module_ occurs exactly once in _stack_.
+          1. Assert: _module_.[[DFSAncestorIndex]] is less than or equal to _module_.[[DFSIndex]].
+          1. If _module_.[[DFSAncestorIndex]] equals _module_.[[DFSIndex]], then
+            1. Let _done_ be *false*.
+            1. Repeat, while _done_ is *false*,
+              1. Let _requiredModule_ be the last element in _stack_.
+              1. Remove the last element of _stack_.
+              1. Set _requiredModule_.[[Status]] to `"instantiated"`.
+              1. If _requiredModule_ and _module_ are the same Module Record, set _done_ to *true*.
+          1. Return _index_.
+        </emu-alg>
+
+        <h1><ins>EvaluateAll ( ) Concrete Method</ins></h1>
+
+        <p>The EvaluateAll abstract method of a Module Record provides transitive top-level execution of a module.</p>
+        <p>Evaluate transitions this module's [[Status]] from `"instantiated"` to `"evaluated"`.</p>
+
+        <p>If execution results in an exception, that exception is recorded in the [[EvaluationError]] field and rethrown by future invocations of Evaluate.</p>
+
+        <p>This abstract method performs the following steps (most of the work is done by the auxiliary function InnerModuleEvaluation):</p>
+
+        <emu-alg>
+          1. Let _module_ be this Module Record.
+          1. Assert: _module_.[[Status]] is `"instantiated"` or `"evaluated"`.
+          1. Let _stack_ be a new empty List.
+          1. Let _result_ be InnerModuleEvaluation(_module_, _stack_, 0).
+          1. If _result_ is an abrupt completion, then
+            1. For each module _m_ in _stack_, do
+              1. Assert: _m_.[[Status]] is `"evaluating"`.
+              1. Set _m_.[[Status]] to `"evaluated"`.
+              1. Set _m_.[[EvaluationError]] to _result_.
+            1. Assert: _module_.[[Status]] is `"evaluated"` and _module_.[[EvaluationError]] is _result_.
+            1. Return _result_.
+          1. Assert: _module_.[[Status]] is `"evaluated"` and _module_.[[EvaluationError]] is *undefined*.
+          1. Assert: _stack_ is empty.
+          1. Return *undefined*.
+        </emu-alg>
+
+        <h1><ins>InnerModuleEvaluation ( _module_, _stack_, _index_ )</ins></h1>
+
+        <p>The InnerModuleEvaluation abstract operation is used by Evaluate to perform the actual evaluation process for the Source Text Module Record _module_, as well as recursively on all other modules in the dependency graph. The _stack_ and _index_ parameters, as well as _module_'s [[DFSIndex]] and [[DFSAncestoreIndex]] fields, are used the same way as in InnerModuleInstantiation.</p>
+
+        <p>This abstract operation performs the following steps:</p>
+
+        <emu-alg>
+          1. If _module_.[[Status]] is `"evaluated"`, then
+            1. If _module_.[[EvaluationError]] is *undefined*, return _index_.
+            1. Otherwise return _module_.[[EvaluationError]].
+          1. If _module_.[[Status]] is `"evaluating"`, return _index_.
+          1. Assert: _module_.[[Status]] is `"instantiated"`.
+          1. Set _module_.[[Status]] to `"evaluating"`.
+          1. Set _module_.[[DFSIndex]] to _index_.
+          1. Set _module_.[[DFSAncestorIndex]] to _index_.
+          1. Set _index_ to _index_ + 1.
+          1. Append _module_ to _stack_.
+          1. For each String _required_ that is an element of _module_.[[RequestedModules]], do
+            1. Let _requiredModule_ be ! HostResolveImportedModule(_module_, _required_).
+            1. NOTE: Instantiate must be completed successfully prior to invoking this method, so every requested module is guaranteed to resolve successfully.
+            1. Set _index_ to ? InnerModuleEvaluation(_requiredModule_, _stack_, _index_).
+            1. Assert: _requiredModule_.[[Status]] is either `"evaluating"` or `"evaluated"`.
+            1. Assert: _requiredModule_.[[Status]] is `"evaluating"` if and only if _requiredModule_ is in _stack_.
+            1. If _requiredModule_.[[Status]] is `"evaluating"`, then
+              1. Assert: _requiredModule_ is a Source Text Module Record.
+              1. Set _module_.[[DFSAncestorIndex]] to min(_module_.[[DFSAncestorIndex]], _requiredModule_.[[DFSAncestorIndex]]).
+          1. Perform ?_module_.Evaluate().
+          1. Assert: _module_ occurs exactly once in _stack_.
+          1. Assert: _module_.[[DFSAncestorIndex]] is less than or equal to _module_.[[DFSIndex]].
+          1. If _module_.[[DFSAncestorIndex]] equals _module_.[[DFSIndex]], then
+            1. Let _done_ be *false*.
+            1. Repeat, while _done_ is *false*,
+              1. Let _requiredModule_ be the last element in _stack_.
+              1. Remove the last element of _stack_.
+              1. Set _requiredModule_.[[Status]] to `"evaluated"`.
+              1. If _requiredModule_ and _module_ are the same Module Record, set _done_ to *true*.
+          1. Return _index_.
+        </emu-alg>
       </emu-clause>
 
       <emu-clause id="sec-source-text-module-records">
         <h1>Source Text Module Records</h1>
+
+        <emu-table id="table-38" caption="Additional Fields of Source Text Module Records">
+          <table>
+            <tbody>
+            <tr>
+              <th>
+                Field Name
+              </th>
+              <th>
+                Value Type
+              </th>
+              <th>
+                Meaning
+              </th>
+            </tr>
+            <tr>
+              <td>
+                [[ECMAScriptCode]]
+              </td>
+              <td>
+                a Parse Node
+              </td>
+              <td>
+                The result of parsing the source text of this module using |Module| as the goal symbol.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <del>[[RequestedModules]]</del>
+              </td>
+              <td>
+                <del>List of String</del>
+              </td>
+              <td>
+                <del>A List of all the |ModuleSpecifier| strings used by the module represented by this record to request the importation of a module. The List is source code occurrence ordered.</del>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                [[ImportEntries]]
+              </td>
+              <td>
+                List of ImportEntry Records
+              </td>
+              <td>
+                A List of ImportEntry records derived from the code of this module.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                [[LocalExportEntries]]
+              </td>
+              <td>
+                List of ExportEntry Records
+              </td>
+              <td>
+                A List of ExportEntry records derived from the code of this module that correspond to declarations that occur within the module.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                [[IndirectExportEntries]]
+              </td>
+              <td>
+                List of ExportEntry Records
+              </td>
+              <td>
+                A List of ExportEntry records derived from the code of this module that correspond to reexported imports that occur within the module.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                [[StarExportEntries]]
+              </td>
+              <td>
+                List of ExportEntry Records
+              </td>
+              <td>
+                A List of ExportEntry records derived from the code of this module that correspond to export * declarations that occur within the module.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <del>[[Status]]</del>
+              </td>
+              <td>
+                <del>String</del>
+              </td>
+              <td>
+                <del>Initially `"uninstantiated"`. Transitions to `"instantiating"`, `"instantiated"`, `"evaluating"`, `"evaluated"` (in that order) as the module progresses throughout its lifecycle.</del>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <del>[[EvaluationError]]</del>
+              </td>
+              <td>
+                <del>An abrupt completion | *undefined*</del>
+              </td>
+              <td>
+                <del>A completion of type ~throw~ representing the exception that occurred during evaluation.  *undefined* if no exception occurred or if [[Status]] is not `"evaluated"`.</del>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <del>[[DFSIndex]]</del>
+              </td>
+              <td>
+                <del>Integer | *undefined*</del>
+              </td>
+              <td>
+                <del>Auxiliary field used during Instantiate and Evaluate only.</del>
+                <del>If [[Status]] is `"instantiating"` or `"evaluating"`, this non-negative number records the point at which the module was first visited during the ongoing depth-first traversal of the dependency graph.</del>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <del>[[DFSAncestorIndex]]</del>
+              </td>
+              <td>
+                <del>Integer | *undefined*</del>
+              </td>
+              <td>
+                <del>Auxiliary field used during Instantiate and Evaluate only. If [[Status]] is `"instantiating"` or `"evaluating"`, this is either the module's own [[DFSIndex]] or that of an "earlier" module in the same strongly connected component.</del>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </emu-table>
 
         <emu-clause id="sec-getexportednames">
           <h1>GetExportedNames ( _exportStarSet_<ins>, _starExportModule_</ins> ) Concrete Method</h1>
@@ -113,16 +496,112 @@ copyright: false
             <p>GetExportedNames does not filter out or throw an exception for names that have ambiguous star export bindings.</p>
           </emu-note>
         </emu-clause>
+
+        <emu-clause id="sec-instantiate" aoid="Instantiate">
+          <h1><ins>Instantiate ( ) Concrete Method</h1>
+
+          <p>The Instantiate concrete method of a Source Text Module Record implements the correponding Module Record abstract method.</p>
+
+          <p>This abstract method performs the following steps:</p>
+
+          <emu-alg>
+            1. For each ExportEntry Record _e_ in _module_.[[IndirectExportEntries]], do
+              1. Let _resolution_ be ? _module_.ResolveExport(_e_.[[ExportName]], &laquo; &raquo;).
+              1. If _resolution_ is *null* or `"ambiguous"`, throw a *SyntaxError* exception.
+              1. Assert: _resolution_ is a ResolvedBinding Record.
+            1. Assert: All named exports from _module_ are resolvable.
+            1. Let _realm_ be _module_.[[Realm]].
+            1. Assert: _realm_ is not *undefined*.
+            1. Let _env_ be NewModuleEnvironment(_realm_.[[GlobalEnv]]).
+            1. Set _module_.[[Environment]] to _env_.
+            1. Let _envRec_ be _env_'s EnvironmentRecord.
+            1. For each ImportEntry Record _in_ in _module_.[[ImportEntries]], do
+              1. Let _importedModule_ be ! HostResolveImportedModule(_module_, _in_.[[ModuleRequest]]).
+              1. NOTE: The above call cannot fail because imported module requests are a subset of _module_.[[RequestedModules]], and these have been resolved earlier in this algorithm.
+              1. If _in_.[[ImportName]] is `"*"`, then
+                1. Let _namespace_ be ? GetModuleNamespace(_importedModule_).
+                1. Perform ! _envRec_.CreateImmutableBinding(_in_.[[LocalName]], *true*).
+                1. Call _envRec_.InitializeBinding(_in_.[[LocalName]], _namespace_).
+              1. Else,
+                1. Let _resolution_ be ? _importedModule_.ResolveExport(_in_.[[ImportName]], &laquo; &raquo;).
+                1. If _resolution_ is *null* or `"ambiguous"`, throw a *SyntaxError* exception.
+                1. Call _envRec_.CreateImportBinding(_in_.[[LocalName]], _resolution_.[[Module]], _resolution_.[[BindingName]]).
+            1. Let _code_ be _module_.[[ECMAScriptCode]].
+            1. Let _varDeclarations_ be the VarScopedDeclarations of _code_.
+            1. Let _declaredVarNames_ be a new empty List.
+            1. For each element _d_ in _varDeclarations_, do
+              1. For each element _dn_ of the BoundNames of _d_, do
+                1. If _dn_ is not an element of _declaredVarNames_, then
+                  1. Perform ! _envRec_.CreateMutableBinding(_dn_, *false*).
+                  1. Call _envRec_.InitializeBinding(_dn_, *undefined*).
+                  1. Append _dn_ to _declaredVarNames_.
+            1. Let _lexDeclarations_ be the LexicallyScopedDeclarations of _code_.
+            1. For each element _d_ in _lexDeclarations_, do
+              1. For each element _dn_ of the BoundNames of _d_, do
+                1. If IsConstantDeclaration of _d_ is *true*, then
+                  1. Perform ! _envRec_.CreateImmutableBinding(_dn_, *true*).
+                1. Else,
+                  1. Perform ! _envRec_.CreateMutableBinding(_dn_, *false*).
+                1. If _d_ is a |FunctionDeclaration|, a |GeneratorDeclaration|, an |AsyncFunctionDeclaration|, or an |AsyncGeneratorDeclaration|, then
+                  1. Let _fo_ be the result of performing InstantiateFunctionObject for _d_ with argument _env_.
+                  1. Call _envRec_.InitializeBinding(_dn_, _fo_).
+          </emu-alg>
+        </emu-clause>
+
+        <h1><ins>Evaluate ( ) Concrete Method</ins></h1>
+
+        <p>The Evaluate concrete method of a Source Text Module Record implements the correponding Module Record abstract method.</p>
+
+        <p>This abstract operation performs the following steps:</p>
+
+        <emu-alg>
+          1. Let _moduleCxt_ be a new ECMAScript code execution context.
+          1. Set the Function of _moduleCxt_ to *null*.
+          1. Assert: _module_.[[Realm]] is not *undefined*.
+          1. Set the Realm of _moduleCxt_ to _module_.[[Realm]].
+          1. Set the ScriptOrModule of _moduleCxt_ to _module_.
+          1. Assert: _module_ has been linked and declarations in its module environment have been instantiated.
+          1. Set the VariableEnvironment of _moduleCxt_ to _module_.[[Environment]].
+          1. Set the LexicalEnvironment of _moduleCxt_ to _module_.[[Environment]].
+          1. Suspend the currently running execution context.
+          1. Push _moduleCxt_ on to the execution context stack; _moduleCxt_ is now the running execution context.
+          1. Let _result_ be the result of evaluating _module_.[[ECMAScriptCode]].
+          1. Suspend _moduleCxt_ and remove it from the execution context stack.
+          1. Resume the context that is now on the top of the execution context stack as the running execution context.
+          1. Return Completion(_result_).
+        </emu-alg>
+
+        <emu-clause id="sec-moduledeclarationinstantiation">
+          <h1><del>Instantiate ( ) Concrete Method</del></h1>
+
+          <emu-clause id="sec-innermoduleinstantiation" aoid="InnerModuleInstantiation">
+            <h1><del>InnerModuleInstantiation ( _module_, _stack_, _index_ )</del></h1>
+          </emu-clause>
+
+          <emu-clause id="sec-moduledeclarationenvironmentsetup" aoid="ModuleDeclarationEnvironmentSetup">
+            <h1><del>ModuleDeclarationEnvironmentSetup ( _module_ )</del></h1>
+          </emu-clause>
+        </emu-clause>
+
+        <emu-clause id="sec-moduleevaluation">
+          <h1><del>Evaluate ( ) Concrete Method</del></h1>
+
+          <emu-clause id="sec-innermoduleevaluation" aoid="InnerModuleEvaluation">
+            <h1><del>InnerModuleEvaluation ( _module_, _stack_, _index_ )</del></h1>
+          </emu-clause>
+
+          <emu-clause id="sec-moduleexecution" aoid="ModuleExecution">
+            <h1><del>ModuleExecution ( _module_ )</del></h1>
+          </emu-clause>
+        </emu-clause>
       </emu-clause>
 
       <emu-clause id="sec-dynamic-module-records">
         <h1><ins>Dynamic Module Records</ins></h1>
 
-        <p>A <dfn id="dynamicmodule-record">Dynamic Module Record</dfn> is used to represent information about a module that is defined programatically. Its fields contain digested information about the names that are exported by the module and its concrete methods use this digest to link, instantiate, and evaluate the module alongside other Abstract Module Records.</p>
-        
-        <p>Dependency cycles with Source Text Module Records are avoided since these modules can only export, and not import from other Abstract Module Records.</p>
+        <p>A <dfn id="dynamicmodule-record">Dynamic Module Record</dfn> is used to represent information about a custom host-defined module. Its fields contain digested information about the imports and exports of the module and its concrete methods use this digest to link, instantiate, and evaluate the module alongside other Abstract Module Records.</p>
 
-        <p>Dynamic Module Records support late export binding, in that export names are only validated after execution.</p>
+        <p>Dynamic Module Records support late export binding if initialized with the deferredExports flag. In this scenario export names are only validated after execution, but with restrictions placed on their availability in cycles.</p>
 
         <p>In addition to the fields, defined in <emu-xref href="#table-36"></emu-xref>, Dynamic Module Records have the additional fields listed in <emu-xref href="#table-X"></emu-xref>. Each of these fields is initially set in CreateDynamicModule.</p>
 
@@ -142,6 +621,17 @@ copyright: false
             </tr>
             <tr>
               <td>
+                [[DeferredExports]]
+              </td>
+              <td>
+                Boolean
+              </td>
+              <td>
+                A flag indicating if this Dynamic Module defines deferred exports at execution time.
+              </td>
+            </tr>
+            <tr>
+              <td>
                 [[ExportNames]]
               </td>
               <td>
@@ -156,18 +646,10 @@ copyright: false
                 [[StarExportModules]]
               </td>
               <td>
-                A List of Module Record objects that export all names from this Dynamic Module Record.
-              </td>
-            </tr>
-            <tr>
-              <td>
-                [[EvaluationError]]
+                A List of Module Records
               </td>
               <td>
-                An abrupt completion | *undefined*
-              </td>
-              <td>
-                A completion of type ~throw~ representing the exception that occurred during evaluation.  *undefined* if no exception occurred or if [[Status]] is not `"evaluated"`.
+                The Module Record objects that export all names from this Dynamic Module Record to apply deferred exports for.
               </td>
             </tr>
             </tbody>
@@ -175,15 +657,26 @@ copyright: false
         </emu-table>
         
         <emu-clause id="sec-createdynamicmodule" aoid="CreateDynamicModule">
-          <h1>CreateDynamicModule ( _realm_, _hostDefined_ )</h1>
+          <h1>CreateDynamicModule ( _realm_, _requestedModules_, _exportNames_, _hostDefined_ )</h1>
           <p>This method would be expected to be called by the host when constructing a Module Record in _HostResolveImportedModule_.</p>
-          <p>The abstract operation CreateDynamicModule with arguments _realm_, and _hostDefined_ creates a new Dynamic Module Record performing the following steps:</p>
+          <p>The abstract operation CreateDynamicModule with arguments _realm_, _requestedModules_ and _hostDefined_ creates a new Dynamic Module Record performing the following steps:</p>
           <emu-alg>
-            1. Let _exportNames_ be a new empty List.
-            1. Let _starExportModules_ be a new empty List.
-            1. Let _module_ be the Dynamic Module Record { [[Realm]]: _realm_, [[Environment]]: *undefined*, [[Namespace]]: *undefined*, [[Status]]: `"uninstantiated"`, [[ExportNames]]: _exportNames_, [[StarExportModules]]: _starExportModules_, [[EvaluationError]]: *undefined*, [[HostDefined]]: _hostDefined_ }.
-            1. Add _module_ to _module_.[[StarExportModules]].
-            1. Return _module_.
+            1. Assert: _requestedModules_ is a string List.
+            1. If _exportNames_ is *undefined*, then
+              1. Let _deferredExports_ be set to *true*.
+              1. Let _exportNames_ be a new empty List.
+              1. Let _starExportModules_ be a new empty List.
+              1. Let _module_ be the Dynamic Module Record { [[Realm]]: _realm_, [[Environment]]: *undefined*, [[Namespace]]: *undefined*, [[Status]]: `"uninstantiated"`, [[EvaluationError]]: *undefined*, [[HostDefined]]: _hostDefined_, [[RequestedModules]]: _requestedModules_, [[DFSIndex]]: *undefined*, [[DFSAncestorIndex]]: *undefined*, [[DeferredExports]]: _deferredExports_, [[ExportNames]]: _exportNames_, [[StarExportModules]]: _starExportModules_ }.
+              1. Add _module_ to _module_.[[StarExportModules]].
+              1. Return _module_.
+            1. Otherwise,
+              1. Let _deferredExports_ be set to *false*.
+              1. Assert: _exportNames_ is a string List.
+              1. For each string _exportName_ in _exportNames_, do
+                1. Assert: _envRec_ has a binding for _exportName_.
+                1. Perform _envRec_.CreateMutableBinding(_name_, *false*).  
+              1. Let _module_ be the Dynamic Module Record { [[Realm]]: _realm_, [[Environment]]: *undefined*, [[Namespace]]: *undefined*, [[Status]]: `"uninstantiated"`, [[EvaluationError]]: *undefined*, [[HostDefined]]: _hostDefined_, [[RequestedModules]]: _requestedModules_, [[DFSIndex]]: *undefined*, [[DFSAncestorIndex]]: *undefined*, [[DeferredExports]]: _deferredExports_, [[ExportNames]]: _exportNames_, [[StarExportModules]]: *undefined* }.
+              1. Return _module_.
           </emu-alg>
         </emu-clause>
 
@@ -196,12 +689,18 @@ copyright: false
           <p>It performs the following steps:</p>
           <emu-alg>
             1. Let _module_ be this Dynamic Module Record.
-            1. If _module_.[[Status]] is `"uninstantiated"` then,
-              1. Return *null*.
-            1. If _module_.[[StarExportModules]] does not contain _starExportModule_ then,
-              1. Add _starExportModule_ to _module_.[[StarExportModules]].
-            1. Return _module_.[[exportNames]].
+            1. If _module_.[[DeferredExports]] is *true*, then
+              1. If _module_.[[Status]] is `"uninstantiated"`, then
+                1. Return *null*.
+              1. If _module_.[[StarExportModules]] does not contain _starExportModule_ then,
+                1. Add _starExportModule_ to _module_.[[StarExportModules]].
+            1. Return _module_.[[ExportNames]].
           </emu-alg>
+
+          <emu-note>
+            <p>GetExportedNames returns *null* indicating an error when applied to uninstantiated Dynamic Module records with deferred exports.</p>
+            <p>This ensures that module namespaces without a complete list of export names are not observable as execution order matches instantiation order.</p>
+          </emu-note>
         </emu-clause>
 
         <emu-clause id="sec-dynamicresolveexport">
@@ -214,129 +713,115 @@ copyright: false
 
           <emu-alg>
             1. Let _module_ be this Dynamic Module Record.
-            1. If _module_.[[Status]] is `"uninstantiated"` then,
-              1. Perform ? _module_.Instantiate().
-            1. Let _exportNames_ be _module_.[[ExportNames]].
-            1. If _exportNames_ does not contain _exportName_ then,
-              1. Let _envRec_ be the Module Environment Record _module_.[[Environment]]
-              1. If _envRec_ does not already have a binding for _exportName_ then,
-                1. Perform ! _envRec_.CreateMutableBinding(_exportName_, *false*).
-              1. Append _exportName_ to the end of _exportNames_.
+            1. If _module_.[[DeferredExports]] is *true*, then
+              1. If _module_.[[Status]] is `"uninstantiated"`, then
+                1. Return *null*.
+              1. Let _exportNames_ be _module_.[[ExportNames]].
+              1. If _exportNames_ does not contain _exportName_, then
+                1. Let _envRec_ be the Module Environment Record _module_.[[Environment]].
+                1. If _envRec_ does not already have a binding for _exportName_, then
+                  1. Perform ! _envRec_.CreateMutableBinding(_exportName_, *false*).
+                1. Append _exportName_ to the end of _exportNames_.
+            1. If _module_.[[DeferredExports]] is *false*, then
+              1. If _exportNames_ does not contain _exportName_, then
+                1. Return *null*.
             1. Return ResolvedBinding Record { [[Module]]: _module_, [[BindingName]]: _exportName_ }.
           </emu-alg>
         </emu-clause>
 
-        <emu-clause id="sec-dynamicmoduledeclarationinstantiation">
+        <emu-clause id="sec-dynamicinstantiate">
           <h1>Instantiate ( ) Concrete Method</h1>
 
           <p>The Instantiate concrete method of a Dynamic Module Record implements the corresponding Module Record abstract method.</p>
-          <p>On success, Instantiate transitions this module's [[Status]] from `"uninstantiated"` to `"instantiated"`. On failure, an exception is thrown and this module's [[Status]] remains `"uninstantiated"`.</p>
 
           <p>This abstract method performs the following steps:</p>
 
           <emu-alg>
-            1. Let _module_ be this Dynamic Module Record.
-            1. If _module_.[[Status]] is "instantiated", or "evaluated", then
-              1. Return *undefined*.
-            1. Assert: _module_.[[Status]] is not `"instantiating"` or `"evaluating"`.
             1. Let _realm_ be module.[[Realm]].
             1. Assert: _realm_ is a valid Realm.
             1. Let _env_ be NewModuleEnvironment(_realm_.[[GlobalEnv]]).
             1. Set _module_.[[Environment]] to _env_.
-            1. Set _module_.[[Status]] to `"instantiated"`.
-            1. Return *undefined*.
           </emu-alg>
         </emu-clause>
 
-        <emu-clause id="sec-dynamicmoduleevaluation">
+        <emu-clause id="sec-dynamicevaluate">
           <h1>Evaluate ( ) Concrete Method</h1>
 
           <p>The Evaluate concrete method of a Dynamic Module Record implements the corresponding Module Record abstract method.</p>
-          <p>Evaluate transitions this module's [[Status]] from `"instantiated"` to `"evaluated"`.</p>
 
-          <p>If execution results in an exception, that exception is recorded in the [[EvaluationError]] field and rethrown by future invocations of Evaluate.</p>
-
-          <p>Evaluation of dynamic modules calls out to _HostEvaluateDynamicModule_, before finalising the export names of the dynamic modules. Any uninitialized export bindings throw a reference error at this stage.</p>
+          <p>Evaluation of dynamic modules calls out to _HostEvaluateDynamicModule_. When flagged for deferred exports any uninitialized export bindings throw a reference error after this host call.</p>
 
           <p>This abstract method performs the following steps:</p>
 
           <emu-alg>
             1. Let _m_ be this Dynamic Module Record.
-            1. If _m_.[[Status]]_ is `"evaluated"` then,
-               1. Return _m_.[[EvaluationError]].
-            1. Assert: _m_.[[Status]] is `"instantiated"`.
-            1. Set _m_.[[Status]] to `"evaluating"`.
-            1. Let _result_ be HostEvaluateDynamicModule(_m_).
-            1. If _result_ is an abrupt completion, then
-              1. Assert: _m_.[[Status]] is `"evaluating"`.
-              1. Set _m_.[[Status]] to `"evaluated"`.
-              1. Set _m_.[[EvaluationError]] to _result_.
-              1. Return _result_.
+            1. Let _requestedNamespaces_ be an empty List.
+            1. For each String _requested_ that is an element of _module_.[[RequestedModules]], do
+              1. Let _requestedModule_ be ? HostResolveImportedModule(_module_, _requested_).
+              1. Let _requestedNamespace_ be ? GetModuleNamespace(_importedModule_).
+              1. Append _requestedNamespace_ to the list _requestedNamespaces_.
+            1. Let _result_ be HostEvaluateDynamicModule(_m_, _requestedNamespaces_).
+            1. If _result_ is not *undefined*, then
+              1. Throw _result_.
             1. Let _envRec_ be the value of _module_.[[Environment]].
             1. For each string _exportName_ in _m_.[[ExportNames]], do
               1. Assert: _envRec_ has a binding for _exportName_.
               1. If the binding for _exportName_ in _envRec_ is uninitialized then,
-                1. Let _error_ be a *ReferenceError* exception.
-                1. Set _m_.[[Status]] to `"evaluated"`.
-                1. Set _m_.[[EvaluationError]] to _error_.
-                1. Return _error_.
-            1. For each module _exportModule_ in the list _m_.[[StarExportModules]].
-              1. Let _n_ be the value of _exportModule_.[[Namespace]].
-              1. If _n_ is not _undefined_ then,
-                1. Assert: _n_ is a Module Namespace Exotic Object.
-                1. For each string _exportName_ in _m_.[[ExportNames]], do
-                  1. Let _namespaceExports_ be _n_.[[Exports]].
-                  1. If _namespaceExports_ does not contain _exportName_ then,
-                    1. If SameValue(_exportName_, `"default"`) is *false* or _exportModule_ and _m_ are not the same Module Record then,
-                      1. Insert _exportName_ in the list _namespaceExports_ at the position corresponding to the sort order of `Array.prototype.sort` with *undefined* as _comparefn_.
-            1. Set _m_.[[Status]] to `"evaluated"`.
-            1. Assert: _m_.[[EvaluationError]] is *undefined*.
-            1. Return *undefined*.
+                1. Throw a *ReferenceError* exception.
+            1. If _module_.[[DeferredExports]] is *true*, then
+              1. For each module _exportModule_ in the list _m_.[[StarExportModules]].
+                1. Let _n_ be the value of _exportModule_.[[Namespace]].
+                1. If _n_ is not _undefined_ then,
+                  1. Assert: _n_ is a Module Namespace Exotic Object.
+                  1. For each string _exportName_ in _m_.[[ExportNames]], do
+                    1. Let _namespaceExports_ be _n_.[[Exports]].
+                    1. If _namespaceExports_ does not contain _exportName_ then,
+                      1. If SameValue(_exportName_, `"default"`) is *false* or _exportModule_ and _m_ are not the same Module Record then,
+                        1. Insert _exportName_ in the list _namespaceExports_ at the position corresponding to the sort order of `Array.prototype.sort` with *undefined* as _comparefn_.
+            1. Return NormalCompletion(*undefined*).
           </emu-alg>
         </emu-clause>
 
         <emu-clause id="sec-setdynamicexportbinding">
           <h1>SetDynamicExportBinding ( _name_, _value_ ) Concrete Method</h1>
           <p>The SetDynamicExportBinding concrete method of a Dynamic Module Record implements the corresponding Module Record abstract method for a string _name_ and initialization value _value_.</p>
-          <p>After execution completion, only binding mutation is supported.</p>
-          <p>This method can return an error on abrupt completion.</p>
+          <p>After execution completion new export names are not permitted and only binding mutation is supported.</p>
+          <p>This method can throw an error on abrupt completion.</p>
           <emu-alg>
             1. Let _module_ be this Dynamic Module Record.
             1. Let _envRec_ be the module Environment Record _module_.[[Environment]].
-            1. If _module_.[[exportNames]] does not contain _name_ then,
-              1. If _module_.[[Status]] is `"evaluated"` then,
-                1. Let _error_ be a *ReferenceError* exception.
-                1. Return _error_.
-              1. Append _name_ to the end of _module_.[[exportNames]].
+            1. If _module_.[[ExportNames]] does not contain _name_, then
+              1. If _module_.[[Status]] is not `"evaluating"`, then
+                1. Throw a *ReferenceError* exception.
+              1. Append _name_ to the end of _module_.[[ExportNames]].
               1. Perform _envRec_.CreateMutableBinding(_name_, *false*).
               1. Perform _envRec_.InitializeBinding(_name_, _value_).
             1. Otherwise,
               1. Assert: _envRec_ has a binding for _name_.
-              1. If the binding for _name_ in _envRec_ has not been initialized then,
-                1. If _module_.[[Status]] is `"evaluated"` then,
-                  1. Let _error_ be a *ReferenceError* exception.
-                  1. Return _error_.
-                1. Perform _envRec_.InitializeBinding(_name_, _value_).
-              1. Otherwise,
-                1. Perform _envRec_.SetMutableBinding(_name_, _value_, *true*).
+              1. Assert: the binding for _name_ in _envRec_ has been initialized.
+              1. Perform _envRec_.SetMutableBinding(_name_, _value_, *true*).
             1. Return *undefined*.
           </emu-alg>
         </emu-clause>
       </emu-clause>
 
       <emu-clause id="sec-hostevaluatedynamicmodule" aoid="HostEvaluateDynamicModule">
-        <h1><ins>Runtime Semantics: HostEvaluateDynamicModule ( _dynamicModule_ )</ins></h1>
-        <p>HostEvaluateDynamicModule is an implementation-defined abstract operation that performs programmatic execution of a Dynamic Module Record, _dynamicModule_.</p>
+        <h1><ins>Runtime Semantics: HostEvaluateDynamicModule ( _dynamicModule_, _requestedNamespaces_ )</ins></h1>
+        <p>HostEvaluateDynamicModule is an implementation-defined abstract operation that performs programmatic execution of a Dynamic Module Record, _dynamicModule_ given the list of _requestedNamespaces_ corresponding to its _requestedModules_.</p>
         <p>The implementation of HostEvaluateDynamicModule must conform to the following requirements:</p>
         <ul>
           <li>
-            HostEvaluateDynamicModule will call the SetDynamicExportBinding concrete method on the _dynamicModule_ to initialize the export bindings.
+            HostEvaluateDynamicModule may return an error to indicate abrupt completion.
           </li>
           <li>
-            If there is an evaluation error, it must be thrown.
+            HostEvaluateDynamicModule must call the SetDynamicExportBinding concrete method on _dynamicModule_ to provide export values for all export names.
+          </li>
+          <li>
+            If _dynamicModule_.[[DeferredExports]] is *true* the dynamic module may also call the SetDynamicExportBinding concrete method on _dynamicModule_ to initialize new named export bindings.</li>
           </li>
         </ul>
         <emu-note>
+          <p>Dynamic modules must define all export values during this execution call. If any export bindings are not defined to values, an error will be thrown after this call.</p>
           <p>HostEvaluateDynamicModule must not itself rely on checking what lexical bindings have already been initialized for the module. It is important that the bindings defined in evaluation are fully independent of what bindings are imported.</p>
         </emu-note>
       </emu-clause>
@@ -365,7 +850,7 @@ copyright: false
           1. Return _namespace_.
         </emu-alg>
         <emu-note>
-          <p>The only way GetModuleNamespace can throw is <ins>either</ins> via one of the triggered HostResolveImportedModule calls <ins>or by attempting to resolve export names from an uninstantiated Dynamic Module Record during a circular reference execution</ins>. Unresolvable names <ins>to Source Text Modules</ins> are simply excluded from the namespace at this point. They will lead to a real instantiation error later unless they are all ambiguous star exports that are not explicitly requested anywhere.</p>
+          <p>The only way GetModuleNamespace can throw is <ins>either</ins> via one of the triggered HostResolveImportedModule calls <ins>or by attempting to resolve export names from an uninstantiated Dynamic Module Record with deferred exports</ins>. Unresolvable names <ins>to Source Text Modules</ins> are simply excluded from the namespace at this point. They will lead to a real instantiation error later unless they are all ambiguous star exports that are not explicitly requested anywhere.</p>
         </emu-note>
       </emu-clause>
     </emu-clause>

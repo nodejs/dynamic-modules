@@ -1,14 +1,15 @@
 <!doctype html>
 <head><meta charset="utf-8">
-<title>Dynamic Modules</title><script type="application/json" id="menu-search-biblio">[{"type":"clause","id":"introduction","aoid":null,"title":"Introduction","titleHTML":"Introduction","number":"","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"Introduction"},{"type":"table","id":"table-37","number":1,"caption":"Table 1: Abstract Methods of Module Records","referencingIds":[],"namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","key":"Table 1: Abstract Methods of Module Records"},{"type":"term","term":"ResolvedBinding Record","refId":"sec-abstract-module-records","referencingIds":["_ref_22","_ref_38"],"id":"resolvedbinding-record","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","key":"ResolvedBinding Record"},{"type":"clause","id":"sec-abstract-module-records","aoid":null,"title":"Abstract Module Records","titleHTML":"Abstract Module Records","number":"1.1.1.1","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":["_ref_1","_ref_3","_ref_9","_ref_11","_ref_15","_ref_19","_ref_20","_ref_24","_ref_28","_ref_32","_ref_34","_ref_37"],"key":"Abstract Module Records"},{"type":"clause","id":"sec-getexportednames","aoid":null,"title":"GetExportedNames ( exportStarSet, starExportModule ) Concrete Method","titleHTML":"GetExportedNames ( <var>exportStarSet</var><ins>, <var>starExportModule</var></ins> ) Concrete Method","number":"1.1.1.2.1","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"GetExportedNames ( exportStarSet, starExportModule ) Concrete Method"},{"type":"clause","id":"sec-source-text-module-records","aoid":null,"title":"Source Text Module Records","titleHTML":"Source Text Module Records","number":"1.1.1.2","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":["_ref_2","_ref_4"],"key":"Source Text Module Records"},{"type":"term","term":"Dynamic Module Record","refId":"sec-dynamic-module-records","referencingIds":["_ref_8","_ref_10","_ref_12","_ref_13","_ref_14","_ref_16","_ref_17","_ref_18","_ref_21","_ref_23","_ref_25","_ref_27","_ref_29","_ref_33","_ref_35","_ref_36","_ref_41"],"id":"dynamicmodule-record","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","key":"Dynamic Module Record"},{"type":"table","id":"table-X","number":2,"caption":"Table 2: Additional Fields of Dynamic Module Records","referencingIds":["_ref_0"],"namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","key":"Table 2: Additional Fields of Dynamic Module Records"},{"type":"op","aoid":"CreateDynamicModule","refId":"sec-createdynamicmodule","location":"","referencingIds":[],"key":"CreateDynamicModule"},{"type":"clause","id":"sec-createdynamicmodule","aoid":"CreateDynamicModule","title":"CreateDynamicModule ( realm, hostDefined )","titleHTML":"CreateDynamicModule ( <var>realm</var>, <var>hostDefined</var> )","number":"1.1.1.3.1","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":["_ref_7"],"key":"CreateDynamicModule ( realm, hostDefined )"},{"type":"clause","id":"sec-dynamicgetexportednames","aoid":null,"title":"GetExportedNames ( exportStarSet, starExportModule ) Concrete Method","titleHTML":"GetExportedNames ( <var>exportStarSet</var>, <var>starExportModule</var> ) Concrete Method","number":"1.1.1.3.2","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"GetExportedNames ( exportStarSet, starExportModule ) Concrete Method"},{"type":"clause","id":"sec-dynamicresolveexport","aoid":null,"title":"ResolveExport ( exportName, resolveSet ) Concrete Method","titleHTML":"ResolveExport ( <var>exportName</var>, <var>resolveSet</var> ) Concrete Method","number":"1.1.1.3.3","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"ResolveExport ( exportName, resolveSet ) Concrete Method"},{"type":"clause","id":"sec-dynamicmoduledeclarationinstantiation","aoid":null,"title":"Instantiate ( ) Concrete Method","titleHTML":"Instantiate ( ) Concrete Method","number":"1.1.1.3.4","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"Instantiate ( ) Concrete Method"},{"type":"clause","id":"sec-dynamicmoduleevaluation","aoid":null,"title":"Evaluate ( ) Concrete Method","titleHTML":"Evaluate ( ) Concrete Method","number":"1.1.1.3.5","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"Evaluate ( ) Concrete Method"},{"type":"clause","id":"sec-setdynamicexportbinding","aoid":null,"title":"SetDynamicExportBinding ( name, value ) Concrete Method","titleHTML":"SetDynamicExportBinding ( <var>name</var>, <var>value</var> ) Concrete Method","number":"1.1.1.3.6","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"SetDynamicExportBinding ( name, value ) Concrete Method"},{"type":"clause","id":"sec-dynamic-module-records","aoid":null,"title":"Dynamic Module Records","titleHTML":"<ins>Dynamic Module Records</ins>","number":"1.1.1.3","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"Dynamic Module Records"},{"type":"op","aoid":"HostEvaluateDynamicModule","refId":"sec-hostevaluatedynamicmodule","location":"","referencingIds":[],"key":"HostEvaluateDynamicModule"},{"type":"clause","id":"sec-hostevaluatedynamicmodule","aoid":"HostEvaluateDynamicModule","title":"Runtime Semantics: HostEvaluateDynamicModule ( dynamicModule )","titleHTML":"<ins>Runtime Semantics: HostEvaluateDynamicModule ( <var>dynamicModule</var> )</ins>","number":"1.1.1.4","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":["_ref_30"],"key":"Runtime Semantics: HostEvaluateDynamicModule ( dynamicModule )"},{"type":"op","aoid":"GetModuleNamespace","refId":"sec-getmodulenamespace","location":"","referencingIds":[],"key":"GetModuleNamespace"},{"type":"clause","id":"sec-getmodulenamespace","aoid":"GetModuleNamespace","title":"Runtime Semantics: GetModuleNamespace ( module )","titleHTML":"Runtime Semantics: GetModuleNamespace ( <var>module</var> )","number":"1.1.1.5","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"Runtime Semantics: GetModuleNamespace ( module )"},{"type":"clause","id":"sec-module-semantics","aoid":null,"title":"Module Semantics","titleHTML":"Module Semantics","number":"1.1.1","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"Module Semantics"},{"type":"clause","id":"sec-modules","aoid":null,"title":"Modules","titleHTML":"Modules","number":"1.1","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"Modules"},{"type":"clause","id":"sec-ecmascript-language-scripts-and-modules","aoid":null,"title":"ECMAScript Language: Scripts and Modules","titleHTML":"ECMAScript Language: Scripts and Modules","number":"1","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"ECMAScript Language: Scripts and Modules"}]</script></head><body><div id="menu-toggle">☰</div><div id="menu-spacer"></div><div id="menu"><div id="menu-search"><input type="text" id="menu-search-box" placeholder="Search..."><div id="menu-search-results" class="inactive"></div></div><div id="menu-pins"><div class="menu-pane-header">Pins</div><ul id="menu-pins-list"></ul></div><div class="menu-pane-header">Table of Contents</div><div id="menu-toc"><ol class="toc"><li><span class="item-toggle-none"></span><a href="#introduction" title="Introduction">Introduction</a></li><li><span class="item-toggle">◢</span><a href="#sec-ecmascript-language-scripts-and-modules" title="ECMAScript Language: Scripts and Modules"><span class="secnum">1</span> ECMAScript Language: Scripts and Modules</a><ol class="toc"><li><span class="item-toggle">◢</span><a href="#sec-modules" title="Modules"><span class="secnum">1.1</span> Modules</a><ol class="toc"><li><span class="item-toggle">◢</span><a href="#sec-module-semantics" title="Module Semantics"><span class="secnum">1.1.1</span> Module Semantics</a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#sec-abstract-module-records" title="Abstract Module Records"><span class="secnum">1.1.1.1</span> Abstract Module Records</a></li><li><span class="item-toggle">◢</span><a href="#sec-source-text-module-records" title="Source Text Module Records"><span class="secnum">1.1.1.2</span> Source Text Module Records</a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#sec-getexportednames" title="GetExportedNames ( exportStarSet, starExportModule ) Concrete Method"><span class="secnum">1.1.1.2.1</span> GetExportedNames ( <var>exportStarSet</var><ins>, <var>starExportModule</var></ins> ) Concrete Method</a></li></ol></li><li><span class="item-toggle">◢</span><a href="#sec-dynamic-module-records" title="Dynamic Module Records"><span class="secnum">1.1.1.3</span> <ins>Dynamic Module Records</ins></a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#sec-createdynamicmodule" title="CreateDynamicModule ( realm, hostDefined )"><span class="secnum">1.1.1.3.1</span> CreateDynamicModule ( <var>realm</var>, <var>hostDefined</var> )</a></li><li><span class="item-toggle-none"></span><a href="#sec-dynamicgetexportednames" title="GetExportedNames ( exportStarSet, starExportModule ) Concrete Method"><span class="secnum">1.1.1.3.2</span> GetExportedNames ( <var>exportStarSet</var>, <var>starExportModule</var> ) Concrete Method</a></li><li><span class="item-toggle-none"></span><a href="#sec-dynamicresolveexport" title="ResolveExport ( exportName, resolveSet ) Concrete Method"><span class="secnum">1.1.1.3.3</span> ResolveExport ( <var>exportName</var>, <var>resolveSet</var> ) Concrete Method</a></li><li><span class="item-toggle-none"></span><a href="#sec-dynamicmoduledeclarationinstantiation" title="Instantiate ( ) Concrete Method"><span class="secnum">1.1.1.3.4</span> Instantiate ( ) Concrete Method</a></li><li><span class="item-toggle-none"></span><a href="#sec-dynamicmoduleevaluation" title="Evaluate ( ) Concrete Method"><span class="secnum">1.1.1.3.5</span> Evaluate ( ) Concrete Method</a></li><li><span class="item-toggle-none"></span><a href="#sec-setdynamicexportbinding" title="SetDynamicExportBinding ( name, value ) Concrete Method"><span class="secnum">1.1.1.3.6</span> SetDynamicExportBinding ( <var>name</var>, <var>value</var> ) Concrete Method</a></li></ol></li><li><span class="item-toggle-none"></span><a href="#sec-hostevaluatedynamicmodule" title="Runtime Semantics: HostEvaluateDynamicModule ( dynamicModule )"><span class="secnum">1.1.1.4</span> <ins>RS: HostEvaluateDynamicModule ( <var>dynamicModule</var> )</ins></a></li><li><span class="item-toggle-none"></span><a href="#sec-getmodulenamespace" title="Runtime Semantics: GetModuleNamespace ( module )"><span class="secnum">1.1.1.5</span> RS: GetModuleNamespace ( <var>module</var> )</a></li></ol></li></ol></li></ol></li></ol></div></div><div id="spec-container"><h1 class="version first">Stage 1 Draft / August 21, 2018</h1><h1 class="title">Dynamic Modules</h1>
+<title>Dynamic Modules</title><script type="application/json" id="menu-search-biblio">[{"type":"clause","id":"introduction","aoid":null,"title":"Introduction","titleHTML":"Introduction","number":"","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"Introduction"},{"type":"term","term":"Module Record","refId":"sec-abstract-module-records","referencingIds":[],"namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","key":"Module Record"},{"type":"table","id":"table-36","number":1,"caption":"Table 1: Module Record Fields","referencingIds":["_ref_0","_ref_2"],"namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","key":"Table 1: Module Record Fields"},{"type":"table","id":"table-37","number":2,"caption":"Table 2: Abstract Methods of Module Records","referencingIds":["_ref_1"],"namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","key":"Table 2: Abstract Methods of Module Records"},{"type":"term","term":"ResolvedBinding Record","refId":"sec-abstract-module-records","referencingIds":["_ref_46","_ref_68","_ref_87"],"id":"resolvedbinding-record","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","key":"ResolvedBinding Record"},{"type":"clause","id":"sec-abstract-module-records","aoid":null,"title":"Abstract Module Records","titleHTML":"Abstract Module Records","number":"1.1.1.1","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":["_ref_9","_ref_12","_ref_17","_ref_23","_ref_25","_ref_27","_ref_36","_ref_40","_ref_45","_ref_50","_ref_54","_ref_56","_ref_61","_ref_65","_ref_66","_ref_71","_ref_74","_ref_80","_ref_83","_ref_86"],"key":"Abstract Module Records"},{"type":"table","id":"table-38","number":3,"caption":"Table 3: Additional Fields of Source Text Module Records","referencingIds":[],"namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","key":"Table 3: Additional Fields of Source Text Module Records"},{"type":"clause","id":"sec-getexportednames","aoid":null,"title":"GetExportedNames ( exportStarSet, starExportModule ) Concrete Method","titleHTML":"GetExportedNames ( <var>exportStarSet</var><ins>, <var>starExportModule</var></ins> ) Concrete Method","number":"1.1.1.2.1","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"GetExportedNames ( exportStarSet, starExportModule ) Concrete Method"},{"type":"op","aoid":"Instantiate","refId":"sec-instantiate","location":"","referencingIds":[],"key":"Instantiate"},{"type":"clause","id":"sec-instantiate","aoid":"Instantiate","title":"Instantiate ( ) Concrete Method","titleHTML":"<ins>Instantiate ( ) Concrete Method</ins>","number":"1.1.1.2.2","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":["_ref_8","_ref_10","_ref_11","_ref_13","_ref_14","_ref_15","_ref_20","_ref_24","_ref_33","_ref_37","_ref_38","_ref_69"],"key":"Instantiate ( ) Concrete Method"},{"type":"op","aoid":"InnerModuleInstantiation","refId":"sec-innermoduleinstantiation","location":"","referencingIds":[],"key":"InnerModuleInstantiation"},{"type":"clause","id":"sec-innermoduleinstantiation","aoid":"InnerModuleInstantiation","title":"InnerModuleInstantiation ( module, stack, index )","titleHTML":"<del>InnerModuleInstantiation ( <var>module</var>, <var>stack</var>, <var>index</var> )</del>","number":"1.1.1.2.3.1","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":["_ref_16","_ref_18","_ref_19","_ref_22","_ref_31"],"key":"InnerModuleInstantiation ( module, stack, index )"},{"type":"op","aoid":"ModuleDeclarationEnvironmentSetup","refId":"sec-moduledeclarationenvironmentsetup","location":"","referencingIds":[],"key":"ModuleDeclarationEnvironmentSetup"},{"type":"clause","id":"sec-moduledeclarationenvironmentsetup","aoid":"ModuleDeclarationEnvironmentSetup","title":"ModuleDeclarationEnvironmentSetup ( module )","titleHTML":"<del>ModuleDeclarationEnvironmentSetup ( <var>module</var> )</del>","number":"1.1.1.2.3.2","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"ModuleDeclarationEnvironmentSetup ( module )"},{"type":"clause","id":"sec-moduledeclarationinstantiation","aoid":null,"title":"Instantiate ( ) Concrete Method","titleHTML":"<del>Instantiate ( ) Concrete Method</del>","number":"1.1.1.2.3","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"Instantiate ( ) Concrete Method"},{"type":"op","aoid":"InnerModuleEvaluation","refId":"sec-innermoduleevaluation","location":"","referencingIds":[],"key":"InnerModuleEvaluation"},{"type":"clause","id":"sec-innermoduleevaluation","aoid":"InnerModuleEvaluation","title":"InnerModuleEvaluation ( module, stack, index )","titleHTML":"<del>InnerModuleEvaluation ( <var>module</var>, <var>stack</var>, <var>index</var> )</del>","number":"1.1.1.2.4.1","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":["_ref_26","_ref_28","_ref_29","_ref_34"],"key":"InnerModuleEvaluation ( module, stack, index )"},{"type":"op","aoid":"ModuleExecution","refId":"sec-moduleexecution","location":"","referencingIds":[],"key":"ModuleExecution"},{"type":"clause","id":"sec-moduleexecution","aoid":"ModuleExecution","title":"ModuleExecution ( module )","titleHTML":"<del>ModuleExecution ( <var>module</var> )</del>","number":"1.1.1.2.4.2","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"ModuleExecution ( module )"},{"type":"clause","id":"sec-moduleevaluation","aoid":null,"title":"Evaluate ( ) Concrete Method","titleHTML":"<del>Evaluate ( ) Concrete Method</del>","number":"1.1.1.2.4","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"Evaluate ( ) Concrete Method"},{"type":"clause","id":"sec-source-text-module-records","aoid":null,"title":"Source Text Module Records","titleHTML":"Source Text Module Records","number":"1.1.1.2","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":["_ref_6","_ref_30","_ref_35","_ref_39","_ref_41","_ref_44"],"key":"Source Text Module Records"},{"type":"term","term":"Dynamic Module Record","refId":"sec-dynamic-module-records","referencingIds":["_ref_7","_ref_53","_ref_55","_ref_57","_ref_58","_ref_59","_ref_60","_ref_62","_ref_63","_ref_64","_ref_67","_ref_70","_ref_73","_ref_75","_ref_82","_ref_84","_ref_85","_ref_90"],"id":"dynamicmodule-record","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","key":"Dynamic Module Record"},{"type":"table","id":"table-X","number":4,"caption":"Table 4: Additional Fields of Dynamic Module Records","referencingIds":["_ref_3"],"namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","key":"Table 4: Additional Fields of Dynamic Module Records"},{"type":"op","aoid":"CreateDynamicModule","refId":"sec-createdynamicmodule","location":"","referencingIds":[],"key":"CreateDynamicModule"},{"type":"clause","id":"sec-createdynamicmodule","aoid":"CreateDynamicModule","title":"CreateDynamicModule ( realm, requestedModules, exportNames, hostDefined )","titleHTML":"CreateDynamicModule ( <var>realm</var>, <var>requestedModules</var>, <var>exportNames</var>, <var>hostDefined</var> )","number":"1.1.1.3.1","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":["_ref_4","_ref_52"],"key":"CreateDynamicModule ( realm, requestedModules, exportNames, hostDefined )"},{"type":"clause","id":"sec-dynamicgetexportednames","aoid":null,"title":"GetExportedNames ( exportStarSet, starExportModule ) Concrete Method","titleHTML":"GetExportedNames ( <var>exportStarSet</var>, <var>starExportModule</var> ) Concrete Method","number":"1.1.1.3.2","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"GetExportedNames ( exportStarSet, starExportModule ) Concrete Method"},{"type":"clause","id":"sec-dynamicresolveexport","aoid":null,"title":"ResolveExport ( exportName, resolveSet ) Concrete Method","titleHTML":"ResolveExport ( <var>exportName</var>, <var>resolveSet</var> ) Concrete Method","number":"1.1.1.3.3","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"ResolveExport ( exportName, resolveSet ) Concrete Method"},{"type":"clause","id":"sec-dynamicinstantiate","aoid":null,"title":"Instantiate ( ) Concrete Method","titleHTML":"Instantiate ( ) Concrete Method","number":"1.1.1.3.4","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"Instantiate ( ) Concrete Method"},{"type":"clause","id":"sec-dynamicevaluate","aoid":null,"title":"Evaluate ( ) Concrete Method","titleHTML":"Evaluate ( ) Concrete Method","number":"1.1.1.3.5","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"Evaluate ( ) Concrete Method"},{"type":"clause","id":"sec-setdynamicexportbinding","aoid":null,"title":"SetDynamicExportBinding ( name, value ) Concrete Method","titleHTML":"SetDynamicExportBinding ( <var>name</var>, <var>value</var> ) Concrete Method","number":"1.1.1.3.6","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"SetDynamicExportBinding ( name, value ) Concrete Method"},{"type":"clause","id":"sec-dynamic-module-records","aoid":null,"title":"Dynamic Module Records","titleHTML":"<ins>Dynamic Module Records</ins>","number":"1.1.1.3","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"Dynamic Module Records"},{"type":"op","aoid":"HostEvaluateDynamicModule","refId":"sec-hostevaluatedynamicmodule","location":"","referencingIds":[],"key":"HostEvaluateDynamicModule"},{"type":"clause","id":"sec-hostevaluatedynamicmodule","aoid":"HostEvaluateDynamicModule","title":"Runtime Semantics: HostEvaluateDynamicModule ( dynamicModule, requestedNamespaces )","titleHTML":"<ins>Runtime Semantics: HostEvaluateDynamicModule ( <var>dynamicModule</var>, <var>requestedNamespaces</var> )</ins>","number":"1.1.1.4","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":["_ref_78"],"key":"Runtime Semantics: HostEvaluateDynamicModule ( dynamicModule, requestedNamespaces )"},{"type":"op","aoid":"GetModuleNamespace","refId":"sec-getmodulenamespace","location":"","referencingIds":[],"key":"GetModuleNamespace"},{"type":"clause","id":"sec-getmodulenamespace","aoid":"GetModuleNamespace","title":"Runtime Semantics: GetModuleNamespace ( module )","titleHTML":"Runtime Semantics: GetModuleNamespace ( <var>module</var> )","number":"1.1.1.5","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":["_ref_49","_ref_77"],"key":"Runtime Semantics: GetModuleNamespace ( module )"},{"type":"clause","id":"sec-module-semantics","aoid":null,"title":"Module Semantics","titleHTML":"Module Semantics","number":"1.1.1","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"Module Semantics"},{"type":"clause","id":"sec-modules","aoid":null,"title":"Modules","titleHTML":"Modules","number":"1.1","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"Modules"},{"type":"clause","id":"sec-ecmascript-language-scripts-and-modules","aoid":null,"title":"ECMAScript Language: Scripts and Modules","titleHTML":"ECMAScript Language: Scripts and Modules","number":"1","namespace":"https://guybedford.github.io/proposal-dynamic-modules/","location":"","referencingIds":[],"key":"ECMAScript Language: Scripts and Modules"}]</script></head><body><div id="menu-toggle">☰</div><div id="menu-spacer"></div><div id="menu"><div id="menu-search"><input type="text" id="menu-search-box" placeholder="Search..."><div id="menu-search-results" class="inactive"></div></div><div id="menu-pins"><div class="menu-pane-header">Pins</div><ul id="menu-pins-list"></ul></div><div class="menu-pane-header">Table of Contents</div><div id="menu-toc"><ol class="toc"><li><span class="item-toggle-none"></span><a href="#introduction" title="Introduction">Introduction</a></li><li><span class="item-toggle">◢</span><a href="#sec-ecmascript-language-scripts-and-modules" title="ECMAScript Language: Scripts and Modules"><span class="secnum">1</span> ECMAScript Language: Scripts and Modules</a><ol class="toc"><li><span class="item-toggle">◢</span><a href="#sec-modules" title="Modules"><span class="secnum">1.1</span> Modules</a><ol class="toc"><li><span class="item-toggle">◢</span><a href="#sec-module-semantics" title="Module Semantics"><span class="secnum">1.1.1</span> Module Semantics</a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#sec-abstract-module-records" title="Abstract Module Records"><span class="secnum">1.1.1.1</span> Abstract Module Records</a></li><li><span class="item-toggle">◢</span><a href="#sec-source-text-module-records" title="Source Text Module Records"><span class="secnum">1.1.1.2</span> Source Text Module Records</a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#sec-getexportednames" title="GetExportedNames ( exportStarSet, starExportModule ) Concrete Method"><span class="secnum">1.1.1.2.1</span> GetExportedNames ( <var>exportStarSet</var><ins>, <var>starExportModule</var></ins> ) Concrete Method</a></li><li><span class="item-toggle-none"></span><a href="#sec-instantiate" title="Instantiate ( ) Concrete Method"><span class="secnum">1.1.1.2.2</span> <ins>Instantiate ( ) Concrete Method</ins></a></li><li><span class="item-toggle">◢</span><a href="#sec-moduledeclarationinstantiation" title="Instantiate ( ) Concrete Method"><span class="secnum">1.1.1.2.3</span> <del>Instantiate ( ) Concrete Method</del></a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#sec-innermoduleinstantiation" title="InnerModuleInstantiation ( module, stack, index )"><span class="secnum">1.1.1.2.3.1</span> <del>InnerModuleInstantiation ( <var>module</var>, <var>stack</var>, <var>index</var> )</del></a></li><li><span class="item-toggle-none"></span><a href="#sec-moduledeclarationenvironmentsetup" title="ModuleDeclarationEnvironmentSetup ( module )"><span class="secnum">1.1.1.2.3.2</span> <del>ModuleDeclarationEnvironmentSetup ( <var>module</var> )</del></a></li></ol></li><li><span class="item-toggle">◢</span><a href="#sec-moduleevaluation" title="Evaluate ( ) Concrete Method"><span class="secnum">1.1.1.2.4</span> <del>Evaluate ( ) Concrete Method</del></a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#sec-innermoduleevaluation" title="InnerModuleEvaluation ( module, stack, index )"><span class="secnum">1.1.1.2.4.1</span> <del>InnerModuleEvaluation ( <var>module</var>, <var>stack</var>, <var>index</var> )</del></a></li><li><span class="item-toggle-none"></span><a href="#sec-moduleexecution" title="ModuleExecution ( module )"><span class="secnum">1.1.1.2.4.2</span> <del>ModuleExecution ( <var>module</var> )</del></a></li></ol></li></ol></li><li><span class="item-toggle">◢</span><a href="#sec-dynamic-module-records" title="Dynamic Module Records"><span class="secnum">1.1.1.3</span> <ins>Dynamic Module Records</ins></a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#sec-createdynamicmodule" title="CreateDynamicModule ( realm, requestedModules, exportNames, hostDefined )"><span class="secnum">1.1.1.3.1</span> CreateDynamicModule ( <var>realm</var>, <var>requestedModules</var>, <var>exportNames</var>, <var>hostDefined</var> )</a></li><li><span class="item-toggle-none"></span><a href="#sec-dynamicgetexportednames" title="GetExportedNames ( exportStarSet, starExportModule ) Concrete Method"><span class="secnum">1.1.1.3.2</span> GetExportedNames ( <var>exportStarSet</var>, <var>starExportModule</var> ) Concrete Method</a></li><li><span class="item-toggle-none"></span><a href="#sec-dynamicresolveexport" title="ResolveExport ( exportName, resolveSet ) Concrete Method"><span class="secnum">1.1.1.3.3</span> ResolveExport ( <var>exportName</var>, <var>resolveSet</var> ) Concrete Method</a></li><li><span class="item-toggle-none"></span><a href="#sec-dynamicinstantiate" title="Instantiate ( ) Concrete Method"><span class="secnum">1.1.1.3.4</span> Instantiate ( ) Concrete Method</a></li><li><span class="item-toggle-none"></span><a href="#sec-dynamicevaluate" title="Evaluate ( ) Concrete Method"><span class="secnum">1.1.1.3.5</span> Evaluate ( ) Concrete Method</a></li><li><span class="item-toggle-none"></span><a href="#sec-setdynamicexportbinding" title="SetDynamicExportBinding ( name, value ) Concrete Method"><span class="secnum">1.1.1.3.6</span> SetDynamicExportBinding ( <var>name</var>, <var>value</var> ) Concrete Method</a></li></ol></li><li><span class="item-toggle-none"></span><a href="#sec-hostevaluatedynamicmodule" title="Runtime Semantics: HostEvaluateDynamicModule ( dynamicModule, requestedNamespaces )"><span class="secnum">1.1.1.4</span> <ins>RS: HostEvaluateDynamicModule ( <var>dynamicModule</var>, <var>requestedNamespaces</var> )</ins></a></li><li><span class="item-toggle-none"></span><a href="#sec-getmodulenamespace" title="Runtime Semantics: GetModuleNamespace ( module )"><span class="secnum">1.1.1.5</span> RS: GetModuleNamespace ( <var>module</var> )</a></li></ol></li></ol></li></ol></li></ol></div></div><div id="spec-container"><h1 class="version first">Stage 1 Draft / August 23, 2018</h1><h1 class="title">Dynamic Modules</h1>
 <script src="ecmarkup.js" defer=""></script>
 <link rel="stylesheet" href="ecmarkup.css">
 
 <emu-intro id="introduction">
   <h1>Introduction</h1>
 
-  <p>Dynamic Modules allow non-source-text module records to be created and used by host environments.</p>
-  <p>In addition, they provide late definition of export bindings at the execution phase, to support named exports compatibility with legacy module systems.</p>
+  <p>Dynamic Modules allow integrations of Source Text Modules records with custom host-defined module records.</p>
+  <p>They are created via <emu-xref aoid="CreateDynamicModule" id="_ref_4"><a href="#sec-createdynamicmodule">CreateDynamicModule</a></emu-xref> returned by <emu-xref aoid="HostResolveImportedModule" id="_ref_5"><a href="https://tc39.github.io/ecma262/#sec-hostresolveimportedmodule">HostResolveImportedModule</a></emu-xref>, and are triggered for execution through the HostExecuteDynamicModule host function. They can use the SetDynamicExport concrete method to define and update exported values.</p>
+  <p>In addition, a deferredExports flag can allow these modules to provide late definition of export bindings at the execution phase, under special constraints, to support named exports compatibility with legacy module systems.</p>
 </emu-intro>
 
 <emu-clause id="sec-ecmascript-language-scripts-and-modules">
@@ -21,8 +22,145 @@
 
       <emu-clause id="sec-abstract-module-records">
         <h1><span class="secnum">1.1.1.1</span>Abstract Module Records</h1>
-
-        <emu-table id="table-37" caption="Abstract Methods of Module Records"><figure><figcaption>Table 1: Abstract Methods of Module Records</figcaption>
+        <p>A  <dfn>Module Record</dfn> encapsulates structural information about the imports and exports of a single module. This information is used to link the imports and exports of sets of connected modules. A Module Record includes four fields that are only used when evaluating a module.</p>
+        <p>For specification purposes Module Record values are values of the <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref> specification type and can be thought of as existing in a simple object-oriented hierarchy where Module Record is an abstract class with concrete subclasses. This specification only defines  <del>a single</del><ins>two</ins> Module Record concrete subclass<ins>es</ins> named <emu-xref href="#sec-source-text-module-records" id="_ref_6"><a href="#sec-source-text-module-records">Source Text Module Record</a></emu-xref><ins> and <emu-xref href="#dynamicmodule-record" id="_ref_7"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref></ins>. Other specifications and implementations may define additional Module Record subclasses corresponding to alternative module definition facilities that they defined.</p>
+        <p>Module Record defines the fields listed in  <emu-xref href="#table-36" id="_ref_0"><a href="#table-36">Table 1</a></emu-xref>. All Module Definition subclasses include at least those fields. Module Record also defines the abstract method list in  <emu-xref href="#table-37" id="_ref_1"><a href="#table-37">Table 2</a></emu-xref>. All Module definition subclasses must provide concrete implementations of these abstract methods.</p>
+        <p><ins>Module Record also defines the abstract operations <emu-xref aoid="Instantiate" id="_ref_8"><a href="#sec-instantiate">Instantiate</a></emu-xref> and Evaluate which provide top-level module instantiation and evaluation respectively.</ins></p>
+        <emu-table id="table-36" caption="Module Record Fields"><figure><figcaption>Table 1: <emu-xref href="#sec-abstract-module-records" id="_ref_9"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> Fields</figcaption>
+          <table>
+            <thead>
+            <tr>
+              <th>
+                Field Name
+              
+              </th>
+              <th>
+                Value Type
+              
+              </th>
+              <th>
+                Meaning
+              
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>
+                [[Realm]]
+              
+              </td>
+              <td>
+                <emu-xref href="#realm-record"><a href="https://tc39.github.io/ecma262/#realm-record">Realm Record</a></emu-xref> | <emu-val>undefined</emu-val>
+              
+              </td>
+              <td>
+                The <emu-xref href="#realm"><a href="https://tc39.github.io/ecma262/#realm">Realm</a></emu-xref> within which this module was created. <emu-val>undefined</emu-val> if not yet assigned.
+              
+              </td>
+            </tr>
+            <tr>
+              <td>
+                [[Environment]]
+              
+              </td>
+              <td>
+                <emu-xref href="#sec-lexical-environments"><a href="https://tc39.github.io/ecma262/#sec-lexical-environments">Lexical Environment</a></emu-xref> | <emu-val>undefined</emu-val>
+              
+              </td>
+              <td>
+                The <emu-xref href="#sec-lexical-environments"><a href="https://tc39.github.io/ecma262/#sec-lexical-environments">Lexical Environment</a></emu-xref> containing the top level bindings for this module. This field is set when the module is instantiated.
+              
+              </td>
+            </tr>
+            <tr>
+              <td>
+                [[Namespace]]
+              
+              </td>
+              <td>
+                Object | <emu-val>undefined</emu-val>
+              
+              </td>
+              <td>
+                The Module Namespace Object (<emu-xref href="#sec-module-namespace-objects"><a href="https://tc39.github.io/ecma262/#sec-module-namespace-objects">26.3</a></emu-xref>) if one has been created for this module. Otherwise <emu-val>undefined</emu-val>.
+              
+              </td>
+            </tr>
+            <tr>
+              <td>
+                [[HostDefined]]
+              
+              </td>
+              <td>
+                Any, default value is <emu-val>undefined</emu-val>.
+              
+              </td>
+              <td>
+                Field reserved for use by host environments that need to associate additional information with a module.
+              
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <ins>[[RequestedModules]]</ins>
+              </td>
+              <td>
+                <ins><emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> of String</ins>
+              </td>
+              <td>
+                <ins>A <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> of all the <emu-nt><a href="https://tc39.github.io/ecma262/#prod-ModuleSpecifier">ModuleSpecifier</a></emu-nt> strings used by the module represented by this record to request the importation of a module. The <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> is source code occurrence ordered.</ins>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <ins>[[Status]]</ins>
+              </td>
+              <td>
+                <ins>String</ins>
+              </td>
+              <td>
+                <ins>Initially <code>"uninstantiated"</code>. Transitions to <code>"instantiating"</code>, <code>"instantiated"</code>, <code>"evaluating"</code>, <code>"evaluated"</code> (in that order) as the module progresses throughout its lifecycle.</ins>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <ins>[[EvaluationError]]</ins>
+              </td>
+              <td>
+                <ins>An <emu-xref href="#sec-completion-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-completion-record-specification-type">abrupt completion</a></emu-xref> | <emu-val>undefined</emu-val></ins>
+              </td>
+              <td>
+                <ins>A completion of type <emu-const>throw</emu-const> representing the exception that occurred during evaluation.  <emu-val>undefined</emu-val> if no exception occurred or if [[Status]] is not <code>"evaluated"</code>.</ins>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <ins>[[DFSIndex]]</ins>
+              </td>
+              <td>
+                <ins>Integer | <emu-val>undefined</emu-val></ins>
+              </td>
+              <td>
+                <ins>Auxiliary field used during <emu-xref aoid="Instantiate" id="_ref_10"><a href="#sec-instantiate">Instantiate</a></emu-xref> and Evaluate only.</ins>
+                <ins>If [[Status]] is <code>"instantiating"</code> or <code>"evaluating"</code>, this non-negative number records the point at which the module was first visited during the ongoing depth-first traversal of the dependency graph.</ins>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <ins>[[DFSAncestorIndex]]</ins>
+              </td>
+              <td>
+                <ins>Integer | <emu-val>undefined</emu-val></ins>
+              </td>
+              <td>
+                <ins>Auxiliary field used during <emu-xref aoid="Instantiate" id="_ref_11"><a href="#sec-instantiate">Instantiate</a></emu-xref> and Evaluate only. If [[Status]] is <code>"instantiating"</code> or <code>"evaluating"</code>, this is either the module's own [[DFSIndex]] or that of an "earlier" module in the same strongly connected component.</ins>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </figure></emu-table>
+        <emu-table id="table-37" caption="Abstract Methods of Module Records"><figure><figcaption>Table 2: Abstract Methods of Module Records</figcaption>
           <table>
             <tbody>
             <tr>
@@ -51,17 +189,17 @@
               
               </td>
               <td>
-                <p>Return the binding of a name exported by this module. Bindings are represented by a  <dfn id="resolvedbinding-record">ResolvedBinding Record</dfn>, of the form { [[Module]]: <emu-xref href="#sec-abstract-module-records" id="_ref_1"><a href="#sec-abstract-module-records">Module Record</a></emu-xref>, [[BindingName]]: String }. Return <emu-val>null</emu-val> if the name cannot be resolved, or <code>"ambiguous"</code> if multiple bindings were found.</p>
+                <p>Return the binding of a name exported by this module. Bindings are represented by a  <dfn id="resolvedbinding-record">ResolvedBinding Record</dfn>, of the form { [[Module]]: <emu-xref href="#sec-abstract-module-records" id="_ref_12"><a href="#sec-abstract-module-records">Module Record</a></emu-xref>, [[BindingName]]: String }. Return <emu-val>null</emu-val> if the name cannot be resolved, or <code>"ambiguous"</code> if multiple bindings were found.</p>
                 <p>This operation must be idempotent if it completes normally. Each time it is called with a specific <var>exportName</var>, <var>resolveSet</var> pair as arguments it must return the same result.</p>
               </td>
             </tr>
             <tr>
               <td>
-                Instantiate()
+                <emu-xref aoid="Instantiate" id="_ref_13"><a href="#sec-instantiate">Instantiate</a></emu-xref>()
               
               </td>
               <td>
-                <p>Prepare the module for evaluation by transitively resolving all module dependencies and creating a module <emu-xref href="#sec-environment-records"><a href="https://tc39.github.io/ecma262/#sec-environment-records">Environment Record</a></emu-xref>.</p>
+                <p>Prepare the module for evaluation by  <del>transitively resolving all module dependencies and</del> creating a module <emu-xref href="#sec-environment-records"><a href="https://tc39.github.io/ecma262/#sec-environment-records">Environment Record</a></emu-xref>.</p>
               </td>
             </tr>
             <tr>
@@ -70,42 +208,63 @@
               
               </td>
               <td>
-                <p>If this module has already been evaluated successfully, return <emu-val>undefined</emu-val>; if it has already been evaluated unsuccessfully, throw the exception that was produced. Otherwise, transitively evaluate all module dependencies of this module and then evaluate this module.</p>
-                <p>Instantiate must have completed successfully prior to invoking this method.</p>
+                <p><del>If this module has already been evaluated successfully, return <emu-val>undefined</emu-val>; if it has already been evaluated unsuccessfully, throw the exception that was produced. Otherwise, transitively evaluate all module dependencies of this module and then evaluate this module.</del></p>
+                <p><ins>Evaluate the module, returning a completion record.</ins></p>
+                <p><emu-xref aoid="Instantiate" id="_ref_14"><a href="#sec-instantiate">Instantiate</a></emu-xref> must have completed successfully prior to invoking this method.</p>
               </td>
             </tr>
             </tbody>
           </table>
-        </figure></emu-table>  
+        </figure></emu-table>
+        <p><ins>The following definitions specify the abstract operations for Abstract Module Records</ins></p>
+
+        <h1><ins>InstantiateAll ( )</ins></h1>
+
+        <p>The InstantiateAll abstract operation of an Abstract Module Record instantiates a module as well as transitively instantiating all of its dependencies.</p>
+        <p>On success, <emu-xref aoid="Instantiate" id="_ref_15"><a href="#sec-instantiate">Instantiate</a></emu-xref> transitions this module's [[Status]] from <code>"uninstantiated"</code> to <code>"instantiated"</code>. On failure, an exception is thrown and this module's [[Status]] remains <code>"uninstantiated"</code>.</p>
+
+        <p>This abstract method performs the following steps (most of the work is done by the auxiliary function <emu-xref aoid="InnerModuleInstantiation" id="_ref_16"><a href="#sec-innermoduleinstantiation">InnerModuleInstantiation</a></emu-xref>):</p>
+
+        <emu-alg><ol><li>Let <var>module</var> be this <emu-xref href="#sec-abstract-module-records" id="_ref_17"><a href="#sec-abstract-module-records">Module Record</a></emu-xref>.</li><li>Assert: <var>module</var>.[[Status]] is not <code>"instantiating"</code> or <code>"evaluating"</code>.</li><li>Let <var>stack</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>Let <var>result</var> be <emu-xref aoid="InnerModuleInstantiation" id="_ref_18"><a href="#sec-innermoduleinstantiation">InnerModuleInstantiation</a></emu-xref>(<var>module</var>, <var>stack</var>, 0).</li><li>If <var>result</var> is an <emu-xref href="#sec-completion-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-completion-record-specification-type">abrupt completion</a></emu-xref>, then<ol><li>For each module <var>m</var> in <var>stack</var>, do<ol><li>Assert: <var>m</var>.[[Status]] is <code>"instantiating"</code>.</li><li>Set <var>m</var>.[[Status]] to <code>"uninstantiated"</code>.</li><li>Set <var>m</var>.[[Environment]] to <emu-val>undefined</emu-val>.</li><li>Set <var>m</var>.[[DFSIndex]] to <emu-val>undefined</emu-val>.</li><li>Set <var>m</var>.[[DFSAncestorIndex]] to <emu-val>undefined</emu-val>.</li></ol></li><li>Assert: <var>module</var>.[[Status]] is <code>"uninstantiated"</code>.</li><li>Return <var>result</var>.</li></ol></li><li>Assert: <var>module</var>.[[Status]] is <code>"instantiated"</code> or <code>"evaluated"</code>.</li><li>Assert: <var>stack</var> is empty.</li><li>Return <emu-val>undefined</emu-val>.
+        </li></ol></emu-alg>
+
+        <h1><ins>InnerModuleInstantiation ( <var>module</var>, <var>stack</var>, <var>index</var> )</ins></h1>
+
+        <p>The <emu-xref aoid="InnerModuleInstantiation" id="_ref_19"><a href="#sec-innermoduleinstantiation">InnerModuleInstantiation</a></emu-xref> abstract operation is used by InstantiateAll to perform the actual instantiation process for the Module Record <var>module</var>, as well as recursively on all other modules in the dependency graph. The <var>stack</var> and <var>index</var> parameters, as well as a module's [[DFSIndex]] and [[DFSAncestorIndex]] fields, keep track of the depth-first search (DFS) traversal. In particular, [[DFSAncestorIndex]] is used to discover strongly connected components (SCCs), such that all modules in an SCC transition to <code>"instantiated"</code> together.</p>
+
+        <p>This function calls out to the <emu-xref aoid="Instantiate" id="_ref_20"><a href="#sec-instantiate">Instantiate</a></emu-xref> concrete method of the Module Record, implementing the Module Record abstract method.</p>
+
+        <p>This abstract operation performs the following steps:</p>
+
+        <emu-alg><ol><li>If <var>module</var>.[[Status]] is <code>"instantiating"</code>, <code>"instantiated"</code>, or <code>"evaluated"</code>, then<ol><li>Return <var>index</var>.</li></ol></li><li>Assert: <var>module</var>.[[Status]] is <code>"uninstantiated"</code>.</li><li>Set <var>module</var>.[[Status]] to <code>"instantiating"</code>.</li><li>Set <var>module</var>.[[DFSIndex]] to <var>index</var>.</li><li>Set <var>module</var>.[[DFSAncestorIndex]] to <var>index</var>.</li><li>Set <var>index</var> to <var>index</var> + 1.</li><li>Append <var>module</var> to <var>stack</var>.</li><li>For each String <var>required</var> that is an element of <var>module</var>.[[RequestedModules]], do<ol><li>Let <var>requiredModule</var> be ?&nbsp;<emu-xref aoid="HostResolveImportedModule" id="_ref_21"><a href="https://tc39.github.io/ecma262/#sec-hostresolveimportedmodule">HostResolveImportedModule</a></emu-xref>(<var>module</var>, <var>required</var>).</li><li>Set <var>index</var> to ?&nbsp;<emu-xref aoid="InnerModuleInstantiation" id="_ref_22"><a href="#sec-innermoduleinstantiation">InnerModuleInstantiation</a></emu-xref>(<var>requiredModule</var>, <var>stack</var>, <var>index</var>).</li><li>Assert: <var>requiredModule</var>.[[Status]] is either <code>"instantiating"</code>, <code>"instantiated"</code>, or <code>"evaluated"</code>.</li><li>Assert: <var>requiredModule</var>.[[Status]] is <code>"instantiating"</code> if and only if <var>requiredModule</var> is in <var>stack</var>.</li><li>If <var>requiredModule</var>.[[Status]] is <code>"instantiating"</code>, then<ol><li>Assert: <var>requiredModule</var> is a <emu-xref href="#sec-abstract-module-records" id="_ref_23"><a href="#sec-abstract-module-records">Module Record</a></emu-xref>.</li><li>Set <var>module</var>.[[DFSAncestorIndex]] to <emu-xref aoid="min"><a href="https://tc39.github.io/ecma262/#sec-algorithm-conventions">min</a></emu-xref>(<var>module</var>.[[DFSAncestorIndex]], <var>requiredModule</var>.[[DFSAncestorIndex]]).</li></ol></li></ol></li><li>Perform ? <var>module</var>.<emu-xref aoid="Instantiate" id="_ref_24"><a href="#sec-instantiate">Instantiate</a></emu-xref>().</li><li>Assert: <var>module</var> occurs exactly once in <var>stack</var>.</li><li>Assert: <var>module</var>.[[DFSAncestorIndex]] is less than or equal to <var>module</var>.[[DFSIndex]].</li><li>If <var>module</var>.[[DFSAncestorIndex]] equals <var>module</var>.[[DFSIndex]], then<ol><li>Let <var>done</var> be <emu-val>false</emu-val>.</li><li>Repeat, while <var>done</var> is <emu-val>false</emu-val>,<ol><li>Let <var>requiredModule</var> be the last element in <var>stack</var>.</li><li>Remove the last element of <var>stack</var>.</li><li>Set <var>requiredModule</var>.[[Status]] to <code>"instantiated"</code>.</li><li>If <var>requiredModule</var> and <var>module</var> are the same <emu-xref href="#sec-abstract-module-records" id="_ref_25"><a href="#sec-abstract-module-records">Module Record</a></emu-xref>, set <var>done</var> to <emu-val>true</emu-val>.</li></ol></li></ol></li><li>Return <var>index</var>.
+        </li></ol></emu-alg>
+
+        <h1><ins>EvaluateAll ( ) Concrete Method</ins></h1>
+
+        <p>The EvaluateAll abstract method of a Module Record provides transitive top-level execution of a module.</p>
+        <p>Evaluate transitions this module's [[Status]] from <code>"instantiated"</code> to <code>"evaluated"</code>.</p>
+
+        <p>If execution results in an exception, that exception is recorded in the [[EvaluationError]] field and rethrown by future invocations of Evaluate.</p>
+
+        <p>This abstract method performs the following steps (most of the work is done by the auxiliary function <emu-xref aoid="InnerModuleEvaluation" id="_ref_26"><a href="#sec-innermoduleevaluation">InnerModuleEvaluation</a></emu-xref>):</p>
+
+        <emu-alg><ol><li>Let <var>module</var> be this <emu-xref href="#sec-abstract-module-records" id="_ref_27"><a href="#sec-abstract-module-records">Module Record</a></emu-xref>.</li><li>Assert: <var>module</var>.[[Status]] is <code>"instantiated"</code> or <code>"evaluated"</code>.</li><li>Let <var>stack</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>Let <var>result</var> be <emu-xref aoid="InnerModuleEvaluation" id="_ref_28"><a href="#sec-innermoduleevaluation">InnerModuleEvaluation</a></emu-xref>(<var>module</var>, <var>stack</var>, 0).</li><li>If <var>result</var> is an <emu-xref href="#sec-completion-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-completion-record-specification-type">abrupt completion</a></emu-xref>, then<ol><li>For each module <var>m</var> in <var>stack</var>, do<ol><li>Assert: <var>m</var>.[[Status]] is <code>"evaluating"</code>.</li><li>Set <var>m</var>.[[Status]] to <code>"evaluated"</code>.</li><li>Set <var>m</var>.[[EvaluationError]] to <var>result</var>.</li></ol></li><li>Assert: <var>module</var>.[[Status]] is <code>"evaluated"</code> and <var>module</var>.[[EvaluationError]] is <var>result</var>.</li><li>Return <var>result</var>.</li></ol></li><li>Assert: <var>module</var>.[[Status]] is <code>"evaluated"</code> and <var>module</var>.[[EvaluationError]] is <emu-val>undefined</emu-val>.</li><li>Assert: <var>stack</var> is empty.</li><li>Return <emu-val>undefined</emu-val>.
+        </li></ol></emu-alg>
+
+        <h1><ins>InnerModuleEvaluation ( <var>module</var>, <var>stack</var>, <var>index</var> )</ins></h1>
+
+        <p>The <emu-xref aoid="InnerModuleEvaluation" id="_ref_29"><a href="#sec-innermoduleevaluation">InnerModuleEvaluation</a></emu-xref> abstract operation is used by Evaluate to perform the actual evaluation process for the <emu-xref href="#sec-source-text-module-records" id="_ref_30"><a href="#sec-source-text-module-records">Source Text Module Record</a></emu-xref> <var>module</var>, as well as recursively on all other modules in the dependency graph. The <var>stack</var> and <var>index</var> parameters, as well as <var>module</var>'s [[DFSIndex]] and [[DFSAncestoreIndex]] fields, are used the same way as in <emu-xref aoid="InnerModuleInstantiation" id="_ref_31"><a href="#sec-innermoduleinstantiation">InnerModuleInstantiation</a></emu-xref>.</p>
+
+        <p>This abstract operation performs the following steps:</p>
+
+        <emu-alg><ol><li>If <var>module</var>.[[Status]] is <code>"evaluated"</code>, then<ol><li>If <var>module</var>.[[EvaluationError]] is <emu-val>undefined</emu-val>, return <var>index</var>.</li><li>Otherwise return <var>module</var>.[[EvaluationError]].</li></ol></li><li>If <var>module</var>.[[Status]] is <code>"evaluating"</code>, return <var>index</var>.</li><li>Assert: <var>module</var>.[[Status]] is <code>"instantiated"</code>.</li><li>Set <var>module</var>.[[Status]] to <code>"evaluating"</code>.</li><li>Set <var>module</var>.[[DFSIndex]] to <var>index</var>.</li><li>Set <var>module</var>.[[DFSAncestorIndex]] to <var>index</var>.</li><li>Set <var>index</var> to <var>index</var> + 1.</li><li>Append <var>module</var> to <var>stack</var>.</li><li>For each String <var>required</var> that is an element of <var>module</var>.[[RequestedModules]], do<ol><li>Let <var>requiredModule</var> be !&nbsp;<emu-xref aoid="HostResolveImportedModule" id="_ref_32"><a href="https://tc39.github.io/ecma262/#sec-hostresolveimportedmodule">HostResolveImportedModule</a></emu-xref>(<var>module</var>, <var>required</var>).</li><li>NOTE: <emu-xref aoid="Instantiate" id="_ref_33"><a href="#sec-instantiate">Instantiate</a></emu-xref> must be completed successfully prior to invoking this method, so every requested module is guaranteed to resolve successfully.</li><li>Set <var>index</var> to ?&nbsp;<emu-xref aoid="InnerModuleEvaluation" id="_ref_34"><a href="#sec-innermoduleevaluation">InnerModuleEvaluation</a></emu-xref>(<var>requiredModule</var>, <var>stack</var>, <var>index</var>).</li><li>Assert: <var>requiredModule</var>.[[Status]] is either <code>"evaluating"</code> or <code>"evaluated"</code>.</li><li>Assert: <var>requiredModule</var>.[[Status]] is <code>"evaluating"</code> if and only if <var>requiredModule</var> is in <var>stack</var>.</li><li>If <var>requiredModule</var>.[[Status]] is <code>"evaluating"</code>, then<ol><li>Assert: <var>requiredModule</var> is a <emu-xref href="#sec-source-text-module-records" id="_ref_35"><a href="#sec-source-text-module-records">Source Text Module Record</a></emu-xref>.</li><li>Set <var>module</var>.[[DFSAncestorIndex]] to <emu-xref aoid="min"><a href="https://tc39.github.io/ecma262/#sec-algorithm-conventions">min</a></emu-xref>(<var>module</var>.[[DFSAncestorIndex]], <var>requiredModule</var>.[[DFSAncestorIndex]]).</li></ol></li></ol></li><li>Perform ?<var>module</var>.Evaluate().</li><li>Assert: <var>module</var> occurs exactly once in <var>stack</var>.</li><li>Assert: <var>module</var>.[[DFSAncestorIndex]] is less than or equal to <var>module</var>.[[DFSIndex]].</li><li>If <var>module</var>.[[DFSAncestorIndex]] equals <var>module</var>.[[DFSIndex]], then<ol><li>Let <var>done</var> be <emu-val>false</emu-val>.</li><li>Repeat, while <var>done</var> is <emu-val>false</emu-val>,<ol><li>Let <var>requiredModule</var> be the last element in <var>stack</var>.</li><li>Remove the last element of <var>stack</var>.</li><li>Set <var>requiredModule</var>.[[Status]] to <code>"evaluated"</code>.</li><li>If <var>requiredModule</var> and <var>module</var> are the same <emu-xref href="#sec-abstract-module-records" id="_ref_36"><a href="#sec-abstract-module-records">Module Record</a></emu-xref>, set <var>done</var> to <emu-val>true</emu-val>.</li></ol></li></ol></li><li>Return <var>index</var>.
+        </li></ol></emu-alg>
       </emu-clause>
 
       <emu-clause id="sec-source-text-module-records">
         <h1><span class="secnum">1.1.1.2</span>Source Text Module Records</h1>
 
-        <emu-clause id="sec-getexportednames">
-          <h1><span class="secnum">1.1.1.2.1</span>GetExportedNames ( <var>exportStarSet</var><ins>, <var>starExportModule</var></ins> ) Concrete Method</h1>
-          <p>The GetExportedNames concrete method of a <emu-xref href="#sec-source-text-module-records" id="_ref_2"><a href="#sec-source-text-module-records">Source Text Module Record</a></emu-xref> implements the corresponding <emu-xref href="#sec-abstract-module-records" id="_ref_3"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> abstract method.</p>
-          <p>It performs the following steps:</p>
-          <emu-alg><ol><li>Let <var>module</var> be this <emu-xref href="#sec-source-text-module-records" id="_ref_4"><a href="#sec-source-text-module-records">Source Text Module Record</a></emu-xref>.</li><li>If <var>exportStarSet</var> contains <var>module</var>, then<ol><li>Assert: We've reached the starting point of an <code>import *</code> circularity.</li><li>Return a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li></ol></li><li>Append <var>module</var> to <var>exportStarSet</var>.</li><li>Let <var>exportedNames</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>For each ExportEntry <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref> <var>e</var> in <var>module</var>.[[LocalExportEntries]], do<ol><li>Assert: <var>module</var> provides the direct binding for this export.</li><li>Append <var>e</var>.[[ExportName]] to <var>exportedNames</var>.</li></ol></li><li>For each ExportEntry <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref> <var>e</var> in <var>module</var>.[[IndirectExportEntries]], do<ol><li>Assert: <var>module</var> imports a specific binding for this export.</li><li>Append <var>e</var>.[[ExportName]] to <var>exportedNames</var>.</li></ol></li><li>For each ExportEntry <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref> <var>e</var> in <var>module</var>.[[StarExportEntries]], do<ol><li>Let <var>requestedModule</var> be ?&nbsp;<emu-xref aoid="HostResolveImportedModule" id="_ref_5"><a href="https://tc39.github.io/ecma262/#sec-hostresolveimportedmodule">HostResolveImportedModule</a></emu-xref>(<var>module</var>, <var>e</var>.[[ModuleRequest]]).</li><li>Let <var>starNames</var> be ? <var>requestedModule</var>.GetExportedNames(<var>exportStarSet</var><ins>, <var>starExportModule</var></ins>).</li><li><ins>If <var>starNames</var> is <emu-val>null</emu-val> then,</ins><ol><li><ins>Return <emu-val>null</emu-val>.</ins></li></ol></li><li>For each element <var>n</var> of <var>starNames</var>, do<ol><li>If <emu-xref aoid="SameValue" id="_ref_6"><a href="https://tc39.github.io/ecma262/#sec-samevalue">SameValue</a></emu-xref>(<var>n</var>, <code>"default"</code>) is <emu-val>false</emu-val>, then<ol><li>If <var>n</var> is not an element of <var>exportedNames</var>, then<ol><li>Append <var>n</var> to <var>exportedNames</var>.</li></ol></li></ol></li></ol></li></ol></li><li>Return <var>exportedNames</var>.
-          </li></ol></emu-alg>
-          <emu-note><span class="note">Note</span><div class="note-contents">
-            <p>GetExportedNames does not filter out or throw an exception for names that have ambiguous star export bindings.</p>
-          </div></emu-note>
-        </emu-clause>
-      </emu-clause>
-
-      <emu-clause id="sec-dynamic-module-records">
-        <h1><span class="secnum">1.1.1.3</span><ins>Dynamic Module Records</ins></h1>
-
-        <p>A  <dfn id="dynamicmodule-record">Dynamic Module Record</dfn> is used to represent information about a module that is defined programatically. Its fields contain digested information about the names that are exported by the module and its concrete methods use this digest to link, instantiate, and evaluate the module alongside other Abstract Module Records.</p>
-        
-        <p>Dependency cycles with Source Text Module Records are avoided since these modules can only export, and not import from other Abstract Module Records.</p>
-
-        <p>Dynamic Module Records support late export binding, in that export names are only validated after execution.</p>
-
-        <p>In addition to the fields, defined in  <emu-xref href="#table-36"><a href="https://tc39.github.io/ecma262/#table-36">Table 37</a></emu-xref>, Dynamic Module Records have the additional fields listed in  <emu-xref href="#table-X" id="_ref_0"><a href="#table-X">Table 2</a></emu-xref>. Each of these fields is initially set in <emu-xref aoid="CreateDynamicModule" id="_ref_7"><a href="#sec-createdynamicmodule">CreateDynamicModule</a></emu-xref>.</p>
-
-        <emu-table id="table-X" caption="Additional Fields of Dynamic Module Records"><figure><figcaption>Table 2: Additional Fields of Dynamic Module Records</figcaption>
+        <emu-table id="table-38" caption="Additional Fields of Source Text Module Records"><figure><figcaption>Table 3: Additional Fields of Source Text Module Records</figcaption>
           <table>
             <tbody>
             <tr>
@@ -124,6 +283,232 @@
             </tr>
             <tr>
               <td>
+                [[ECMAScriptCode]]
+              
+              </td>
+              <td>
+                a Parse Node
+              
+              </td>
+              <td>
+                The result of parsing the source text of this module using <emu-nt><a href="https://tc39.github.io/ecma262/#prod-Module">Module</a></emu-nt> as the <emu-xref href="#sec-context-free-grammars"><a href="https://tc39.github.io/ecma262/#sec-context-free-grammars">goal symbol</a></emu-xref>.
+              
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <del>[[RequestedModules]]</del>
+              </td>
+              <td>
+                <del><emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> of String</del>
+              </td>
+              <td>
+                <del>A <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> of all the <emu-nt><a href="https://tc39.github.io/ecma262/#prod-ModuleSpecifier">ModuleSpecifier</a></emu-nt> strings used by the module represented by this record to request the importation of a module. The <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> is source code occurrence ordered.</del>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                [[ImportEntries]]
+              
+              </td>
+              <td>
+                <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> of ImportEntry Records
+              
+              </td>
+              <td>
+                A <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> of ImportEntry records derived from the code of this module.
+              
+              </td>
+            </tr>
+            <tr>
+              <td>
+                [[LocalExportEntries]]
+              
+              </td>
+              <td>
+                <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> of ExportEntry Records
+              
+              </td>
+              <td>
+                A <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> of ExportEntry records derived from the code of this module that correspond to declarations that occur within the module.
+              
+              </td>
+            </tr>
+            <tr>
+              <td>
+                [[IndirectExportEntries]]
+              
+              </td>
+              <td>
+                <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> of ExportEntry Records
+              
+              </td>
+              <td>
+                A <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> of ExportEntry records derived from the code of this module that correspond to reexported imports that occur within the module.
+              
+              </td>
+            </tr>
+            <tr>
+              <td>
+                [[StarExportEntries]]
+              
+              </td>
+              <td>
+                <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> of ExportEntry Records
+              
+              </td>
+              <td>
+                A <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> of ExportEntry records derived from the code of this module that correspond to export * declarations that occur within the module.
+              
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <del>[[Status]]</del>
+              </td>
+              <td>
+                <del>String</del>
+              </td>
+              <td>
+                <del>Initially <code>"uninstantiated"</code>. Transitions to <code>"instantiating"</code>, <code>"instantiated"</code>, <code>"evaluating"</code>, <code>"evaluated"</code> (in that order) as the module progresses throughout its lifecycle.</del>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <del>[[EvaluationError]]</del>
+              </td>
+              <td>
+                <del>An <emu-xref href="#sec-completion-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-completion-record-specification-type">abrupt completion</a></emu-xref> | <emu-val>undefined</emu-val></del>
+              </td>
+              <td>
+                <del>A completion of type <emu-const>throw</emu-const> representing the exception that occurred during evaluation.  <emu-val>undefined</emu-val> if no exception occurred or if [[Status]] is not <code>"evaluated"</code>.</del>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <del>[[DFSIndex]]</del>
+              </td>
+              <td>
+                <del>Integer | <emu-val>undefined</emu-val></del>
+              </td>
+              <td>
+                <del>Auxiliary field used during <emu-xref aoid="Instantiate" id="_ref_37"><a href="#sec-instantiate">Instantiate</a></emu-xref> and Evaluate only.</del>
+                <del>If [[Status]] is <code>"instantiating"</code> or <code>"evaluating"</code>, this non-negative number records the point at which the module was first visited during the ongoing depth-first traversal of the dependency graph.</del>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <del>[[DFSAncestorIndex]]</del>
+              </td>
+              <td>
+                <del>Integer | <emu-val>undefined</emu-val></del>
+              </td>
+              <td>
+                <del>Auxiliary field used during <emu-xref aoid="Instantiate" id="_ref_38"><a href="#sec-instantiate">Instantiate</a></emu-xref> and Evaluate only. If [[Status]] is <code>"instantiating"</code> or <code>"evaluating"</code>, this is either the module's own [[DFSIndex]] or that of an "earlier" module in the same strongly connected component.</del>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </figure></emu-table>
+
+        <emu-clause id="sec-getexportednames">
+          <h1><span class="secnum">1.1.1.2.1</span>GetExportedNames ( <var>exportStarSet</var><ins>, <var>starExportModule</var></ins> ) Concrete Method</h1>
+          <p>The GetExportedNames concrete method of a <emu-xref href="#sec-source-text-module-records" id="_ref_39"><a href="#sec-source-text-module-records">Source Text Module Record</a></emu-xref> implements the corresponding <emu-xref href="#sec-abstract-module-records" id="_ref_40"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> abstract method.</p>
+          <p>It performs the following steps:</p>
+          <emu-alg><ol><li>Let <var>module</var> be this <emu-xref href="#sec-source-text-module-records" id="_ref_41"><a href="#sec-source-text-module-records">Source Text Module Record</a></emu-xref>.</li><li>If <var>exportStarSet</var> contains <var>module</var>, then<ol><li>Assert: We've reached the starting point of an <code>import *</code> circularity.</li><li>Return a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li></ol></li><li>Append <var>module</var> to <var>exportStarSet</var>.</li><li>Let <var>exportedNames</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>For each ExportEntry <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref> <var>e</var> in <var>module</var>.[[LocalExportEntries]], do<ol><li>Assert: <var>module</var> provides the direct binding for this export.</li><li>Append <var>e</var>.[[ExportName]] to <var>exportedNames</var>.</li></ol></li><li>For each ExportEntry <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref> <var>e</var> in <var>module</var>.[[IndirectExportEntries]], do<ol><li>Assert: <var>module</var> imports a specific binding for this export.</li><li>Append <var>e</var>.[[ExportName]] to <var>exportedNames</var>.</li></ol></li><li>For each ExportEntry <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref> <var>e</var> in <var>module</var>.[[StarExportEntries]], do<ol><li>Let <var>requestedModule</var> be ?&nbsp;<emu-xref aoid="HostResolveImportedModule" id="_ref_42"><a href="https://tc39.github.io/ecma262/#sec-hostresolveimportedmodule">HostResolveImportedModule</a></emu-xref>(<var>module</var>, <var>e</var>.[[ModuleRequest]]).</li><li>Let <var>starNames</var> be ? <var>requestedModule</var>.GetExportedNames(<var>exportStarSet</var><ins>, <var>starExportModule</var></ins>).</li><li><ins>If <var>starNames</var> is <emu-val>null</emu-val> then,</ins><ol><li><ins>Return <emu-val>null</emu-val>.</ins></li></ol></li><li>For each element <var>n</var> of <var>starNames</var>, do<ol><li>If <emu-xref aoid="SameValue" id="_ref_43"><a href="https://tc39.github.io/ecma262/#sec-samevalue">SameValue</a></emu-xref>(<var>n</var>, <code>"default"</code>) is <emu-val>false</emu-val>, then<ol><li>If <var>n</var> is not an element of <var>exportedNames</var>, then<ol><li>Append <var>n</var> to <var>exportedNames</var>.</li></ol></li></ol></li></ol></li></ol></li><li>Return <var>exportedNames</var>.
+          </li></ol></emu-alg>
+          <emu-note><span class="note">Note</span><div class="note-contents">
+            <p>GetExportedNames does not filter out or throw an exception for names that have ambiguous star export bindings.</p>
+          </div></emu-note>
+        </emu-clause>
+
+        <emu-clause id="sec-instantiate" aoid="Instantiate">
+          <h1><span class="secnum">1.1.1.2.2</span><ins>Instantiate ( ) Concrete Method</ins></h1>
+
+          <p>The Instantiate concrete method of a <emu-xref href="#sec-source-text-module-records" id="_ref_44"><a href="#sec-source-text-module-records">Source Text Module Record</a></emu-xref> implements the correponding <emu-xref href="#sec-abstract-module-records" id="_ref_45"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> abstract method.</p>
+
+          <p>This abstract method performs the following steps:</p>
+
+          <emu-alg><ol><li>For each ExportEntry <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref> <var>e</var> in <var>module</var>.[[IndirectExportEntries]], do<ol><li>Let <var>resolution</var> be ? <var>module</var>.ResolveExport(<var>e</var>.[[ExportName]], « »).</li><li>If <var>resolution</var> is <emu-val>null</emu-val> or <code>"ambiguous"</code>, throw a <emu-val>SyntaxError</emu-val> exception.</li><li>Assert: <var>resolution</var> is a <emu-xref href="#resolvedbinding-record" id="_ref_46"><a href="#resolvedbinding-record">ResolvedBinding Record</a></emu-xref>.</li></ol></li><li>Assert: All named exports from <var>module</var> are resolvable.</li><li>Let <var>realm</var> be <var>module</var>.[[Realm]].</li><li>Assert: <var>realm</var> is not <emu-val>undefined</emu-val>.</li><li>Let <var>env</var> be <emu-xref aoid="NewModuleEnvironment" id="_ref_47"><a href="https://tc39.github.io/ecma262/#sec-newmoduleenvironment">NewModuleEnvironment</a></emu-xref>(<var>realm</var>.[[GlobalEnv]]).</li><li>Set <var>module</var>.[[Environment]] to <var>env</var>.</li><li>Let <var>envRec</var> be <var>env</var>'s <emu-xref href="#sec-lexical-environments"><a href="https://tc39.github.io/ecma262/#sec-lexical-environments">EnvironmentRecord</a></emu-xref>.</li><li>For each ImportEntry <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref> <var>in</var> in <var>module</var>.[[ImportEntries]], do<ol><li>Let <var>importedModule</var> be !&nbsp;<emu-xref aoid="HostResolveImportedModule" id="_ref_48"><a href="https://tc39.github.io/ecma262/#sec-hostresolveimportedmodule">HostResolveImportedModule</a></emu-xref>(<var>module</var>, <var>in</var>.[[ModuleRequest]]).</li><li>NOTE: The above call cannot fail because imported module requests are a subset of <var>module</var>.[[RequestedModules]], and these have been resolved earlier in this algorithm.</li><li>If <var>in</var>.[[ImportName]] is <code>"*"</code>, then<ol><li>Let <var>namespace</var> be ?&nbsp;<emu-xref aoid="GetModuleNamespace" id="_ref_49"><a href="#sec-getmodulenamespace">GetModuleNamespace</a></emu-xref>(<var>importedModule</var>).</li><li>Perform ! <var>envRec</var>.CreateImmutableBinding(<var>in</var>.[[LocalName]], <emu-val>true</emu-val>).</li><li>Call <var>envRec</var>.InitializeBinding(<var>in</var>.[[LocalName]], <var>namespace</var>).</li></ol></li><li>Else,<ol><li>Let <var>resolution</var> be ? <var>importedModule</var>.ResolveExport(<var>in</var>.[[ImportName]], « »).</li><li>If <var>resolution</var> is <emu-val>null</emu-val> or <code>"ambiguous"</code>, throw a <emu-val>SyntaxError</emu-val> exception.</li><li>Call <var>envRec</var>.CreateImportBinding(<var>in</var>.[[LocalName]], <var>resolution</var>.[[Module]], <var>resolution</var>.[[BindingName]]).</li></ol></li></ol></li><li>Let <var>code</var> be <var>module</var>.[[ECMAScriptCode]].</li><li>Let <var>varDeclarations</var> be the VarScopedDeclarations of <var>code</var>.</li><li>Let <var>declaredVarNames</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>For each element <var>d</var> in <var>varDeclarations</var>, do<ol><li>For each element <var>dn</var> of the BoundNames of <var>d</var>, do<ol><li>If <var>dn</var> is not an element of <var>declaredVarNames</var>, then<ol><li>Perform ! <var>envRec</var>.CreateMutableBinding(<var>dn</var>, <emu-val>false</emu-val>).</li><li>Call <var>envRec</var>.InitializeBinding(<var>dn</var>, <emu-val>undefined</emu-val>).</li><li>Append <var>dn</var> to <var>declaredVarNames</var>.</li></ol></li></ol></li></ol></li><li>Let <var>lexDeclarations</var> be the LexicallyScopedDeclarations of <var>code</var>.</li><li>For each element <var>d</var> in <var>lexDeclarations</var>, do<ol><li>For each element <var>dn</var> of the BoundNames of <var>d</var>, do<ol><li>If IsConstantDeclaration of <var>d</var> is <emu-val>true</emu-val>, then<ol><li>Perform ! <var>envRec</var>.CreateImmutableBinding(<var>dn</var>, <emu-val>true</emu-val>).</li></ol></li><li>Else,<ol><li>Perform ! <var>envRec</var>.CreateMutableBinding(<var>dn</var>, <emu-val>false</emu-val>).</li></ol></li><li>If <var>d</var> is a <emu-nt><a href="https://tc39.github.io/ecma262/#prod-FunctionDeclaration">FunctionDeclaration</a></emu-nt>, a <emu-nt><a href="https://tc39.github.io/ecma262/#prod-GeneratorDeclaration">GeneratorDeclaration</a></emu-nt>, an <emu-nt><a href="https://tc39.github.io/ecma262/#prod-AsyncFunctionDeclaration">AsyncFunctionDeclaration</a></emu-nt>, or an <emu-nt>AsyncGeneratorDeclaration</emu-nt>, then<ol><li>Let <var>fo</var> be the result of performing InstantiateFunctionObject for <var>d</var> with argument <var>env</var>.</li><li>Call <var>envRec</var>.InitializeBinding(<var>dn</var>, <var>fo</var>).
+          </li></ol></li></ol></li></ol></li></ol></emu-alg>
+        </emu-clause>
+
+        <h1><ins>Evaluate ( ) Concrete Method</ins></h1>
+
+        <p>The Evaluate concrete method of a Source Text Module Record implements the correponding <emu-xref href="#sec-abstract-module-records" id="_ref_50"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> abstract method.</p>
+
+        <p>This abstract operation performs the following steps:</p>
+
+        <emu-alg><ol><li>Let <var>moduleCxt</var> be a new ECMAScript code <emu-xref href="#sec-execution-contexts"><a href="https://tc39.github.io/ecma262/#sec-execution-contexts">execution context</a></emu-xref>.</li><li>Set the Function of <var>moduleCxt</var> to <emu-val>null</emu-val>.</li><li>Assert: <var>module</var>.[[Realm]] is not <emu-val>undefined</emu-val>.</li><li>Set the <emu-xref href="#realm"><a href="https://tc39.github.io/ecma262/#realm">Realm</a></emu-xref> of <var>moduleCxt</var> to <var>module</var>.[[Realm]].</li><li>Set the ScriptOrModule of <var>moduleCxt</var> to <var>module</var>.</li><li>Assert: <var>module</var> has been linked and declarations in its <emu-xref href="#module-environment"><a href="https://tc39.github.io/ecma262/#module-environment">module environment</a></emu-xref> have been instantiated.</li><li>Set the VariableEnvironment of <var>moduleCxt</var> to <var>module</var>.[[Environment]].</li><li>Set the LexicalEnvironment of <var>moduleCxt</var> to <var>module</var>.[[Environment]].</li><li>Suspend the currently <emu-xref href="#running-execution-context"><a href="https://tc39.github.io/ecma262/#running-execution-context">running execution context</a></emu-xref>.</li><li>Push <var>moduleCxt</var> on to the <emu-xref href="#execution-context-stack"><a href="https://tc39.github.io/ecma262/#execution-context-stack">execution context stack</a></emu-xref>; <var>moduleCxt</var> is now the <emu-xref href="#running-execution-context"><a href="https://tc39.github.io/ecma262/#running-execution-context">running execution context</a></emu-xref>.</li><li>Let <var>result</var> be the result of evaluating <var>module</var>.[[ECMAScriptCode]].</li><li>Suspend <var>moduleCxt</var> and remove it from the <emu-xref href="#execution-context-stack"><a href="https://tc39.github.io/ecma262/#execution-context-stack">execution context stack</a></emu-xref>.</li><li>Resume the context that is now on the top of the <emu-xref href="#execution-context-stack"><a href="https://tc39.github.io/ecma262/#execution-context-stack">execution context stack</a></emu-xref> as the <emu-xref href="#running-execution-context"><a href="https://tc39.github.io/ecma262/#running-execution-context">running execution context</a></emu-xref>.</li><li>Return <emu-xref aoid="Completion" id="_ref_51"><a href="https://tc39.github.io/ecma262/#sec-completion-record-specification-type">Completion</a></emu-xref>(<var>result</var>).
+        </li></ol></emu-alg>
+
+        <emu-clause id="sec-moduledeclarationinstantiation">
+          <h1><span class="secnum">1.1.1.2.3</span><del>Instantiate ( ) Concrete Method</del></h1>
+
+          <emu-clause id="sec-innermoduleinstantiation" aoid="InnerModuleInstantiation">
+            <h1><span class="secnum">1.1.1.2.3.1</span><del>InnerModuleInstantiation ( <var>module</var>, <var>stack</var>, <var>index</var> )</del></h1>
+          </emu-clause>
+
+          <emu-clause id="sec-moduledeclarationenvironmentsetup" aoid="ModuleDeclarationEnvironmentSetup">
+            <h1><span class="secnum">1.1.1.2.3.2</span><del>ModuleDeclarationEnvironmentSetup ( <var>module</var> )</del></h1>
+          </emu-clause>
+        </emu-clause>
+
+        <emu-clause id="sec-moduleevaluation">
+          <h1><span class="secnum">1.1.1.2.4</span><del>Evaluate ( ) Concrete Method</del></h1>
+
+          <emu-clause id="sec-innermoduleevaluation" aoid="InnerModuleEvaluation">
+            <h1><span class="secnum">1.1.1.2.4.1</span><del>InnerModuleEvaluation ( <var>module</var>, <var>stack</var>, <var>index</var> )</del></h1>
+          </emu-clause>
+
+          <emu-clause id="sec-moduleexecution" aoid="ModuleExecution">
+            <h1><span class="secnum">1.1.1.2.4.2</span><del>ModuleExecution ( <var>module</var> )</del></h1>
+          </emu-clause>
+        </emu-clause>
+      </emu-clause>
+
+      <emu-clause id="sec-dynamic-module-records">
+        <h1><span class="secnum">1.1.1.3</span><ins>Dynamic Module Records</ins></h1>
+
+        <p>A  <dfn id="dynamicmodule-record">Dynamic Module Record</dfn> is used to represent information about a custom host-defined module. Its fields contain digested information about the imports and exports of the module and its concrete methods use this digest to link, instantiate, and evaluate the module alongside other Abstract Module Records.</p>
+
+        <p>Dynamic Module Records support late export binding if initialized with the deferredExports flag. In this scenario export names are only validated after execution, but with restrictions placed on their availability in cycles.</p>
+
+        <p>In addition to the fields, defined in  <emu-xref href="#table-36" id="_ref_2"><a href="#table-36">Table 1</a></emu-xref>, Dynamic Module Records have the additional fields listed in  <emu-xref href="#table-X" id="_ref_3"><a href="#table-X">Table 4</a></emu-xref>. Each of these fields is initially set in <emu-xref aoid="CreateDynamicModule" id="_ref_52"><a href="#sec-createdynamicmodule">CreateDynamicModule</a></emu-xref>.</p>
+
+        <emu-table id="table-X" caption="Additional Fields of Dynamic Module Records"><figure><figcaption>Table 4: Additional Fields of Dynamic Module Records</figcaption>
+          <table>
+            <tbody>
+            <tr>
+              <th>
+                Field Name
+              
+              </th>
+              <th>
+                Value Type
+              
+              </th>
+              <th>
+                Meaning
+              
+              </th>
+            </tr>
+            <tr>
+              <td>
+                [[DeferredExports]]
+              
+              </td>
+              <td>
+                Boolean
+              
+              </td>
+              <td>
+                A flag indicating if this Dynamic Module defines deferred exports at execution time.
+              
+              </td>
+            </tr>
+            <tr>
+              <td>
                 [[ExportNames]]
               
               </td>
@@ -132,7 +517,7 @@
               
               </td>
               <td>
-                The list of export bindings associated with this <emu-xref href="#dynamicmodule-record" id="_ref_8"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref>.
+                The list of export bindings associated with this <emu-xref href="#dynamicmodule-record" id="_ref_53"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref>.
               
               </td>
             </tr>
@@ -142,21 +527,11 @@
               
               </td>
               <td>
-                A <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> of <emu-xref href="#sec-abstract-module-records" id="_ref_9"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> objects that export all names from this <emu-xref href="#dynamicmodule-record" id="_ref_10"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref>.
-              
-              </td>
-            </tr>
-            <tr>
-              <td>
-                [[EvaluationError]]
+                A <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> of Module Records
               
               </td>
               <td>
-                An <emu-xref href="#sec-completion-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-completion-record-specification-type">abrupt completion</a></emu-xref> | <emu-val>undefined</emu-val>
-              
-              </td>
-              <td>
-                A completion of type <emu-const>throw</emu-const> representing the exception that occurred during evaluation.  <emu-val>undefined</emu-val> if no exception occurred or if [[Status]] is not <code>"evaluated"</code>.
+                The <emu-xref href="#sec-abstract-module-records" id="_ref_54"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> objects that export all names from this <emu-xref href="#dynamicmodule-record" id="_ref_55"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> to apply deferred exports for.
               
               </td>
             </tr>
@@ -165,89 +540,94 @@
         </figure></emu-table>
         
         <emu-clause id="sec-createdynamicmodule" aoid="CreateDynamicModule">
-          <h1><span class="secnum">1.1.1.3.1</span>CreateDynamicModule ( <var>realm</var>, <var>hostDefined</var> )</h1>
-          <p>This method would be expected to be called by the host when constructing a <emu-xref href="#sec-abstract-module-records" id="_ref_11"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> in <var>HostResolveImportedModule</var>.</p>
-          <p>The abstract operation CreateDynamicModule with arguments <var>realm</var>, and <var>hostDefined</var> creates a new <emu-xref href="#dynamicmodule-record" id="_ref_12"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> performing the following steps:</p>
-          <emu-alg><ol><li>Let <var>exportNames</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>Let <var>starExportModules</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>Let <var>module</var> be the <emu-xref href="#dynamicmodule-record" id="_ref_13"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> { [[Realm]]: <var>realm</var>, [[Environment]]: <emu-val>undefined</emu-val>, [[Namespace]]: <emu-val>undefined</emu-val>, [[Status]]: <code>"uninstantiated"</code>, [[ExportNames]]: <var>exportNames</var>, [[StarExportModules]]: <var>starExportModules</var>, [[EvaluationError]]: <emu-val>undefined</emu-val>, [[HostDefined]]: <var>hostDefined</var> }.</li><li>Add <var>module</var> to <var>module</var>.[[StarExportModules]].</li><li>Return <var>module</var>.
-          </li></ol></emu-alg>
+          <h1><span class="secnum">1.1.1.3.1</span>CreateDynamicModule ( <var>realm</var>, <var>requestedModules</var>, <var>exportNames</var>, <var>hostDefined</var> )</h1>
+          <p>This method would be expected to be called by the host when constructing a <emu-xref href="#sec-abstract-module-records" id="_ref_56"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> in <var>HostResolveImportedModule</var>.</p>
+          <p>The abstract operation CreateDynamicModule with arguments <var>realm</var>, <var>requestedModules</var> and <var>hostDefined</var> creates a new <emu-xref href="#dynamicmodule-record" id="_ref_57"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> performing the following steps:</p>
+          <emu-alg><ol><li>Assert: <var>requestedModules</var> is a string <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>If <var>exportNames</var> is <emu-val>undefined</emu-val>, then<ol><li>Let <var>deferredExports</var> be set to <emu-val>true</emu-val>.</li><li>Let <var>exportNames</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>Let <var>starExportModules</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>Let <var>module</var> be the <emu-xref href="#dynamicmodule-record" id="_ref_58"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> { [[Realm]]: <var>realm</var>, [[Environment]]: <emu-val>undefined</emu-val>, [[Namespace]]: <emu-val>undefined</emu-val>, [[Status]]: <code>"uninstantiated"</code>, [[EvaluationError]]: <emu-val>undefined</emu-val>, [[HostDefined]]: <var>hostDefined</var>, [[RequestedModules]]: <var>requestedModules</var>, [[DFSIndex]]: <emu-val>undefined</emu-val>, [[DFSAncestorIndex]]: <emu-val>undefined</emu-val>, [[DeferredExports]]: <var>deferredExports</var>, [[ExportNames]]: <var>exportNames</var>, [[StarExportModules]]: <var>starExportModules</var> }.</li><li>Add <var>module</var> to <var>module</var>.[[StarExportModules]].</li><li>Return <var>module</var>.</li></ol></li><li>Otherwise,<ol><li>Let <var>deferredExports</var> be set to <emu-val>false</emu-val>.</li><li>Assert: <var>exportNames</var> is a string <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>For each string <var>exportName</var> in <var>exportNames</var>, do<ol><li>Assert: <var>envRec</var> has a binding for <var>exportName</var>.</li><li>Perform <var>envRec</var>.CreateMutableBinding(<var>name</var>, <emu-val>false</emu-val>).  </li></ol></li><li>Let <var>module</var> be the <emu-xref href="#dynamicmodule-record" id="_ref_59"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> { [[Realm]]: <var>realm</var>, [[Environment]]: <emu-val>undefined</emu-val>, [[Namespace]]: <emu-val>undefined</emu-val>, [[Status]]: <code>"uninstantiated"</code>, [[EvaluationError]]: <emu-val>undefined</emu-val>, [[HostDefined]]: <var>hostDefined</var>, [[RequestedModules]]: <var>requestedModules</var>, [[DFSIndex]]: <emu-val>undefined</emu-val>, [[DFSAncestorIndex]]: <emu-val>undefined</emu-val>, [[DeferredExports]]: <var>deferredExports</var>, [[ExportNames]]: <var>exportNames</var>, [[StarExportModules]]: <emu-val>undefined</emu-val> }.</li><li>Return <var>module</var>.
+          </li></ol></li></ol></emu-alg>
         </emu-clause>
 
         <p>The following definitions specify the required concrete methods for Dynamic Module Records.</p>
 
         <emu-clause id="sec-dynamicgetexportednames">
           <h1><span class="secnum">1.1.1.3.2</span>GetExportedNames ( <var>exportStarSet</var>, <var>starExportModule</var> ) Concrete Method</h1>
-          <p>The GetExportedNames concrete method of a <emu-xref href="#dynamicmodule-record" id="_ref_14"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> implements the corresponding <emu-xref href="#sec-abstract-module-records" id="_ref_15"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> abstract method.</p>
-          <p>Any modules exporting names from this <emu-xref href="#dynamicmodule-record" id="_ref_16"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> are stored so their exports can be amended on execution of this Dynamic Module.</p>
+          <p>The GetExportedNames concrete method of a <emu-xref href="#dynamicmodule-record" id="_ref_60"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> implements the corresponding <emu-xref href="#sec-abstract-module-records" id="_ref_61"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> abstract method.</p>
+          <p>Any modules exporting names from this <emu-xref href="#dynamicmodule-record" id="_ref_62"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> are stored so their exports can be amended on execution of this Dynamic Module.</p>
           <p>It performs the following steps:</p>
-          <emu-alg><ol><li>Let <var>module</var> be this <emu-xref href="#dynamicmodule-record" id="_ref_17"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref>.</li><li>If <var>module</var>.[[Status]] is <code>"uninstantiated"</code> then,<ol><li>Return <emu-val>null</emu-val>.</li></ol></li><li>If <var>module</var>.[[StarExportModules]] does not contain <var>starExportModule</var> then,<ol><li>Add <var>starExportModule</var> to <var>module</var>.[[StarExportModules]].</li></ol></li><li>Return <var>module</var>.[[exportNames]].
+          <emu-alg><ol><li>Let <var>module</var> be this <emu-xref href="#dynamicmodule-record" id="_ref_63"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref>.</li><li>If <var>module</var>.[[DeferredExports]] is <emu-val>true</emu-val>, then<ol><li>If <var>module</var>.[[Status]] is <code>"uninstantiated"</code>, then<ol><li>Return <emu-val>null</emu-val>.</li></ol></li><li>If <var>module</var>.[[StarExportModules]] does not contain <var>starExportModule</var> then,<ol><li>Add <var>starExportModule</var> to <var>module</var>.[[StarExportModules]].</li></ol></li></ol></li><li>Return <var>module</var>.[[ExportNames]].
           </li></ol></emu-alg>
+
+          <emu-note><span class="note">Note</span><div class="note-contents">
+            <p>GetExportedNames returns <emu-val>null</emu-val> indicating an error when applied to uninstantiated Dynamic Module records with deferred exports.</p>
+            <p>This ensures that module namespaces without a complete list of export names are not observable as execution order matches instantiation order.</p>
+          </div></emu-note>
         </emu-clause>
 
         <emu-clause id="sec-dynamicresolveexport">
           <h1><span class="secnum">1.1.1.3.3</span>ResolveExport ( <var>exportName</var>, <var>resolveSet</var> ) Concrete Method</h1>
-          <p>The ResolveExport concrete method of a <emu-xref href="#dynamicmodule-record" id="_ref_18"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> implements the corresponding <emu-xref href="#sec-abstract-module-records" id="_ref_19"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> abstract method.</p>
+          <p>The ResolveExport concrete method of a <emu-xref href="#dynamicmodule-record" id="_ref_64"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> implements the corresponding <emu-xref href="#sec-abstract-module-records" id="_ref_65"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> abstract method.</p>
 
-          <p>ResolveExport ensures that a binding is created for the dynamic <emu-xref href="#sec-abstract-module-records" id="_ref_20"><a href="#sec-abstract-module-records">Module Record</a></emu-xref>, lazily creating a binding if needed.</p>
+          <p>ResolveExport ensures that a binding is created for the dynamic <emu-xref href="#sec-abstract-module-records" id="_ref_66"><a href="#sec-abstract-module-records">Module Record</a></emu-xref>, lazily creating a binding if needed.</p>
 
           <p>This abstract method performs the following steps:</p>
 
-          <emu-alg><ol><li>Let <var>module</var> be this <emu-xref href="#dynamicmodule-record" id="_ref_21"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref>.</li><li>If <var>module</var>.[[Status]] is <code>"uninstantiated"</code> then,<ol><li>Perform ? <var>module</var>.Instantiate().</li></ol></li><li>Let <var>exportNames</var> be <var>module</var>.[[ExportNames]].</li><li>If <var>exportNames</var> does not contain <var>exportName</var> then,<ol><li>Let <var>envRec</var> be the Module <emu-xref href="#sec-environment-records"><a href="https://tc39.github.io/ecma262/#sec-environment-records">Environment Record</a></emu-xref> <var>module</var>.[[Environment]]</li><li>If <var>envRec</var> does not already have a binding for <var>exportName</var> then,<ol><li>Perform ! <var>envRec</var>.CreateMutableBinding(<var>exportName</var>, <emu-val>false</emu-val>).</li></ol></li><li>Append <var>exportName</var> to the end of <var>exportNames</var>.</li></ol></li><li>Return <emu-xref href="#resolvedbinding-record" id="_ref_22"><a href="#resolvedbinding-record">ResolvedBinding Record</a></emu-xref> { [[Module]]: <var>module</var>, [[BindingName]]: <var>exportName</var> }.
+          <emu-alg><ol><li>Let <var>module</var> be this <emu-xref href="#dynamicmodule-record" id="_ref_67"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref>.</li><li>If <var>module</var>.[[DeferredExports]] is <emu-val>true</emu-val>, then<ol><li>If <var>module</var>.[[Status]] is <code>"uninstantiated"</code>, then<ol><li>Return <emu-val>null</emu-val>.</li></ol></li><li>Let <var>exportNames</var> be <var>module</var>.[[ExportNames]].</li><li>If <var>exportNames</var> does not contain <var>exportName</var>, then<ol><li>Let <var>envRec</var> be the Module <emu-xref href="#sec-environment-records"><a href="https://tc39.github.io/ecma262/#sec-environment-records">Environment Record</a></emu-xref> <var>module</var>.[[Environment]].</li><li>If <var>envRec</var> does not already have a binding for <var>exportName</var>, then<ol><li>Perform ! <var>envRec</var>.CreateMutableBinding(<var>exportName</var>, <emu-val>false</emu-val>).</li></ol></li><li>Append <var>exportName</var> to the end of <var>exportNames</var>.</li></ol></li></ol></li><li>If <var>module</var>.[[DeferredExports]] is <emu-val>false</emu-val>, then<ol><li>If <var>exportNames</var> does not contain <var>exportName</var>, then<ol><li>Return <emu-val>null</emu-val>.</li></ol></li></ol></li><li>Return <emu-xref href="#resolvedbinding-record" id="_ref_68"><a href="#resolvedbinding-record">ResolvedBinding Record</a></emu-xref> { [[Module]]: <var>module</var>, [[BindingName]]: <var>exportName</var> }.
           </li></ol></emu-alg>
         </emu-clause>
 
-        <emu-clause id="sec-dynamicmoduledeclarationinstantiation">
+        <emu-clause id="sec-dynamicinstantiate">
           <h1><span class="secnum">1.1.1.3.4</span>Instantiate ( ) Concrete Method</h1>
 
-          <p>The Instantiate concrete method of a <emu-xref href="#dynamicmodule-record" id="_ref_23"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> implements the corresponding <emu-xref href="#sec-abstract-module-records" id="_ref_24"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> abstract method.</p>
-          <p>On success, Instantiate transitions this module's [[Status]] from <code>"uninstantiated"</code> to <code>"instantiated"</code>. On failure, an exception is thrown and this module's [[Status]] remains <code>"uninstantiated"</code>.</p>
+          <p>The <emu-xref aoid="Instantiate" id="_ref_69"><a href="#sec-instantiate">Instantiate</a></emu-xref> concrete method of a <emu-xref href="#dynamicmodule-record" id="_ref_70"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> implements the corresponding <emu-xref href="#sec-abstract-module-records" id="_ref_71"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> abstract method.</p>
 
           <p>This abstract method performs the following steps:</p>
 
-          <emu-alg><ol><li>Let <var>module</var> be this <emu-xref href="#dynamicmodule-record" id="_ref_25"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref>.</li><li>If <var>module</var>.[[Status]] is "instantiated", or "evaluated", then<ol><li>Return <emu-val>undefined</emu-val>.</li></ol></li><li>Assert: <var>module</var>.[[Status]] is not <code>"instantiating"</code> or <code>"evaluating"</code>.</li><li>Let <var>realm</var> be module.[[Realm]].</li><li>Assert: <var>realm</var> is a valid <emu-xref href="#realm"><a href="https://tc39.github.io/ecma262/#realm">Realm</a></emu-xref>.</li><li>Let <var>env</var> be <emu-xref aoid="NewModuleEnvironment" id="_ref_26"><a href="https://tc39.github.io/ecma262/#sec-newmoduleenvironment">NewModuleEnvironment</a></emu-xref>(<var>realm</var>.[[GlobalEnv]]).</li><li>Set <var>module</var>.[[Environment]] to <var>env</var>.</li><li>Set <var>module</var>.[[Status]] to <code>"instantiated"</code>.</li><li>Return <emu-val>undefined</emu-val>.
+          <emu-alg><ol><li>Let <var>realm</var> be module.[[Realm]].</li><li>Assert: <var>realm</var> is a valid <emu-xref href="#realm"><a href="https://tc39.github.io/ecma262/#realm">Realm</a></emu-xref>.</li><li>Let <var>env</var> be <emu-xref aoid="NewModuleEnvironment" id="_ref_72"><a href="https://tc39.github.io/ecma262/#sec-newmoduleenvironment">NewModuleEnvironment</a></emu-xref>(<var>realm</var>.[[GlobalEnv]]).</li><li>Set <var>module</var>.[[Environment]] to <var>env</var>.
           </li></ol></emu-alg>
         </emu-clause>
 
-        <emu-clause id="sec-dynamicmoduleevaluation">
+        <emu-clause id="sec-dynamicevaluate">
           <h1><span class="secnum">1.1.1.3.5</span>Evaluate ( ) Concrete Method</h1>
 
-          <p>The Evaluate concrete method of a <emu-xref href="#dynamicmodule-record" id="_ref_27"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> implements the corresponding <emu-xref href="#sec-abstract-module-records" id="_ref_28"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> abstract method.</p>
-          <p>Evaluate transitions this module's [[Status]] from <code>"instantiated"</code> to <code>"evaluated"</code>.</p>
+          <p>The Evaluate concrete method of a <emu-xref href="#dynamicmodule-record" id="_ref_73"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> implements the corresponding <emu-xref href="#sec-abstract-module-records" id="_ref_74"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> abstract method.</p>
 
-          <p>If execution results in an exception, that exception is recorded in the [[EvaluationError]] field and rethrown by future invocations of Evaluate.</p>
-
-          <p>Evaluation of dynamic modules calls out to <var>HostEvaluateDynamicModule</var>, before finalising the export names of the dynamic modules. Any uninitialized export bindings throw a reference error at this stage.</p>
+          <p>Evaluation of dynamic modules calls out to <var>HostEvaluateDynamicModule</var>. When flagged for deferred exports any uninitialized export bindings throw a reference error after this host call.</p>
 
           <p>This abstract method performs the following steps:</p>
 
-          <emu-alg><ol><li>Let <var>m</var> be this <emu-xref href="#dynamicmodule-record" id="_ref_29"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref>.</li><li>If <var>m</var>.[[Status]]_ is <code>"evaluated"</code> then,<ol><li>Return <var>m</var>.[[EvaluationError]].</li></ol></li><li>Assert: <var>m</var>.[[Status]] is <code>"instantiated"</code>.</li><li>Set <var>m</var>.[[Status]] to <code>"evaluating"</code>.</li><li>Let <var>result</var> be <emu-xref aoid="HostEvaluateDynamicModule" id="_ref_30"><a href="#sec-hostevaluatedynamicmodule">HostEvaluateDynamicModule</a></emu-xref>(<var>m</var>).</li><li>If <var>result</var> is an <emu-xref href="#sec-completion-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-completion-record-specification-type">abrupt completion</a></emu-xref>, then<ol><li>Assert: <var>m</var>.[[Status]] is <code>"evaluating"</code>.</li><li>Set <var>m</var>.[[Status]] to <code>"evaluated"</code>.</li><li>Set <var>m</var>.[[EvaluationError]] to <var>result</var>.</li><li>Return <var>result</var>.</li></ol></li><li>Let <var>envRec</var> be the value of <var>module</var>.[[Environment]].</li><li>For each string <var>exportName</var> in <var>m</var>.[[ExportNames]], do<ol><li>Assert: <var>envRec</var> has a binding for <var>exportName</var>.</li><li>If the binding for <var>exportName</var> in <var>envRec</var> is uninitialized then,<ol><li>Let <var>error</var> be a <emu-val>ReferenceError</emu-val> exception.</li><li>Set <var>m</var>.[[Status]] to <code>"evaluated"</code>.</li><li>Set <var>m</var>.[[EvaluationError]] to <var>error</var>.</li><li>Return <var>error</var>.</li></ol></li></ol></li><li>For each module <var>exportModule</var> in the list <var>m</var>.[[StarExportModules]].<ol><li>Let <var>n</var> be the value of <var>exportModule</var>.[[Namespace]].</li><li>If <var>n</var> is not <var>undefined</var> then,<ol><li>Assert: <var>n</var> is a Module Namespace Exotic Object.</li><li>For each string <var>exportName</var> in <var>m</var>.[[ExportNames]], do<ol><li>Let <var>namespaceExports</var> be <var>n</var>.[[Exports]].</li><li>If <var>namespaceExports</var> does not contain <var>exportName</var> then,<ol><li>If <emu-xref aoid="SameValue" id="_ref_31"><a href="https://tc39.github.io/ecma262/#sec-samevalue">SameValue</a></emu-xref>(<var>exportName</var>, <code>"default"</code>) is <emu-val>false</emu-val> or <var>exportModule</var> and <var>m</var> are not the same <emu-xref href="#sec-abstract-module-records" id="_ref_32"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> then,<ol><li>Insert <var>exportName</var> in the list <var>namespaceExports</var> at the position corresponding to the sort order of <code>Array.prototype.sort</code> with <emu-val>undefined</emu-val> as <var>comparefn</var>.</li></ol></li></ol></li></ol></li></ol></li></ol></li><li>Set <var>m</var>.[[Status]] to <code>"evaluated"</code>.</li><li>Assert: <var>m</var>.[[EvaluationError]] is <emu-val>undefined</emu-val>.</li><li>Return <emu-val>undefined</emu-val>.
+          <emu-alg><ol><li>Let <var>m</var> be this <emu-xref href="#dynamicmodule-record" id="_ref_75"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref>.</li><li>Let <var>requestedNamespaces</var> be an empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>For each String <var>requested</var> that is an element of <var>module</var>.[[RequestedModules]], do<ol><li>Let <var>requestedModule</var> be ?&nbsp;<emu-xref aoid="HostResolveImportedModule" id="_ref_76"><a href="https://tc39.github.io/ecma262/#sec-hostresolveimportedmodule">HostResolveImportedModule</a></emu-xref>(<var>module</var>, <var>requested</var>).</li><li>Let <var>requestedNamespace</var> be ?&nbsp;<emu-xref aoid="GetModuleNamespace" id="_ref_77"><a href="#sec-getmodulenamespace">GetModuleNamespace</a></emu-xref>(<var>importedModule</var>).</li><li>Append <var>requestedNamespace</var> to the list <var>requestedNamespaces</var>.</li></ol></li><li>Let <var>result</var> be <emu-xref aoid="HostEvaluateDynamicModule" id="_ref_78"><a href="#sec-hostevaluatedynamicmodule">HostEvaluateDynamicModule</a></emu-xref>(<var>m</var>, <var>requestedNamespaces</var>).</li><li>If <var>result</var> is not <emu-val>undefined</emu-val>, then<ol><li>Throw <var>result</var>.</li></ol></li><li>Let <var>envRec</var> be the value of <var>module</var>.[[Environment]].</li><li>For each string <var>exportName</var> in <var>m</var>.[[ExportNames]], do<ol><li>Assert: <var>envRec</var> has a binding for <var>exportName</var>.</li><li>If the binding for <var>exportName</var> in <var>envRec</var> is uninitialized then,<ol><li>Throw a <emu-val>ReferenceError</emu-val> exception.</li></ol></li></ol></li><li>If <var>module</var>.[[DeferredExports]] is <emu-val>true</emu-val>, then<ol><li>For each module <var>exportModule</var> in the list <var>m</var>.[[StarExportModules]].<ol><li>Let <var>n</var> be the value of <var>exportModule</var>.[[Namespace]].</li><li>If <var>n</var> is not <var>undefined</var> then,<ol><li>Assert: <var>n</var> is a Module Namespace Exotic Object.</li><li>For each string <var>exportName</var> in <var>m</var>.[[ExportNames]], do<ol><li>Let <var>namespaceExports</var> be <var>n</var>.[[Exports]].</li><li>If <var>namespaceExports</var> does not contain <var>exportName</var> then,<ol><li>If <emu-xref aoid="SameValue" id="_ref_79"><a href="https://tc39.github.io/ecma262/#sec-samevalue">SameValue</a></emu-xref>(<var>exportName</var>, <code>"default"</code>) is <emu-val>false</emu-val> or <var>exportModule</var> and <var>m</var> are not the same <emu-xref href="#sec-abstract-module-records" id="_ref_80"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> then,<ol><li>Insert <var>exportName</var> in the list <var>namespaceExports</var> at the position corresponding to the sort order of <code>Array.prototype.sort</code> with <emu-val>undefined</emu-val> as <var>comparefn</var>.</li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></li><li>Return <emu-xref aoid="NormalCompletion" id="_ref_81"><a href="https://tc39.github.io/ecma262/#sec-normalcompletion">NormalCompletion</a></emu-xref>(<emu-val>undefined</emu-val>).
           </li></ol></emu-alg>
         </emu-clause>
 
         <emu-clause id="sec-setdynamicexportbinding">
           <h1><span class="secnum">1.1.1.3.6</span>SetDynamicExportBinding ( <var>name</var>, <var>value</var> ) Concrete Method</h1>
-          <p>The SetDynamicExportBinding concrete method of a <emu-xref href="#dynamicmodule-record" id="_ref_33"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> implements the corresponding <emu-xref href="#sec-abstract-module-records" id="_ref_34"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> abstract method for a string <var>name</var> and initialization value <var>value</var>.</p>
-          <p>After execution completion, only binding mutation is supported.</p>
-          <p>This method can return an error on <emu-xref href="#sec-completion-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-completion-record-specification-type">abrupt completion</a></emu-xref>.</p>
-          <emu-alg><ol><li>Let <var>module</var> be this <emu-xref href="#dynamicmodule-record" id="_ref_35"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref>.</li><li>Let <var>envRec</var> be the module <emu-xref href="#sec-environment-records"><a href="https://tc39.github.io/ecma262/#sec-environment-records">Environment Record</a></emu-xref> <var>module</var>.[[Environment]].</li><li>If <var>module</var>.[[exportNames]] does not contain <var>name</var> then,<ol><li>If <var>module</var>.[[Status]] is <code>"evaluated"</code> then,<ol><li>Let <var>error</var> be a <emu-val>ReferenceError</emu-val> exception.</li><li>Return <var>error</var>.</li></ol></li><li>Append <var>name</var> to the end of <var>module</var>.[[exportNames]].</li><li>Perform <var>envRec</var>.CreateMutableBinding(<var>name</var>, <emu-val>false</emu-val>).</li><li>Perform <var>envRec</var>.InitializeBinding(<var>name</var>, <var>value</var>).</li></ol></li><li>Otherwise,<ol><li>Assert: <var>envRec</var> has a binding for <var>name</var>.</li><li>If the binding for <var>name</var> in <var>envRec</var> has not been initialized then,<ol><li>If <var>module</var>.[[Status]] is <code>"evaluated"</code> then,<ol><li>Let <var>error</var> be a <emu-val>ReferenceError</emu-val> exception.</li><li>Return <var>error</var>.</li></ol></li><li>Perform <var>envRec</var>.InitializeBinding(<var>name</var>, <var>value</var>).</li></ol></li><li>Otherwise,<ol><li>Perform <var>envRec</var>.SetMutableBinding(<var>name</var>, <var>value</var>, <emu-val>true</emu-val>).</li></ol></li></ol></li><li>Return <emu-val>undefined</emu-val>.
+          <p>The SetDynamicExportBinding concrete method of a <emu-xref href="#dynamicmodule-record" id="_ref_82"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> implements the corresponding <emu-xref href="#sec-abstract-module-records" id="_ref_83"><a href="#sec-abstract-module-records">Module Record</a></emu-xref> abstract method for a string <var>name</var> and initialization value <var>value</var>.</p>
+          <p>After execution completion new export names are not permitted and only binding mutation is supported.</p>
+          <p>This method can throw an error on <emu-xref href="#sec-completion-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-completion-record-specification-type">abrupt completion</a></emu-xref>.</p>
+          <emu-alg><ol><li>Let <var>module</var> be this <emu-xref href="#dynamicmodule-record" id="_ref_84"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref>.</li><li>Let <var>envRec</var> be the module <emu-xref href="#sec-environment-records"><a href="https://tc39.github.io/ecma262/#sec-environment-records">Environment Record</a></emu-xref> <var>module</var>.[[Environment]].</li><li>If <var>module</var>.[[ExportNames]] does not contain <var>name</var>, then<ol><li>If <var>module</var>.[[Status]] is not <code>"evaluating"</code>, then<ol><li>Throw a <emu-val>ReferenceError</emu-val> exception.</li></ol></li><li>Append <var>name</var> to the end of <var>module</var>.[[ExportNames]].</li><li>Perform <var>envRec</var>.CreateMutableBinding(<var>name</var>, <emu-val>false</emu-val>).</li><li>Perform <var>envRec</var>.InitializeBinding(<var>name</var>, <var>value</var>).</li></ol></li><li>Otherwise,<ol><li>Assert: <var>envRec</var> has a binding for <var>name</var>.</li><li>Assert: the binding for <var>name</var> in <var>envRec</var> has been initialized.</li><li>Perform <var>envRec</var>.SetMutableBinding(<var>name</var>, <var>value</var>, <emu-val>true</emu-val>).</li></ol></li><li>Return <emu-val>undefined</emu-val>.
           </li></ol></emu-alg>
         </emu-clause>
       </emu-clause>
 
       <emu-clause id="sec-hostevaluatedynamicmodule" aoid="HostEvaluateDynamicModule">
-        <h1><span class="secnum">1.1.1.4</span><ins>Runtime Semantics: HostEvaluateDynamicModule ( <var>dynamicModule</var> )</ins></h1>
-        <p>HostEvaluateDynamicModule is an implementation-defined abstract operation that performs programmatic execution of a <emu-xref href="#dynamicmodule-record" id="_ref_36"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref>, <var>dynamicModule</var>.</p>
+        <h1><span class="secnum">1.1.1.4</span><ins>Runtime Semantics: HostEvaluateDynamicModule ( <var>dynamicModule</var>, <var>requestedNamespaces</var> )</ins></h1>
+        <p>HostEvaluateDynamicModule is an implementation-defined abstract operation that performs programmatic execution of a <emu-xref href="#dynamicmodule-record" id="_ref_85"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref>, <var>dynamicModule</var> given the list of <var>requestedNamespaces</var> corresponding to its <var>requestedModules</var>.</p>
         <p>The implementation of HostEvaluateDynamicModule must conform to the following requirements:</p>
         <ul>
           <li>
-            HostEvaluateDynamicModule will call the SetDynamicExportBinding concrete method on the <var>dynamicModule</var> to initialize the export bindings.
+            HostEvaluateDynamicModule may return an error to indicate <emu-xref href="#sec-completion-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-completion-record-specification-type">abrupt completion</a></emu-xref>.
           
           </li>
           <li>
-            If there is an evaluation error, it must be thrown.
+            HostEvaluateDynamicModule must call the SetDynamicExportBinding concrete method on <var>dynamicModule</var> to provide export values for all export names.
           
           </li>
+          <li>
+            If <var>dynamicModule</var>.[[DeferredExports]] is <emu-val>true</emu-val> the dynamic module may also call the SetDynamicExportBinding concrete method on <var>dynamicModule</var> to initialize new named export bindings.</li>
+          
         </ul>
         <emu-note><span class="note">Note</span><div class="note-contents">
+          <p>Dynamic modules must define all export values during this execution call. If any export bindings are not defined to values, an error will be thrown after this call.</p>
           <p>HostEvaluateDynamicModule must not itself rely on checking what lexical bindings have already been initialized for the module. It is important that the bindings defined in evaluation are fully independent of what bindings are imported.</p>
         </div></emu-note>
       </emu-clause>
@@ -259,10 +639,10 @@
 
         <p>This abstract operation performs the following steps:</p>
 
-        <emu-alg><ol><li>Assert: <var>module</var> is an instance of a concrete subclass of <emu-xref href="#sec-abstract-module-records" id="_ref_37"><a href="#sec-abstract-module-records">Module Record</a></emu-xref>.</li><li>Assert: <var>module</var>.[[Status]] is not <code>"uninstantiated"</code>.</li><li>Assert: If <var>module</var>.[[Status]] is <code>"evaluated"</code>, <var>module</var>.[[EvaluationError]] is <emu-val>undefined</emu-val>.</li><li>Let <var>namespace</var> be <var>module</var>.[[Namespace]].</li><li>If <var>namespace</var> is <emu-val>undefined</emu-val>, then<ol><li>Let <var>exportedNames</var> be ? <var>module</var>.GetExportedNames(« »<ins>, <var>module</var></ins>).</li><li><ins>If <var>exportedNames</var> is <emu-val>null</emu-val>, then</ins><ol><li><ins>Throw a <emu-val>ReferenceError</emu-val> exception</ins></li></ol></li><li>Let <var>unambiguousNames</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>For each <var>name</var> that is an element of <var>exportedNames</var>, do<ol><li>Let <var>resolution</var> be ? <var>module</var>.ResolveExport(<var>name</var>, « »).</li><li>If <var>resolution</var> is a <emu-xref href="#resolvedbinding-record" id="_ref_38"><a href="#resolvedbinding-record">ResolvedBinding Record</a></emu-xref>, append <var>name</var> to <var>unambiguousNames</var>.</li></ol></li><li>Set <var>namespace</var> to <emu-xref aoid="ModuleNamespaceCreate" id="_ref_39"><a href="https://tc39.github.io/ecma262/#sec-modulenamespacecreate">ModuleNamespaceCreate</a></emu-xref>(<var>module</var>, <var>unambiguousNames</var>).</li></ol></li><li>Return <var>namespace</var>.
+        <emu-alg><ol><li>Assert: <var>module</var> is an instance of a concrete subclass of <emu-xref href="#sec-abstract-module-records" id="_ref_86"><a href="#sec-abstract-module-records">Module Record</a></emu-xref>.</li><li>Assert: <var>module</var>.[[Status]] is not <code>"uninstantiated"</code>.</li><li>Assert: If <var>module</var>.[[Status]] is <code>"evaluated"</code>, <var>module</var>.[[EvaluationError]] is <emu-val>undefined</emu-val>.</li><li>Let <var>namespace</var> be <var>module</var>.[[Namespace]].</li><li>If <var>namespace</var> is <emu-val>undefined</emu-val>, then<ol><li>Let <var>exportedNames</var> be ? <var>module</var>.GetExportedNames(« »<ins>, <var>module</var></ins>).</li><li><ins>If <var>exportedNames</var> is <emu-val>null</emu-val>, then</ins><ol><li><ins>Throw a <emu-val>ReferenceError</emu-val> exception</ins></li></ol></li><li>Let <var>unambiguousNames</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>For each <var>name</var> that is an element of <var>exportedNames</var>, do<ol><li>Let <var>resolution</var> be ? <var>module</var>.ResolveExport(<var>name</var>, « »).</li><li>If <var>resolution</var> is a <emu-xref href="#resolvedbinding-record" id="_ref_87"><a href="#resolvedbinding-record">ResolvedBinding Record</a></emu-xref>, append <var>name</var> to <var>unambiguousNames</var>.</li></ol></li><li>Set <var>namespace</var> to <emu-xref aoid="ModuleNamespaceCreate" id="_ref_88"><a href="https://tc39.github.io/ecma262/#sec-modulenamespacecreate">ModuleNamespaceCreate</a></emu-xref>(<var>module</var>, <var>unambiguousNames</var>).</li></ol></li><li>Return <var>namespace</var>.
         </li></ol></emu-alg>
         <emu-note><span class="note">Note</span><div class="note-contents">
-          <p>The only way GetModuleNamespace can throw is  <ins>either</ins> via one of the triggered <emu-xref aoid="HostResolveImportedModule" id="_ref_40"><a href="https://tc39.github.io/ecma262/#sec-hostresolveimportedmodule">HostResolveImportedModule</a></emu-xref> calls  <ins>or by attempting to resolve export names from an uninstantiated <emu-xref href="#dynamicmodule-record" id="_ref_41"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> during a circular reference execution</ins>. Unresolvable names  <ins>to Source Text Modules</ins> are simply excluded from the namespace at this point. They will lead to a real instantiation error later unless they are all ambiguous star exports that are not explicitly requested anywhere.</p>
+          <p>The only way GetModuleNamespace can throw is  <ins>either</ins> via one of the triggered <emu-xref aoid="HostResolveImportedModule" id="_ref_89"><a href="https://tc39.github.io/ecma262/#sec-hostresolveimportedmodule">HostResolveImportedModule</a></emu-xref> calls  <ins>or by attempting to resolve export names from an uninstantiated <emu-xref href="#dynamicmodule-record" id="_ref_90"><a href="#dynamicmodule-record">Dynamic Module Record</a></emu-xref> with deferred exports</ins>. Unresolvable names  <ins>to Source Text Modules</ins> are simply excluded from the namespace at this point. They will lead to a real instantiation error later unless they are all ambiguous star exports that are not explicitly requested anywhere.</p>
         </div></emu-note>
       </emu-clause>
     </emu-clause>
