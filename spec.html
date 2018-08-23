@@ -14,8 +14,8 @@ copyright: false
   <h1>Introduction</h1>
 
   <p>Dynamic Modules allow integrations of Source Text Modules records with custom host-defined module records.</p>
-  <p>This is done via a HostExecuteDynamicModule host function and SetDynamicExport and GetDynamicImport concrete methods.</p>
-  <p>In addition, a deferredExports flag can allow these modules to provide late definition of export bindings at the execution phase, under special constraints to support named exports compatibility with legacy module systems.</p>
+  <p>They are created via CreateDynamicModule returned by HostResolveImportedModule, and are triggered for execution through the HostExecuteDynamicModule host function. They can use the SetDynamicExport concrete method to define and update exported values.</p>
+  <p>In addition, a deferredExports flag can allow these modules to provide late definition of export bindings at the execution phase, under special constraints, to support named exports compatibility with legacy module systems.</p>
 </emu-intro>
 
 <emu-clause id="sec-ecmascript-language-scripts-and-modules">
