@@ -794,19 +794,13 @@ copyright: false
           <h1>SetDynamicExportBinding ( _name_, _value_ ) Concrete Method</h1>
           <p>The SetDynamicExportBinding concrete method of a Dynamic Module Record implements the corresponding Module Record abstract method for a string _name_ and initialization value _value_.</p>
           <p>After execution completion new export names are not permitted and only binding mutation is supported.</p>
-          <p>This method can return an error on abrupt completion.</p>
+          <p>This method can throw an error on abrupt completion.</p>
           <emu-alg>
             1. Let _module_ be this Dynamic Module Record.
             1. Let _envRec_ be the module Environment Record _module_.[[Environment]].
             1. If _module_.[[ExportNames]] does not contain _name_, then
-              1. If _module_.[[DeferredExports]] is *false*, then
-                1. If _module_.[[Status]] is not `"instantiating"`, then
-                  1. Let _error_ be a *ReferenceError* exception.
-                  1. Return _error_.
-              1. Assert: _module_.[[DeferredExports]] is *true*.
-              1. If _module_.[[Status]] is `"evaluated"`, then
-                1. Let _error_ be a *ReferenceError* exception.
-                1. Return _error_.
+              1. If _module_.[[Status]] is not `"evaluating"`, then
+                1. Throw a *ReferenceError* exception.
               1. Append _name_ to the end of _module_.[[ExportNames]].
               1. Perform _envRec_.CreateMutableBinding(_name_, *false*).
               1. Perform _envRec_.InitializeBinding(_name_, _value_).
