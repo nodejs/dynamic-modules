@@ -41,7 +41,7 @@ copyright: false
             </tr>
             <tr>
               <td>
-                GetExportedNames(_exportStarSet_<ins>, _starExportModule_</ins>)
+                GetExportedNames(_exportStarSet_<ins>, _nsModule_</ins>)
               </td>
               <td>
                 Return a list of all names that are either directly or indirectly exported from this module.
@@ -82,7 +82,7 @@ copyright: false
         <h1>Source Text Module Records</h1>
 
         <emu-clause id="sec-getexportednames">
-          <h1>GetExportedNames ( _exportStarSet_<ins>, _starExportModule_</ins> ) Concrete Method</h1>
+          <h1>GetExportedNames ( _exportStarSet_<ins>, _nsModule_</ins> ) Concrete Method</h1>
           <p>The GetExportedNames concrete method of a Source Text Module Record implements the corresponding Module Record abstract method.</p>
           <p>It performs the following steps:</p>
           <emu-alg>
@@ -100,7 +100,7 @@ copyright: false
               1. Append _e_.[[ExportName]] to _exportedNames_.
             1. For each ExportEntry Record _e_ in _module_.[[StarExportEntries]], do
               1. Let _requestedModule_ be ? HostResolveImportedModule(_module_, _e_.[[ModuleRequest]]).
-              1. Let _starNames_ be ? _requestedModule_.GetExportedNames(_exportStarSet_<ins>, _starExportModule_</ins>).
+              1. Let _starNames_ be ? _requestedModule_.GetExportedNames(_exportStarSet_<ins>, _nsModule_</ins>).
               1. <ins>If _starNames_ is *null* then,</ins>
                 1. <ins>Return *null*.</ins>
               1. For each element _n_ of _starNames_, do
@@ -153,10 +153,10 @@ copyright: false
             </tr>
             <tr>
               <td>
-                [[StarExportModules]]
+                [[NamespaceModules]]
               </td>
               <td>
-                A List of Module Record objects that export all names from this Dynamic Module Record.
+                A List of Module Record objects with defined module namespace objects that expose the export names from this Dynamic Module Record.
               </td>
             </tr>
             <tr>
@@ -180,9 +180,9 @@ copyright: false
           <p>The abstract operation CreateDynamicModule with arguments _realm_, and _hostDefined_ creates a new Dynamic Module Record performing the following steps:</p>
           <emu-alg>
             1. Let _exportNames_ be a new empty List.
-            1. Let _starExportModules_ be a new empty List.
-            1. Let _module_ be the Dynamic Module Record { [[Realm]]: _realm_, [[Environment]]: *undefined*, [[Namespace]]: *undefined*, [[Status]]: `"uninstantiated"`, [[ExportNames]]: _exportNames_, [[StarExportModules]]: _starExportModules_, [[EvaluationError]]: *undefined*, [[HostDefined]]: _hostDefined_ }.
-            1. Add _module_ to _module_.[[StarExportModules]].
+            1. Let _nsModules_ be a new empty List.
+            1. Let _module_ be the Dynamic Module Record { [[Realm]]: _realm_, [[Environment]]: *undefined*, [[Namespace]]: *undefined*, [[Status]]: `"uninstantiated"`, [[ExportNames]]: _exportNames_, [[NamespaceModules]]: _nsModules_, [[EvaluationError]]: *undefined*, [[HostDefined]]: _hostDefined_ }.
+            1. Add _module_ to _module_.[[NamespaceModules]].
             1. Return _module_.
           </emu-alg>
         </emu-clause>
@@ -190,7 +190,7 @@ copyright: false
         <p>The following definitions specify the required concrete methods for Dynamic Module Records.</p>
 
         <emu-clause id="sec-dynamicgetexportednames">
-          <h1>GetExportedNames ( _exportStarSet_, _starExportModule_ ) Concrete Method</h1>
+          <h1>GetExportedNames ( _exportStarSet_, _nsModule_ ) Concrete Method</h1>
           <p>The GetExportedNames concrete method of a Dynamic Module Record implements the corresponding Module Record abstract method.</p>
           <p>Any modules exporting names from this Dynamic Module Record are stored so their exports can be amended on execution of this Dynamic Module.</p>
           <p>It performs the following steps:</p>
@@ -198,8 +198,8 @@ copyright: false
             1. Let _module_ be this Dynamic Module Record.
             1. If _module_.[[Status]] is `"uninstantiated"` then,
               1. Return *null*.
-            1. If _module_.[[StarExportModules]] does not contain _starExportModule_ then,
-              1. Add _starExportModule_ to _module_.[[StarExportModules]].
+            1. If _module_.[[NamespaceModules]] does not contain _nsModule_ then,
+              1. Add _nsModule_ to _module_.[[NamespaceModules]].
             1. Return _module_.[[exportNames]].
           </emu-alg>
         </emu-clause>
@@ -280,7 +280,7 @@ copyright: false
                 1. Set _m_.[[Status]] to `"evaluated"`.
                 1. Set _m_.[[EvaluationError]] to _error_.
                 1. Return _error_.
-            1. For each module _exportModule_ in the list _m_.[[StarExportModules]].
+            1. For each module _exportModule_ in the list _m_.[[NamespaceModules]].
               1. Let _n_ be the value of _exportModule_.[[Namespace]].
               1. If _n_ is not _undefined_ then,
                 1. Assert: _n_ is a Module Namespace Exotic Object.
