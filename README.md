@@ -150,4 +150,4 @@ In addition, this work may provide the foundations for exposing a Reflect-base d
 
 ## Implementations
 
-* none yet
+* Experimental implementation work in v8 is in progress. Collaboration welcome.
