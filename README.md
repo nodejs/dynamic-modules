@@ -30,6 +30,10 @@ Because the Dynamic Module Record cannot have any dependencies itself, early acc
 
 > Note: **Dynamic Module Records have no dependencies.** This provides support for a single one-way boundary without further transitive dependencies on other modules in the graph, avoiding circular reference behaviours. This is distinct from integration with WASM or Binary AST which can have further transitive dependencies with the existing graph, therefore needing their own Abstract Module Record implementations.
 
+## ECMAScript 262 Changes
+
+The specification here relies on some minor changes in ECMA-262 itself, which are currently tracking in PR https://github.com/tc39/ecma262/pull/1306.
+
 ## Illustrative Example
 
 Consider the Source Text Module Record "main.js":
@@ -150,4 +154,5 @@ In addition, this work may provide the foundations for exposing a Reflect-base d
 
 ## Implementations
 
-* Experimental implementation work in v8 is in progress. Collaboration welcome.
+An initial implementation in v8 has been developed at https://github.com/v8/v8/compare/master...guybedford:dynamic-modules,
+and is undergoing further review and feedback. Collaboration welcome.
