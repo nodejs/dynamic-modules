@@ -152,13 +152,13 @@ copyright: false
             </tr>
             <tr>
               <td>
-                [[NamespaceModules]]
+                [[PendingNamespaceModules]]
               </td>
               <td>
                 A List of Module Record
               </td>
               <td>
-                The list of module records whose module namespace objects are defined and expose all the export names from this Dynamic Module Record.
+                The list of module records whose module namespace objects are already created and require this dynamic module to execution for their finalization.
               </td>
             </tr>
             <tr>
@@ -183,8 +183,7 @@ copyright: false
           <emu-alg>
             1. Let _exportNames_ be a new empty List.
             1. Let _nsModules_ be a new empty List.
-            1. Let _module_ be the Dynamic Module Record { [[Realm]]: _realm_, [[Environment]]: *undefined*, [[Namespace]]: *undefined*, [[Status]]: `"uninstantiated"`, [[ExportNames]]: _exportNames_, [[NamespaceModules]]: _nsModules_, [[EvaluationError]]: *undefined*, [[HostDefined]]: _hostDefined_ }.
-            1. Add _module_ to _module_.[[NamespaceModules]].
+            1. Let _module_ be the Dynamic Module Record { [[Realm]]: _realm_, [[Environment]]: *undefined*, [[Namespace]]: *undefined*, [[Status]]: `"uninstantiated"`, [[ExportNames]]: _exportNames_, [[PendingNamespaceModules]]: _nsModules_, [[EvaluationError]]: *undefined*, [[HostDefined]]: _hostDefined_ }.
             1. Return _module_.
           </emu-alg>
         </emu-clause>
@@ -199,11 +198,20 @@ copyright: false
           <emu-alg>
             1. Let _module_ be this Dynamic Module Record.
             1. If _module_.[[Status]] is `"uninstantiated"` then,
+              1. If _module_.[[PendingNamespaceModules]] does not contain _nsModule_ then,
+                1. Add _nsModule_ to _module_.[[PendingNamespaceModules]].
+                1. If _nsModule_.[[HostDefined]] is *undefined* then,
+                   1. Set _nsModule_.[[HostDefined]] to *1*.
+                1. Otherwise,
+                   1. Let _n_ be the value of _nsModule_.[[HostDefined]].
+                   1. Assert: _n_ is a positive integer.
+                   1. Set _nsModule_.[[HostDefined]] to _n + 1_.
               1. Return *null*.
-            1. If _module_.[[NamespaceModules]] does not contain _nsModule_ then,
-              1. Add _nsModule_ to _module_.[[NamespaceModules]].
             1. Return _module_.[[exportNames]].
           </emu-alg>
+          <emu-note>
+            <p>For each Module Namespace Exotic Object created that star exports from a Dynamic Module Record before that the dynamic module has executed, we track the number of these under [[HostDefined]] on the namespace. This way namespace finalization to set the exports can be performed by the last dynamic module to execute.</p>
+          </emu-note>
         </emu-clause>
 
         <emu-clause id="sec-dynamicresolveexport">
@@ -282,12 +290,21 @@ copyright: false
                 1. Set _m_.[[Status]] to `"evaluated"`.
                 1. Set _m_.[[EvaluationError]] to _error_.
                 1. Return _error_.
-            1. For each module _exportModule_ in the list _m_.[[NamespaceModules]].
-              1. Let _n_ be the value of _exportModule_.[[Namespace]].
-              1. If _n_ is not _undefined_ then,
-                1. Assert: _n_ is a Module Namespace Exotic Object.
+            1. For each module _exportModule_ in the list _m_.[[PendingNamespaceModules]].
+              1. Let _ns_ be the value of _exportModule_.[[Namespace]].
+              1. Assert: _ns_ is a Module Namespace Exotic Object.
+              1. Let _n_ be the value of _ns_.[[HostDefined]].
+              1. Assert: _n_ is a positive integer.
+              1. Set _ns_.[[HostDefined]] to _n - 1_.
+              1. If _n_ is equal to *1* then,
+                1. Let _exportedNames_ be ? _module_.GetExportedNames(&laquo; &raquo;<ins>, _module_</ins>).
+                1. Assert: _exportedNames_ is not *null*.
+                1. Let _unambiguousNames_ be a new empty List.
+                1. For each _name_ that is an element of _exportedNames_, do
+                  1. Let _resolution_ be ? _module_.ResolveExport(_name_, &laquo; &raquo;).
+                  1. If _resolution_ is a ResolvedBinding Record, append _name_ to _unambiguousNames_.
                 1. For each string _exportName_ in _m_.[[ExportNames]], do
-                  1. Let _namespaceExports_ be _n_.[[Exports]].
+                  1. Let _namespaceExports_ be _ns_.[[Exports]].
                   1. If _namespaceExports_ does not contain _exportName_ then,
                     1. If SameValue(_exportName_, `"default"`) is *false* or _exportModule_ and _m_ are not the same Module Record then,
                       1. Insert _exportName_ in the list _namespaceExports_ at the position corresponding to the sort order of `Array.prototype.sort` with *undefined* as _comparefn_.
@@ -340,34 +357,6 @@ copyright: false
         </ul>
         <emu-note>
           <p>HostEvaluateDynamicModule must not itself rely on checking what lexical bindings have already been initialized for the module. It is important that the bindings defined in evaluation are fully independent of what bindings are imported.</p>
-        </emu-note>
-      </emu-clause>
-
-      <emu-clause id="sec-getmodulenamespace" aoid="GetModuleNamespace">
-        <h1>Runtime Semantics: GetModuleNamespace ( _module_ )</h1>
-
-        <p>The GetModuleNamespace abstract operation retrieves the Module Namespace Exotic object representing _module_'s exports, lazily creating it the first time it was requested, and storing it in _module_.[[Namespace]] for future retrieval.</p>
-
-        <p>This abstract operation performs the following steps:</p>
-
-        <emu-alg>
-          1. Assert: _module_ is an instance of a concrete subclass of Module Record.
-          1. Assert: _module_.[[Status]] is not `"uninstantiated"`.
-          1. Assert: If _module_.[[Status]] is `"evaluated"`, _module_.[[EvaluationError]] is *undefined*.
-          1. Let _namespace_ be _module_.[[Namespace]].
-          1. If _namespace_ is *undefined*, then
-            1. Let _exportedNames_ be ? _module_.GetExportedNames(&laquo; &raquo;<ins>, _module_</ins>).
-            1. <ins>If _exportedNames_ is *null*, then</ins>
-              1. <ins>Throw a *ReferenceError* exception</ins>
-            1. Let _unambiguousNames_ be a new empty List.
-            1. For each _name_ that is an element of _exportedNames_, do
-              1. Let _resolution_ be ? _module_.ResolveExport(_name_, &laquo; &raquo;).
-              1. If _resolution_ is a ResolvedBinding Record, append _name_ to _unambiguousNames_.
-            1. Set _namespace_ to ModuleNamespaceCreate(_module_, _unambiguousNames_).
-          1. Return _namespace_.
-        </emu-alg>
-        <emu-note>
-          <p>The only way GetModuleNamespace can throw is <ins>either</ins> via one of the triggered HostResolveImportedModule calls <ins>or by attempting to resolve export names from an uninstantiated Dynamic Module Record during a circular reference execution</ins>. Unresolvable names <ins>to Source Text Modules</ins> are simply excluded from the namespace at this point. They will lead to a real instantiation error later unless they are all ambiguous star exports that are not explicitly requested anywhere.</p>
         </emu-note>
       </emu-clause>
     </emu-clause>

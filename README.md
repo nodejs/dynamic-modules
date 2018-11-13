@@ -97,13 +97,33 @@ import * as lib from './lib.js';
 On the other hand, the namespace object for `'main2.js'` will not know the list of exported names from `'dynamic-module'` when it is created during instantiation.
 
 In order to support this, we introduce some book-keeping to track any Namespace Exotic Objects created that reference star exports of Dynamic Module Records.
-The post-execution of that dynamic module then amends the appropriate namespaces with new export names.
+
+The namespace is then initially created without any exports, and as soon as all dynamic modules star exported by the namespace are finished executing, then
+the namespace is finalized with its export names being set.
 
 ### Uninstantiated circular edge case
 
-It is actually possible to observe unexecuted dynamic modules in special cases of cycles, as described in [#4](https://github.com/guybedford/proposal-dynamic-modules/pull/4), where circular references result in dynamic module leaves not being executed before their parents.
+The only case where it is possible to observe unexecuted dynamic modules is in special cases of cycles like the following:
 
-To resolve this, reference errors are added for this specific edge case which are caught on instantiation, which is a single check in GetExportedNames. This way we can guarantee that dynamic modules have always completed execution before their importers.
+a.mjs
+```js
+import './b.mjs';
+export * from 'dynamic';
+console.log('a exec');
+```
+
+b.mjs
+```js
+import * as a from './a.mjs';
+console.log('b exec');
+console.log(Reflect.ownKeys(a));
+```
+
+In the example above, importing a.mjs will result in b.mjs being executed before both a.mjs and dynamic. As a result, the namespace object will have no exports during this intermediate phase and can be thought
+of as a form of TDZ on the module namespace exports.
+
+The important thing is that partially populated exports are never visible so that we don't get runtime-dependent export visibility behaviours.
+Previously throwing behaviour was implemented for this case, but the error wouldn't be very easy to debug. Also there are many valid cases where the observability would never be seen.
 
 ## FAQ
 
