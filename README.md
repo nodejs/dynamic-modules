@@ -169,8 +169,8 @@ In addition, this work may provide the foundations for exposing a Reflect-base d
 
 ## Specification
 
-* [Ecmarkup source](https://github.com/guybedford/proposal-dynamic-modules/blob/master/spec.html)
-* [HTML version](https://guybedford.github.io/proposal-dynamic-modules/)
+* [Ecmarkup source](https://github.com/nodejs/dynamic-modules/blob/master/spec.html)
+* [HTML version](https://nodejs.github.io/dynamic-modules/)
 
 ## Implementations
 
